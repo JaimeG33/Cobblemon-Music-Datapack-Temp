@@ -1,0 +1,2823 @@
+{
+  "rules": [
+    {
+      "tag": "surface_general_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "legendarymonuments:dyna_plains",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_general_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "legendarymonuments:dyna_plains",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_evil",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "legendarymonuments:plains_of_death",
+        "battle": "never"
+      }
+    },
+    {
+      "tag": "surface_desert_badlands_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:badlands",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_desert_badlands_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:badlands",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_jungle_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:bamboo_jungle",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_jungle_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:bamboo_jungle",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_aquatic_beach_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:beach",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_aquatic_beach_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:beach",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_forest",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:birch_forest",
+        "battle": "never"
+      }
+    },
+    {
+      "tag": "surface_forest",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:cherry_grove",
+        "battle": "never"
+      }
+    },
+    {
+      "tag": "surface_aquatic_ocean_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:cold_ocean",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_magical",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:dark_forest",
+        "battle": "never"
+      }
+    },
+    {
+      "tag": "surface_aquatic_ocean_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:deep_cold_ocean",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_aquatic_ocean_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:deep_frozen_ocean",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_aquatic_ocean_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:deep_lukewarm_ocean",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_aquatic_ocean_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:deep_lukewarm_ocean",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_aquatic_ocean_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:deep_ocean",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_aquatic_ocean_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:deep_ocean",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_desert_badlands_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:desert",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_desert_badlands_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:desert",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_desert_badlands_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:eroded_badlands",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_desert_badlands_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:eroded_badlands",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_forest",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:flower_forest",
+        "battle": "never"
+      }
+    },
+    {
+      "tag": "surface_forest",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:forest",
+        "battle": "never"
+      }
+    },
+    {
+      "tag": "surface_aquatic_ocean_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:frozen_ocean",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_mountain_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:frozen_peaks",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_snowy_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:frozen_river",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_snowy_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:frozen_river",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_snowy_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:grove",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_snowy_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:grove",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_snowy_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:ice_spikes",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_snowy_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:ice_spikes",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_mountain_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:jagged_peaks",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_jungle_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:jungle",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_jungle_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:jungle",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_aquatic_ocean_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:lukewarm_ocean",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_aquatic_ocean_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:lukewarm_ocean",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_swamp_mushroom_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:mangrove_swamp",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_general_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:meadow",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_general_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:meadow",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_swamp_mushroom_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:mushroom_fields",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_aquatic_ocean_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:ocean",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_aquatic_ocean_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:ocean",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_forest",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:old_growth_birch_forest",
+        "battle": "never"
+      }
+    },
+    {
+      "tag": "surface_snowy_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:old_growth_pine_taiga",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_snowy_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:old_growth_pine_taiga",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_snowy_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:old_growth_spruce_taiga",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_snowy_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:old_growth_spruce_taiga",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_evil",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:pale_garden",
+        "battle": "never"
+      }
+    },
+    {
+      "tag": "surface_general_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:plains",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_general_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:plains",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_general_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:river",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_general_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:river",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_general_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:savanna",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_general_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:savanna",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_general_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:savanna_plateau",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_general_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:savanna_plateau",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_snowy_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:snowy_beach",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_snowy_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:snowy_beach",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_snowy_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:snowy_plains",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_snowy_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:snowy_plains",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_mountain_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:snowy_slopes",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_snowy_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:snowy_taiga",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_snowy_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:snowy_taiga",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_jungle_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:sparse_jungle",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_jungle_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:sparse_jungle",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_mountain_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:stony_peaks",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_hill_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:stony_shore",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_hill_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:stony_shore",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_general_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:sunflower_plains",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_general_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:sunflower_plains",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_swamp_mushroom_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:swamp",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_snowy_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:taiga",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_snowy_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:taiga",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_aquatic_ocean_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:warm_ocean",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_aquatic_ocean_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:warm_ocean",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_forest",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:windswept_forest",
+        "battle": "never"
+      }
+    },
+    {
+      "tag": "surface_hill_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:windswept_gravelly_hills",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_hill_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:windswept_gravelly_hills",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_hill_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:windswept_hills",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_hill_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:windswept_hills",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_general_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:windswept_savanna",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_general_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:windswept_savanna",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_desert_badlands_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:wooded_badlands",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_desert_badlands_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:wooded_badlands",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_retro_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:alpha_islands",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_retro_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:alpha_islands",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_retro_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:alpha_islands_winter",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_retro_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:alpha_islands_winter",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_snowy_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:alpine_grove",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_snowy_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:alpine_grove",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_snowy_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:alpine_highlands",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_snowy_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:alpine_highlands",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_magical",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:amethyst_canyon",
+        "battle": "never"
+      }
+    },
+    {
+      "tag": "surface_magical",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:amethyst_rainforest",
+        "battle": "never"
+      }
+    },
+    {
+      "tag": "surface_desert_badlands_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:ancient_sands",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_desert_badlands_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:ancient_sands",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_general_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:arid_highlands",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_general_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:arid_highlands",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_general_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:ashen_savanna",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_general_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:ashen_savanna",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_snowy_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:birch_taiga",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_snowy_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:birch_taiga",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_general_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:blooming_plateau",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_general_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:blooming_plateau",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_general_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:blooming_valley",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_general_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:blooming_valley",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_general_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:brushland",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_general_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:brushland",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_desert_badlands_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:bryce_canyon",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_desert_badlands_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:bryce_canyon",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_volcanic",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:caldera",
+        "battle": "never"
+      }
+    },
+    {
+      "tag": "surface_forest",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:cloud_forest",
+        "battle": "never"
+      }
+    },
+    {
+      "tag": "surface_snowy_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:cold_shrubland",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_snowy_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:cold_shrubland",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_aquatic_ocean_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:deep_warm_ocean",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_aquatic_ocean_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:deep_warm_ocean",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_desert_badlands_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:desert_canyon",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_desert_badlands_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:desert_canyon",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_desert_badlands_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:desert_oasis",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_desert_badlands_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:desert_oasis",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_desert_badlands_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:desert_spires",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_desert_badlands_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:desert_spires",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_mountain_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:emerald_peaks",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_forest",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:forested_highlands",
+        "battle": "never"
+      }
+    },
+    {
+      "tag": "surface_hill_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:fractured_savanna",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_hill_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:fractured_savanna",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_snowy_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:frozen_cliffs",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_snowy_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:frozen_cliffs",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_mountain_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:glacial_chasm",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_hill_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:granite_cliffs",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_hill_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:granite_cliffs",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "combined_terralith_gravel_beach_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:gravel_beach",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_snowy_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:gravel_beach",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_snowy_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:gravel_desert",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_snowy_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:gravel_desert",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_hill_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:highlands",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_hill_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:highlands",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_general_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:hot_shrubland",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_general_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:hot_shrubland",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_snowy_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:ice_marsh",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_snowy_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:ice_marsh",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_mountain_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:jungle_mountains",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_desert_badlands_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:lush_desert",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_desert_badlands_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:lush_desert",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_general_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:lush_valley",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_general_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:lush_valley",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_magical",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:mirage_isles",
+        "battle": "never"
+      }
+    },
+    {
+      "tag": "surface_magical",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:moonlight_grove",
+        "battle": "never"
+      }
+    },
+    {
+      "tag": "surface_magical",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:moonlight_valley",
+        "battle": "never"
+      }
+    },
+    {
+      "tag": "surface_swamp_mushroom_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:orchid_swamp",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_mountain_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:painted_mountains",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_desert_badlands_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:red_oasis",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_desert_badlands_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:red_oasis",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_mountain_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:rocky_mountains",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_general_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:rocky_shrubland",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_general_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:rocky_shrubland",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_forest",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:sakura_grove",
+        "battle": "never"
+      }
+    },
+    {
+      "tag": "surface_general_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:sakura_valley",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_general_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:sakura_valley",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_desert_badlands_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:sandstone_valley",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_desert_badlands_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:sandstone_valley",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_desert_badlands_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:savanna_badlands",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_desert_badlands_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:savanna_badlands",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_general_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:savanna_slopes",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_general_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:savanna_slopes",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_mountain_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:scarlet_mountains",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_snowy_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:shield",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_snowy_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:shield",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_snowy_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:shield_clearing",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_snowy_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:shield_clearing",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_general_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:shrubland",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_general_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:shrubland",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_snowy_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:siberian_grove",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_snowy_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:siberian_grove",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_snowy_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:siberian_taiga",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_snowy_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:siberian_taiga",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_sky_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:skylands_autumn",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_sky_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:skylands_autumn",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_sky_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:skylands_spring",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_sky_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:skylands_spring",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_sky_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:skylands_summer",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_sky_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:skylands_summer",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_sky_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:skylands_winter",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_sky_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:skylands_winter",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_snowy_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:snowy_badlands",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_snowy_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:snowy_badlands",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_snowy_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:snowy_cherry_grove",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_snowy_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:snowy_cherry_grove",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_snowy_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:snowy_maple_forest",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_snowy_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:snowy_maple_forest",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_snowy_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:snowy_shield",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_snowy_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:snowy_shield",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_general_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:steppe",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_general_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:steppe",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_mountain_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:stony_spires",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_hill_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:temperate_highlands",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_hill_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:temperate_highlands",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_jungle_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:tropical_jungle",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_jungle_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:tropical_jungle",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_volcanic",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:volcanic_crater",
+        "battle": "never"
+      }
+    },
+    {
+      "tag": "surface_volcanic",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:volcanic_peaks",
+        "battle": "never"
+      }
+    },
+    {
+      "tag": "surface_general_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:warm_river",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_general_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:warm_river",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_desert_badlands_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:warped_mesa",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_desert_badlands_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:warped_mesa",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_snowy_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:white_cliffs",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_snowy_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:white_cliffs",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_desert_badlands_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:white_mesa",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_desert_badlands_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:white_mesa",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "combined_terralith_windswept_spires_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:windswept_spires",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "combined_terralith_windswept_spires_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:windswept_spires",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_snowy_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:wintry_forest",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_snowy_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:wintry_forest",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_snowy_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:wintry_lowlands",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_snowy_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:wintry_lowlands",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_hill_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:yellowstone",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_hill_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:yellowstone",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_hill_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:yosemite_cliffs",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_hill_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:yosemite_cliffs",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "surface_hill_day",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:yosemite_lowlands",
+        "battle": "never",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "surface_hill_night",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:yosemite_lowlands",
+        "battle": "never",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    }
+  ]
+}

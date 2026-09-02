@@ -1,0 +1,130 @@
+{
+  "rules": [
+    {
+      "tag": "underground_general",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:cave/andesite_caves",
+        "battle": "never"
+      }
+    },
+    {
+      "tag": "underground_general",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:cave/deep_caves",
+        "battle": "never"
+      }
+    },
+    {
+      "tag": "underground_general",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:cave/diorite_caves",
+        "battle": "never"
+      }
+    },
+    {
+      "tag": "underground_general",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:dripstone_caves",
+        "battle": "never"
+      }
+    },
+    {
+      "tag": "underground_general",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:cave/granite_caves",
+        "battle": "never"
+      }
+    },
+    {
+      "tag": "underground_general",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:cave/infested_caves",
+        "battle": "never"
+      }
+    },
+    {
+      "tag": "underground_general",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:cave/tuff_caves",
+        "battle": "never"
+      }
+    },
+    {
+      "tag": "underground_lush",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:cave/fungal_caves",
+        "battle": "never"
+      }
+    },
+    {
+      "tag": "underground_lush",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:lush_caves",
+        "battle": "never"
+      }
+    },
+    {
+      "tag": "underground_lush",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:cave/underground_jungle",
+        "battle": "never"
+      }
+    },
+    {
+      "tag": "underground_sculk_deep_dark",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "minecraft:deep_dark",
+        "battle": "never"
+      }
+    },
+    {
+      "tag": "underground_sculk_frostfire",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:cave/frostfire_caves",
+        "battle": "never"
+      }
+    },
+    {
+      "tag": "underground_volcanic",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:cave/mantle_caves",
+        "battle": "never"
+      }
+    },
+    {
+      "tag": "underground_volcanic",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "biome": "terralith:cave/thermal_caves",
+        "battle": "never"
+      }
+    }
+  ]
+}
