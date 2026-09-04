@@ -1,0 +1,2146 @@
+{
+  "music/biomes/bdsp_eterna_forest": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/bdsp_eterna_forest",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/bdsp_lake": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/bdsp_lake",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/bdsp_lake_caverns": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/bdsp_lake_caverns",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/bdsp_mt_coronet": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/bdsp_mt_coronet",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/bdsp_oreburgh_gate": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/bdsp_oreburgh_gate",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/bdsp_oreburgh_mine": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/bdsp_oreburgh_mine",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/bdsp_route_201_day": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/bdsp_route_201_day",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/bdsp_route_201_night": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/bdsp_route_201_night",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/bdsp_route_203_day": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/bdsp_route_203_day",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/bdsp_route_203_night": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/bdsp_route_203_night",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/bdsp_route_205_day": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/bdsp_route_205_day",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/bdsp_route_205_night": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/bdsp_route_205_night",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/bdsp_route_206_day": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/bdsp_route_206_day",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/bdsp_route_206_night": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/bdsp_route_206_night",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/bdsp_route_209_day": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/bdsp_route_209_day",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/bdsp_route_209_night": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/bdsp_route_209_night",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/bdsp_route_210_day": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/bdsp_route_210_day",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/bdsp_route_210_night": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/bdsp_route_210_night",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/bdsp_route_216_day": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/bdsp_route_216_day",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/bdsp_route_216_night": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/bdsp_route_216_night",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/bdsp_route_228_day": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/bdsp_route_228_day",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/bdsp_route_228_night": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/bdsp_route_228_night",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/bdsp_stark_mountain": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/bdsp_stark_mountain",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/bw_chargestone_cave": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/bw_chargestone_cave",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/bw_dreamyard": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/bw_dreamyard",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/bw_lostlorn_forest": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/bw_lostlorn_forest",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/bw_victory_road": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/bw_victory_road",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/eos_aegis_cave": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/eos_aegis_cave",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/eos_apple_woods": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/eos_apple_woods",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/eos_barren_valley": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/eos_barren_valley",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/eos_boulder_quarry": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/eos_boulder_quarry",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/eos_brine_cave": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/eos_brine_cave",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/eos_chasm_cave": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/eos_chasm_cave",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/eos_concealed_ruins": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/eos_concealed_ruins",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/eos_craggy_coast": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/eos_craggy_coast",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/eos_crystal_cave": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/eos_crystal_cave",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/eos_dark_crater": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/eos_dark_crater",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/eos_deep_dark_crater": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/eos_deep_dark_crater",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/eos_drenched_bluff": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/eos_drenched_bluff",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/eos_dusk_forest": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/eos_dusk_forest",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/eos_far_amp_plains": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/eos_far_amp_plains",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/eos_foggy_forest": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/eos_foggy_forest",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/eos_fortune_ravine": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/eos_fortune_ravine",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/eos_fortune_ravine_depths": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/eos_fortune_ravine_depths",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/eos_growing_anxiety": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/eos_growing_anxiety",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/eos_hidden_highland": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/eos_hidden_highland",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/eos_in_the_future": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/eos_in_the_future",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/eos_limestone_cavern": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/eos_limestone_cavern",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/eos_lower_brine_cave": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/eos_lower_brine_cave",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/eos_miracle_sea": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/eos_miracle_sea",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/eos_mt_horn": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/eos_mt_horn",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/eos_mt_travail": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/eos_mt_travail",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/eos_mystifying_forest": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/eos_mystifying_forest",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/eos_northern_desert": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/eos_northern_desert",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/eos_on_the_beach_at_dusk": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/eos_on_the_beach_at_dusk",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/eos_quicksand_cave": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/eos_quicksand_cave",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/eos_sky_peak_cave": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/eos_sky_peak_cave",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/eos_sky_peak_snowfield": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/eos_sky_peak_snowfield",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/eos_southern_jungle": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/eos_southern_jungle",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/eos_star_cave": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/eos_star_cave",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/eos_steam_cave": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/eos_steam_cave",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/eos_surrounded_sea": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/eos_surrounded_sea",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/eos_time_gear_remix": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/eos_time_gear_remix",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/eos_treeshroud_forest": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/eos_treeshroud_forest",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/eos_upper_steam_cave": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/eos_upper_steam_cave",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/eos_vast_ice_mountain": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/eos_vast_ice_mountain",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/gs_dark_cave": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/gs_dark_cave",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/gs_national_park": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/gs_national_park",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/gs_route_32": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/gs_route_32",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/gs_ruins_of_alph": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/gs_ruins_of_alph",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/lgpe_mt_moon": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/lgpe_mt_moon",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/lgpe_road_to_bill": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/lgpe_road_to_bill",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/lgpe_road_to_cerulean_city": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/lgpe_road_to_cerulean_city",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/lgpe_road_to_lavander_town": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/lgpe_road_to_lavander_town",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/lgpe_road_to_viridian_city": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/lgpe_road_to_viridian_city",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/lgpe_the_sea": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/lgpe_the_sea",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/lgpe_the_ss_anne": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/lgpe_the_ss_anne",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/lgpe_viridian_forest": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/lgpe_viridian_forest",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/nps_barren_badlands_day": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/nps_barren_badlands_day",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/nps_barren_badlands_night": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/nps_barren_badlands_night",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/nps_blushing_beach_day": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/nps_blushing_beach_day",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/nps_blushing_beach_night": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/nps_blushing_beach_night",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/nps_elsewhere_forest": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/nps_elsewhere_forest",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/nps_elsewhere_forest_illumina_spot": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/nps_elsewhere_forest_illumina_spot",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/nps_fireflow_volcano": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/nps_fireflow_volcano",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/nps_fireflow_volcano_illumina_spot": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/nps_fireflow_volcano_illumina_spot",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/nps_florio_nature_park_day": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/nps_florio_nature_park_day",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/nps_florio_nature_park_illumina_spot": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/nps_florio_nature_park_illumina_spot",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/nps_florio_nature_park_night": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/nps_florio_nature_park_night",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/nps_founja_jungle_day": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/nps_founja_jungle_day",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/nps_founja_jungle_night": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/nps_founja_jungle_night",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/nps_lental_seafloor": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/nps_lental_seafloor",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/nps_lental_seafloor_illumina_spot": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/nps_lental_seafloor_illumina_spot",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/nps_map_select": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/nps_map_select",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/nps_maricopia_reef_day": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/nps_maricopia_reef_day",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/nps_maricopia_reef_night": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/nps_maricopia_reef_night",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/nps_mightywide_river_day": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/nps_mightywide_river_day",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/nps_mightywide_river_night": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/nps_mightywide_river_night",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/nps_outway_cave": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/nps_outway_cave",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/nps_outway_cave_illumina_spot": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/nps_outway_cave_illumina_spot",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/nps_results": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/nps_results",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/nps_ruins_of_remembrance": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/nps_ruins_of_remembrance",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/nps_ruins_of_remembrance_illumina_spot": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/nps_ruins_of_remembrance_illumina_spot",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/nps_secret_side_path_day": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/nps_secret_side_path_day",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/nps_secret_side_path_night": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/nps_secret_side_path_night",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/nps_sweltering_sands_day": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/nps_sweltering_sands_day",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/nps_sweltering_sands_night": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/nps_sweltering_sands_night",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/nps_the_adventure_begins": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/nps_the_adventure_begins",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/nps_welcome_to_l_e_n_s": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/nps_welcome_to_l_e_n_s",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/oras_countdown_to_destruction": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/oras_countdown_to_destruction",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/oras_crossing_the_sea": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/oras_crossing_the_sea",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/oras_dive": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/oras_dive",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/oras_mt_pyre": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/oras_mt_pyre",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/oras_mt_pyre_exterior": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/oras_mt_pyre_exterior",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/oras_petalburg_woods": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/oras_petalburg_woods",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/oras_route_104": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/oras_route_104",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/oras_route_110": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/oras_route_110",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/oras_route_111": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/oras_route_111",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/oras_route_113": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/oras_route_113",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/oras_route_119": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/oras_route_119",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/oras_route_120": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/oras_route_120",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/oras_soaring_dreams": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/oras_soaring_dreams",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/oras_soaring_illusions": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/oras_soaring_illusions",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/oras_surf": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/oras_surf",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/oras_victory_road": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/oras_victory_road",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/pc_mt_battle": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/pc_mt_battle",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/pc_relic_forest": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/pc_relic_forest",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/pc_the_under": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/pc_the_under",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/pla_alabaster_icelands_1": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/pla_alabaster_icelands_1",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/pla_alabaster_icelands_1_alt": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/pla_alabaster_icelands_1_alt",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/pla_alabaster_icelands_2": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/pla_alabaster_icelands_2",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/pla_alabaster_icelands_2_alt": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/pla_alabaster_icelands_2_alt",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/pla_arceus_voice": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/pla_arceus_voice",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/pla_cobalt_coastlands_1": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/pla_cobalt_coastlands_1",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/pla_cobalt_coastlands_1_alt": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/pla_cobalt_coastlands_1_alt",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/pla_cobalt_coastlands_2": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/pla_cobalt_coastlands_2",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/pla_cobalt_coastlands_2_alt": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/pla_cobalt_coastlands_2_alt",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/pla_coronet_highlands_base": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/pla_coronet_highlands_base",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/pla_coronet_highlands_summit": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/pla_coronet_highlands_summit",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/pla_field_late_night": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/pla_field_late_night",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/pla_field_night": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/pla_field_night",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/pla_obsidian_fieldlands_1": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/pla_obsidian_fieldlands_1",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/pla_obsidian_fieldlands_1_alt": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/pla_obsidian_fieldlands_1_alt",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/pla_obsidian_fieldlands_2": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/pla_obsidian_fieldlands_2",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/pla_obsidian_fieldlands_2_alt": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/pla_obsidian_fieldlands_2_alt",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/pla_the_heartwood": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/pla_the_heartwood",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/pla_wayward_cave": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/pla_wayward_cave",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/plza_prism_towers_dark_turn": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/plza_prism_towers_dark_turn",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/pq_backforth_brook": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/pq_backforth_brook",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/pq_belly_button_cave": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/pq_belly_button_cave",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/pq_farside_fjord": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/pq_farside_fjord",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/pq_gloomy_grove": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/pq_gloomy_grove",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/pq_happenstance_island_cave": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/pq_happenstance_island_cave",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/pq_happenstance_island_forest": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/pq_happenstance_island_forest",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/pq_happenstance_island_grassland": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/pq_happenstance_island_grassland",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/pq_happenstance_island_waterside": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/pq_happenstance_island_waterside",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/pq_miasma_moor": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/pq_miasma_moor",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/pq_nightlight_nook": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/pq_nightlight_nook",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/ps_beach": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/ps_beach",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/ps_cave": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/ps_cave",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/ps_rainbow_cloud": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/ps_rainbow_cloud",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/ps_river": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/ps_river",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/ps_tunnel": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/ps_tunnel",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/ps_valley": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/ps_valley",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/ps_volcano": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/ps_volcano",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/pu_auroma_park": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/pu_auroma_park",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/pu_remoat_island": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/pu_remoat_island",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/pu_remoat_island_snow": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/pu_remoat_island_snow",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/pu_theia_sky_ruins": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/pu_theia_sky_ruins",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/rg_mt_moon": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/rg_mt_moon",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/rg_route_1": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/rg_route_1",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/rg_route_11": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/rg_route_11",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/rg_route_24": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/rg_route_24",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/rg_route_3": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/rg_route_3",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/rg_s_s_anne": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/rg_s_s_anne",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/rg_viridian_forest": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/rg_viridian_forest",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/sv_area_zero_underdepths": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/sv_area_zero_underdepths",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/sv_asado_desert": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/sv_asado_desert",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/sv_asado_desert_walking": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/sv_asado_desert_walking",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/sv_casseroya_lake_riding": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/sv_casseroya_lake_riding",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/sv_casseroya_lake_walking": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/sv_casseroya_lake_walking",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/sv_champion_assessment_interview": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/sv_champion_assessment_interview",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/sv_crystal_pool": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/sv_crystal_pool",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/sv_east_province_area_three_riding": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/sv_east_province_area_three_riding",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/sv_east_province_riding": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/sv_east_province_riding",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/sv_east_province_walking": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/sv_east_province_walking",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/sv_inlet_grotto": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/sv_inlet_grotto",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/sv_north_province_area_two_riding": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/sv_north_province_area_two_riding",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/sv_north_province_riding": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/sv_north_province_riding",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/sv_north_province_walking": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/sv_north_province_walking",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/sv_poco_path": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/sv_poco_path",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/sv_pokemon_league": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/sv_pokemon_league",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/sv_south_province": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/sv_south_province",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/sv_south_province_walking": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/sv_south_province_walking",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/sv_tagtree_thicket": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/sv_tagtree_thicket",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/sv_terarium_canyon_biome": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/sv_terarium_canyon_biome",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/sv_terarium_coastal_biome": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/sv_terarium_coastal_biome",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/sv_terarium_polar_biome": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/sv_terarium_polar_biome",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/sv_terarium_savanna_biome": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/sv_terarium_savanna_biome",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/sv_west_province": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/sv_west_province",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/sv_west_province_walking": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/sv_west_province_walking",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/swsh_galar_mines": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/swsh_galar_mines",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/swsh_glimwood_tangle": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/swsh_glimwood_tangle",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/swsh_max_lair": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/swsh_max_lair",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/swsh_route_1": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/swsh_route_1",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/swsh_route_10": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/swsh_route_10",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/swsh_route_3": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/swsh_route_3",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/swsh_route_6": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/swsh_route_6",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/swsh_the_crown_tundra": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/swsh_the_crown_tundra",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/swsh_the_isle_of_armor": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/swsh_the_isle_of_armor",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/swsh_wild_area_north": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/swsh_wild_area_north",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/swsh_wild_area_south": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/swsh_wild_area_south",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/usum_ancient_poni_path": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/usum_ancient_poni_path",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/usum_beach_spot": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/usum_beach_spot",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/usum_haina_desert": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/usum_haina_desert",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/usum_mahalo_trail": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/usum_mahalo_trail",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/usum_mantine_surf": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/usum_mantine_surf",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/usum_mount_lanakila": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/usum_mount_lanakila",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/usum_poke_pelago_day": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/usum_poke_pelago_day",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/usum_poke_pelago_night": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/usum_poke_pelago_night",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/usum_route_1": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/usum_route_1",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/usum_route_10": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/usum_route_10",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/usum_route_2": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/usum_route_2",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/usum_route_4": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/usum_route_4",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/usum_seaward_cave": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/usum_seaward_cave",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/usum_ten_carat_hill": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/usum_ten_carat_hill",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/usum_the_path_to_the_league": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/usum_the_path_to_the_league",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/usum_to_the_altar": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/usum_to_the_altar",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/usum_ultra_forest": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/usum_ultra_forest",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/usum_unsettling_ambience": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/usum_unsettling_ambience",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/usum_vast_poni_canyon": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/usum_vast_poni_canyon",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/usum_verdant_cavern": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/usum_verdant_cavern",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/xd_dr_kaminkos_yard": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/xd_dr_kaminkos_yard",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/xd_orre_colosseum": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/xd_orre_colosseum",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/xd_world_map": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/xd_world_map",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/xy_friends_theme": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/xy_friends_theme",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/xy_glittering_cave": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/xy_glittering_cave",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/xy_route_1": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/xy_route_1",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/xy_route_15": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/xy_route_15",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/xy_route_18": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/xy_route_18",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/xy_route_2": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/xy_route_2",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/xy_route_4": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/xy_route_4",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/xy_route_8": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/xy_route_8",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/xy_santalune_forest": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/xy_santalune_forest",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/xy_surf": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/xy_surf",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/xy_the_kalos_power_plant": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/xy_the_kalos_power_plant",
+        "stream": true
+      }
+    ]
+  },
+  "music/biomes/xy_victory_road": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/biomes/xy_victory_road",
+        "stream": true
+      }
+    ]
+  },
+  "music/dimensions/bdsp_team_galactic_hq": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/dimensions/bdsp_team_galactic_hq",
+        "stream": true
+      }
+    ]
+  },
+  "music/dimensions/lgpe_go_park": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/dimensions/lgpe_go_park",
+        "stream": true
+      }
+    ]
+  },
+  "music/dimensions/pla_disaster_looming": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/dimensions/pla_disaster_looming",
+        "stream": true
+      }
+    ]
+  },
+  "music/dimensions/pla_hall_of_origin": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/dimensions/pla_hall_of_origin",
+        "stream": true
+      }
+    ]
+  },
+  "music/dimensions/pla_space_time_distortion": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/dimensions/pla_space_time_distortion",
+        "stream": true
+      }
+    ]
+  },
+  "music/dimensions/pt_distortion_world": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/dimensions/pt_distortion_world",
+        "stream": true
+      }
+    ]
+  },
+  "music/dimensions/sv_area_zero": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/dimensions/sv_area_zero",
+        "stream": true
+      }
+    ]
+  },
+  "music/dimensions/sv_unsettling_atmosphere": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/dimensions/sv_unsettling_atmosphere",
+        "stream": true
+      }
+    ]
+  },
+  "music/dimensions/swsh_legendary_max_raid": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/dimensions/swsh_legendary_max_raid",
+        "stream": true
+      }
+    ]
+  },
+  "music/dimensions/usum_aether_paradise_labs": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/dimensions/usum_aether_paradise_labs",
+        "stream": true
+      }
+    ]
+  },
+  "music/dimensions/usum_ultra_crater": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/dimensions/usum_ultra_crater",
+        "stream": true
+      }
+    ]
+  },
+  "music/dimensions/usum_ultra_desert": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/dimensions/usum_ultra_desert",
+        "stream": true
+      }
+    ]
+  },
+  "music/dimensions/usum_ultra_jungle": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/dimensions/usum_ultra_jungle",
+        "stream": true
+      }
+    ]
+  },
+  "music/dimensions/usum_ultra_megalopolis": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/dimensions/usum_ultra_megalopolis",
+        "stream": true
+      }
+    ]
+  },
+  "music/dimensions/usum_ultra_space": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/dimensions/usum_ultra_space",
+        "stream": true
+      }
+    ]
+  },
+  "music/dimensions/usum_ultra_space_wilds": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/dimensions/usum_ultra_space_wilds",
+        "stream": true
+      }
+    ]
+  },
+  "music/dimensions/xy_dark_skies": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/dimensions/xy_dark_skies",
+        "stream": true
+      }
+    ]
+  },
+  "music/dimensions/xy_friend_safari": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/dimensions/xy_friend_safari",
+        "stream": true
+      }
+    ]
+  },
+  "music/structures/oras_drought": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/structures/oras_drought",
+        "stream": true
+      }
+    ]
+  },
+  "music/structures/xy_team_flare_secret_hq": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/structures/xy_team_flare_secret_hq",
+        "stream": true
+      }
+    ]
+  },
+  "music/villages/sv_kitakami": {
+    "sounds": [
+      {
+        "name": "dysfam_music:music/villages/sv_kitakami",
+        "stream": true
+      }
+    ]
+  }
+}

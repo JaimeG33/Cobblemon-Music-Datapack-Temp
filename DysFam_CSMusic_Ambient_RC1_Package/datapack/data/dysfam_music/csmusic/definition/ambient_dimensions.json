@@ -1,0 +1,89 @@
+{
+  "rules": [
+    {
+      "tag": "dimension_end",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:the_end",
+        "battle": "never"
+      }
+    },
+    {
+      "tag": "dimension_nether_warped_crimson",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:the_nether",
+        "battle": "never",
+        "biome": "minecraft:warped_forest"
+      }
+    },
+    {
+      "tag": "dimension_nether_warped_crimson",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:the_nether",
+        "battle": "never",
+        "biome": "minecraft:crimson_forest"
+      }
+    },
+    {
+      "tag": "dimension_nether_soul_sand",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:the_nether",
+        "battle": "never",
+        "biome": "minecraft:soul_sand_valley"
+      }
+    },
+    {
+      "tag": "dimension_nether_wastes_basalt",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:the_nether",
+        "battle": "never",
+        "biome": "minecraft:nether_wastes"
+      }
+    },
+    {
+      "tag": "dimension_nether_wastes_basalt",
+      "priority": 10,
+      "when": {
+        "dimension": "minecraft:the_nether",
+        "battle": "never",
+        "biome": "minecraft:basalt_deltas"
+      }
+    },
+    {
+      "tag": "dimension_cobblesafari_safari",
+      "priority": 10,
+      "when": {
+        "dimension": "cobblesafari:domedimension",
+        "battle": "never"
+      }
+    },
+    {
+      "tag": "dimension_lm_hall_of_origin",
+      "priority": 10,
+      "when": {
+        "dimension": "legendarymonuments:hall_of_origin_world",
+        "battle": "never"
+      }
+    },
+    {
+      "tag": "dimension_lm_distortion_world",
+      "priority": 10,
+      "when": {
+        "dimension": "legendarymonuments:distortion_world",
+        "battle": "never"
+      }
+    },
+    {
+      "tag": "dimension_lm_reawakening_sanctum",
+      "priority": 10,
+      "when": {
+        "dimension": "legendarymonuments:reawakening_sanctum",
+        "battle": "never"
+      }
+    }
+  ]
+}
