@@ -1,0 +1,7 @@
+{
+    "intro":  "dysfam_music:music/battles/default/bdsp_battle_wild_pokemon_intro",
+    "loop":  "dysfam_music:music/battles/default/bdsp_battle_wild_pokemon_loop",
+    "tags":  [
+                 "battle_gen4"
+             ]
+}
