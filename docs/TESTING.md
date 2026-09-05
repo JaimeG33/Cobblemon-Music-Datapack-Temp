@@ -101,3 +101,27 @@ After battle testing, briefly verify:
 - End
 
 This catches accidental RC1 regressions before expanding RC2.
+
+## RC2 full candidate
+
+Expected runtime with CobbleSafari 0.3.4:
+
+- 283 music definitions
+- 1,267 trigger rules
+- 15 trigger files
+- 0 skipped definitions
+- 0 rejected trigger files
+
+Useful checks:
+
+`mcfunction
+/function dysfam_music:check
+/function dysfam_music:check_audio
+`
+
+Generation smoke-test species:
+Pikachu, Hoppip, Mudkip, Lucario, Snivy, Froakie, Rowlet, Wooloo, Sprigatito.
+
+## Datapack ZIP rule
+
+The datapack ZIP must contain forward-slash paths (data/dysfam_music/...). The earlier Windows backslash ZIP caused Minecraft to enable the pack while CobbleSafari could not discover its CSMusic resources. Always use 	ools/build_csmusic_rc2_datapack.ps1.

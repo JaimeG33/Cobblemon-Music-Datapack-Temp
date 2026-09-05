@@ -1,0 +1,8 @@
+tellraw @s [{"text":"=== ToaRex Music Pack Status ===","color":"gold","bold":true}]
+tellraw @s [{"text":"Datapack: ","color":"gray"},{"text":"ONLINE","color":"green"}]
+tellraw @s [{"text":"Release: ","color":"gray"},{"text":"RC2 - Ambient + Full Generic Wild Battles","color":"aqua"}]
+tellraw @s [{"text":"DysFam CSMusic tracks declared: ","color":"gray"},{"text":"277","color":"white"},{"text":" (268 ambient + 9 battle)","color":"dark_gray"}]
+tellraw @s [{"text":"Resource sound events expected: ","color":"gray"},{"text":"286","color":"white"},{"text":" (client resource pack cannot be queried by a vanilla datapack)","color":"dark_gray"}]
+tellraw @s [{"text":"Generic wild species rules: ","color":"gray"},{"text":"1016","color":"white"},{"text":" (base Cobblemon 1.7.3)","color":"dark_gray"}]
+tellraw @s [{"text":"Expected CobbleSafari runtime: ","color":"gray"},{"text":"283 music definitions / 1267 trigger rules / 15 trigger files","color":"white"}]
+tellraw @s [{"text":"Audio test: ","color":"gray"},{"text":"/function dysfam_music:check_audio","color":"aqua"}]

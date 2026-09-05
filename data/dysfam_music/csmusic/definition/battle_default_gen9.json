@@ -1,0 +1,964 @@
+{
+    "rules":  [
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:sprigatito"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:floragato"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:meowscarada"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:fuecoco"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:crocalor"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:skeledirge"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:quaxly"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:quaxwell"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:quaquaval"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:lechonk"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:oinkologne"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:tarountula"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:spidops"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:nymble"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:lokix"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:pawmi"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:pawmo"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:pawmot"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:tandemaus"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:maushold"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:fidough"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:dachsbun"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:smoliv"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:dolliv"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:arboliva"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:squawkabilly"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:nacli"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:naclstack"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:garganacl"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:charcadet"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:armarouge"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:ceruledge"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:tadbulb"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:bellibolt"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:wattrel"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:kilowattrel"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:maschiff"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:mabosstiff"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:shroodle"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:grafaiai"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:bramblin"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:brambleghast"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:toedscool"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:toedscruel"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:klawf"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:capsakid"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:scovillain"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:rellor"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:rabsca"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:flittle"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:espathra"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:tinkatink"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:tinkatuff"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:tinkaton"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:wiglett"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:wugtrio"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:bombirdier"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:finizen"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:palafin"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:varoom"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:revavroom"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:cyclizar"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:orthworm"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:glimmet"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:glimmora"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:greavard"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:houndstone"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:flamigo"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:cetoddle"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:cetitan"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:veluza"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:dondozo"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:tatsugiri"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:annihilape"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:clodsire"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:farigiraf"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:dudunsparce"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:kingambit"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:greattusk"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:screamtail"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:brutebonnet"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:fluttermane"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:slitherwing"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:sandyshocks"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:irontreads"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:ironbundle"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:ironhands"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:ironjugulis"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:ironmoth"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:ironthorns"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:frigibax"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:arctibax"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:baxcalibur"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:gimmighoul"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:gholdengo"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:wochien"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:chienpao"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:tinglu"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:chiyu"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:roaringmoon"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:ironvaliant"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:koraidon"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:miraidon"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:walkingwake"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:ironleaves"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:dipplin"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:poltchageist"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:sinistcha"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:okidogi"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:munkidori"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:fezandipiti"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:ogerpon"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:archaludon"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:hydrapple"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:gougingfire"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:ragingbolt"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:ironboulder"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:ironcrown"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:terapagos"
+                               }
+                  },
+                  {
+                      "music":  "dysfam_music:battle_gen9",
+                      "priority":  50,
+                      "when":  {
+                                   "battle":  "wild",
+                                   "species":  "cobblemon:pecharunt"
+                               }
+                  }
+              ]
+}

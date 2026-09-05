@@ -102,12 +102,12 @@ Maps generations 1-9 to their generic wild battle CSMusic track.
 It records:
 
 - generation
-- National PokÃ©dex number
+- National PokÃƒÂ©dex number
 - display name
 - exact `cobblemon:<species>` ID
 - source species JSON path
 
-This is the authoritative input for the future full Gen 1-9 rule generator.
+This is the authoritative input for the RC2 full Gen 1-9 rule generator.
 
 ## Duplicate datapack workspace
 
@@ -116,3 +116,19 @@ The repository root is the active datapack. The historical package also contains
 ## Generated files
 
 `DysFam_CSMusic_Ambient_RC1_Package/build_output/` is intentionally ignored by Git because it contains large generated resource-pack files. It should always be reproducible from the manifest + source OGG archive.
+
+## RC2 full battle generation
+
+RC2 generates attle_default_gen1.json through attle_default_gen9.json, totaling 1,016 base-species rules at priority 50. Rules match exact cobblemon:<species> IDs.
+
+Forms inherit their base species' generic generation theme because the generic rules do not specify orm. Later special species/form rules can override them at higher priority.
+
+Minecraft 1.21.1 uses data/<namespace>/function/ and data/minecraft/tags/function/ (singular).
+
+## Status functions
+
+- /function dysfam_music:check reports declared/expected pack counts.
+- /function dysfam_music:check_audio manually tests one RC2 resource-pack sound event.
+- A load/tick session marker displays the online message once per world/server load or /reload.
+
+A vanilla datapack cannot directly inspect the client's enabled resource-pack list or dynamically read CobbleSafari's internal CSMusic loaded-count registry, so those values are reported as expected build counts.
