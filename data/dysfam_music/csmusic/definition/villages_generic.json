@@ -1,0 +1,394 @@
+{
+  "rules": [
+    {
+      "tag": "village_basic_day",
+      "priority": 30,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "battle": "never",
+        "structure": "bca:village/default_small",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "village_basic_night",
+      "priority": 30,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "battle": "never",
+        "structure": "bca:village/default_small",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "village_basic_day",
+      "priority": 30,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "battle": "never",
+        "structure": "bca:village/default_mid",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "village_basic_night",
+      "priority": 30,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "battle": "never",
+        "structure": "bca:village/default_mid",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "village_basic_day",
+      "priority": 30,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "battle": "never",
+        "structure": "bca:village/default_large",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "village_basic_night",
+      "priority": 30,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "battle": "never",
+        "structure": "bca:village/default_large",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "village_basic_day",
+      "priority": 30,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "battle": "never",
+        "structure": "bca:village/fighting_small",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "village_basic_night",
+      "priority": 30,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "battle": "never",
+        "structure": "bca:village/fighting_small",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "village_basic_day",
+      "priority": 30,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "battle": "never",
+        "structure": "bca:village/fighting_mid",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "village_basic_night",
+      "priority": 30,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "battle": "never",
+        "structure": "bca:village/fighting_mid",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "village_basic_day",
+      "priority": 30,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "battle": "never",
+        "structure": "bca:village/fighting_large",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "village_basic_night",
+      "priority": 30,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "battle": "never",
+        "structure": "bca:village/fighting_large",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "village_magic_day",
+      "priority": 30,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "battle": "never",
+        "structure": "bca:village/dark_small",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "village_magic_night",
+      "priority": 30,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "battle": "never",
+        "structure": "bca:village/dark_small",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "village_magic_day",
+      "priority": 30,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "battle": "never",
+        "structure": "bca:village/dark_mid",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "village_magic_night",
+      "priority": 30,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "battle": "never",
+        "structure": "bca:village/dark_mid",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "village_magic_day",
+      "priority": 30,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "battle": "never",
+        "structure": "bca:village/fairy_small",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "village_magic_night",
+      "priority": 30,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "battle": "never",
+        "structure": "bca:village/fairy_small",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "village_magic_day",
+      "priority": 30,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "battle": "never",
+        "structure": "bca:village/fairy_mid",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "village_magic_night",
+      "priority": 30,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "battle": "never",
+        "structure": "bca:village/fairy_mid",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "village_cold_day",
+      "priority": 30,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "battle": "never",
+        "structure": "bca:village/ice_small",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "village_cold_night",
+      "priority": 30,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "battle": "never",
+        "structure": "bca:village/ice_small",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "village_cold_day",
+      "priority": 30,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "battle": "never",
+        "structure": "bca:village/ice_mid",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "village_cold_night",
+      "priority": 30,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "battle": "never",
+        "structure": "bca:village/ice_mid",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "village_cold_day",
+      "priority": 30,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "battle": "never",
+        "structure": "bca:village/ice_large",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "village_cold_night",
+      "priority": 30,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "battle": "never",
+        "structure": "bca:village/ice_large",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "village_basic_day",
+      "priority": 30,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "battle": "never",
+        "structure": "terralith:fortified_village",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "village_basic_night",
+      "priority": 30,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "battle": "never",
+        "structure": "terralith:fortified_village",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "tag": "village_hot_day",
+      "priority": 30,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "battle": "never",
+        "structure": "terralith:fortified_desert_village",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "tag": "village_hot_night",
+      "priority": 30,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "battle": "never",
+        "structure": "terralith:fortified_desert_village",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    }
+  ]
+}

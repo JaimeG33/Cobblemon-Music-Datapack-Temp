@@ -57,6 +57,8 @@ Generic generation music cannot match `generation` directly, so generation suppo
 
 Normal ambient rules use `battle: "never"` so ambient music yields cleanly when a battle begins.
 
+RC4 village rules also use `battle: "never"`, exact Overworld structure IDs and priority 30. Generic villages select one of eight day/night pools; named towns select exact tracks. `structure_piece` restricts Lavender Town's Pokémon Tower to its template bounds. Equal priorities use the source-key order in CobbleSafari 0.3.4; the tower and town rules occupy indices 0 and 1 in one file, respectively. RC4 leaves the Pallet lab on its town theme and reserves Pokémon Center/Mart overrides for RC5.
+
 ## Resource pack
 
 The cumulative resource pack is built locally from:

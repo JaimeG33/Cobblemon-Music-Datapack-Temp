@@ -1,5 +1,7 @@
 # Testing
 
+Current cumulative release: [RC4 installation and gameplay QA](RC4_VILLAGE_TESTING.md). The RC2 commands and counts below are historical; use the RC2 branch to reproduce that release.
+
 ## Clean CSMusic QA environment
 
 Keep enabled:

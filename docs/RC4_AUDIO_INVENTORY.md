@@ -1,5 +1,7 @@
 # RC4 village audio inventory
 
+Implementation status: all 127 new candidate tracks/events are now included in the cumulative RC4 source and resource pack; the existing Kitakami track is reused. The user approved both Twinleaf Day/Night versions. The inventory below records the original RC3-to-RC4 asset delta; “missing” describes what had to be added, not a current absent asset. See [RC4 validation and gameplay QA](RC4_VILLAGE_TESTING.md).
+
 Source: `C:/Users/Jaime/Downloads/CSMusic_Reference_Excel_Files/Music Pack Conditions & Music(2)_2.xlsx`, Villages sheet. Compared with `C:/Users/Jaime/Downloads/DysFam Music OGG Files.zip` and the cumulative `csmusic_release_assets.csv`.
 
 **127 unique workbook song labels; 128 candidate OGGs if Twinleaf uses both Day and Night.** All candidates exist in the source ZIP. One event/track already exists (`SV - Kitakami`); the other 127 candidates need new manifest rows, sound events and track definitions. Choosing only one Twinleaf version reduces additions to 126. New uncompressed source audio totals 313.12 MiB with both Twinleaf versions; final ZIP size will depend on compression.
@@ -26,7 +28,7 @@ Tracks appearing in more than one pool should share one definition with multiple
 | BDSP - Sunnyshore City (Day/Night) | BDSP - Sunyshore City (Day/Night) | Resolve spelling; preserve intended city |
 | LGPE - Lavander Town | LGPE - Lavender Town | Resolve spelling; registry is `lavender_town` |
 | USUM - Trainers' School | USUM - Trainers School | Resolve punctuation |
-| BDSP - Twinleaf Town | BDSP - Twinleaf Town (Day), BDSP - Twinleaf Town (Night) | User decision; recommend day/night rules |
+| BDSP - Twinleaf Town | BDSP - Twinleaf Town (Day), BDSP - Twinleaf Town (Night) | Approved and implemented day/night rules |
 
 The source archive itself spells `SV - Cascaraffa` and `ORAS - Pacificlog Town` this way; do not silently rename source paths. The town registry is `cobbletowns:pacifidlog_town`. Ignore Villages D32 (`O`) as already instructed.
 

@@ -25,7 +25,7 @@ All RC4 village rules use priority 30, Overworld and `battle: "never"`. Generic 
 | `cobbletowns:lavender_town` | named town | LGPE - Lavander Town | `structure` | I9: LGPE - Lavander Town |
 | `cobbletowns:cherrygrove_city` | named town | HGSS - Cherrygrove City | `structure` | I17: HGSS - Cherrygrove City |
 | `cobbletowns:pacifidlog_town` | named town | ORAS - Pacificlog Town | `structure` | I21: ORAS - Pacificlog Town |
-| `cobbletowns:twinleaf_town` | named town | Day/Night audio choice pending | `structure` | I25: BDSP - Twinleaf Town |
+| `cobbletowns:twinleaf_town` | named town | BDSP - Twinleaf Town (Day) / (Night), approved | `structure` with time ranges | I25: BDSP - Twinleaf Town; user approved split |
 | `cobbletowns:floaroma_town` | named town | BDSP - Floaroma Town | `structure` | I29: BDSP - Floaroma Town |
 | `cobbletowns:lentimas_town` | named town | BW - Lentimas Town | `structure` | I33: BW - Lentimas Town |
 | `legendarymonuments:traditional_village/ecruteak` | named legendary village | HGSS - Ecruteak City | `structure` | J3/J5 |

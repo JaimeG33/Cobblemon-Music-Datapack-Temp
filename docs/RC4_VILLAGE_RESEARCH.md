@@ -3,6 +3,8 @@
 Research before implementation. No world, mod, pack activation, or profile configuration changes were made.
 User clarified that the standalone `O` in Magic Villages Night is a typo; magical villages retain priority 30.
 
+Implementation follow-up: the user approved both Twinleaf versions, ambient fallback for the nonlegendary variant and explicit priority-30 tower ordering. RC4 source and builds now exist on `rc4-villages`; see [RC4 static results and gameplay QA](RC4_VILLAGE_TESTING.md). The research snapshots below are historical evidence, not a claim that implementation is still pending.
+
 ## Completed follow-up audit — 2026-10-09
 
 The new handoff was checked against the current local files, original Villages workbook, audio source ZIP, 263 mod/global/world-pack archives, saved `level.dat` selections and `latest.log`. This follow-up supersedes the earlier activation snapshot below. Only documentation and the research CSV were updated; the profile, worlds, original archives, runtime datapack and release outputs were not changed.

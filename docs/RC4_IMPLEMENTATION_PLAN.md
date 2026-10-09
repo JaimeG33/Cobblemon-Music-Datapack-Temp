@@ -1,11 +1,11 @@
-# RC4 implementation proposal — review before implementation
+# RC4 implementation plan — approved and implemented
 
-Research completed 2026-10-09. No RC4 runtime files, builds or installations have been made. This proposal uses the authoritative Villages sheet, the [exact structure map](RC4_STRUCTURE_MUSIC_MAP.md), and [audio inventory](RC4_AUDIO_INVENTORY.md).
+Research completed 2026-10-09. The user approved full RC4 implementation, builds and static validation, both Twinleaf versions, ambient fallback for the nonlegendary variant, and tower-first ordering at priority 30. The implementation follows this plan and is Built / Awaiting Gameplay QA; see [actual results and installation](RC4_VILLAGE_TESTING.md). No automatic installation or profile/world modification was performed. The original proposal below records the chosen design using the authoritative Villages sheet, [exact structure map](RC4_STRUCTURE_MUSIC_MAP.md), and [audio inventory](RC4_AUDIO_INVENTORY.md).
 
-## Decisions before implementation
+## Approved decisions
 
-1. **Twinleaf:** workbook I25 names one track, while the source archive supplies Day and Night. Recommend time-based Day/Night assignments, consistent with the existing 0–12000 / 12000–24000 convention. Selecting one version for all times is also possible. The counts below assume both.
-2. **Nonlegendary traditional village:** no assignment exists in the Villages sheet. Recommend leaving it on ambient; explicitly extend Ecruteak music to it only if requested. This need not block RC4 if we follow the source as written.
+1. **Twinleaf:** use both Day and Night with [0,12000) / [12000,24000) time ranges.
+2. **Nonlegendary traditional village:** retain ambient; no dedicated village rule.
 
 Pokémon Tower can preserve village priority 30 through deliberate rule ordering in CobbleSafari 0.3.4. No priority change is needed. Original CobbleTowns repairs and required-pack policy are separate changes requiring user review; village music can be tested with the already enabled pack despite its documented loot defect.
 
@@ -62,9 +62,9 @@ All proposed village files have stable names. Any unexpected overlap between set
 
 These counts assume both Twinleaf tracks, no nonlegendary rule, one tower rule and exactly three new trigger files. Selecting one Twinleaf track gives 406 repository tracks, 1,305 rules, 415 events, and runtime totals 412 tracks / 1,309 rules / 19 files. An added nonlegendary assignment changes rule counts; use an existing track if the user chooses Ecruteak for it.
 
-## Build commands after review and implementation
+## Implemented build commands
 
-Create dedicated RC4 scripts first; these commands are proposed and have **not** been run:
+The dedicated RC4 scripts were created and run successfully:
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File ".\DysFam_CSMusic_Ambient_RC1_Package\tools\build_csmusic_rc4_datapack.ps1"

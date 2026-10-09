@@ -1,0 +1,94 @@
+{
+  "rules": [
+    {
+      "music": "dysfam_music:villages_lgpe_pokemon_tower",
+      "priority": 30,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "battle": "never",
+        "structure": "cobbletowns:lavender_town",
+        "structure_piece": "cobbletowns:lavender_town/buildings/pokemon_tower"
+      }
+    },
+    {
+      "music": "dysfam_music:villages_lgpe_lavender_town",
+      "priority": 30,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "battle": "never",
+        "structure": "cobbletowns:lavender_town"
+      }
+    },
+    {
+      "music": "dysfam_music:villages_lgpe_pallet_town",
+      "priority": 30,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "battle": "never",
+        "structure": "cobbletowns:pallet_town"
+      }
+    },
+    {
+      "music": "dysfam_music:villages_hgss_cherrygrove_city",
+      "priority": 30,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "battle": "never",
+        "structure": "cobbletowns:cherrygrove_city"
+      }
+    },
+    {
+      "music": "dysfam_music:villages_oras_pacificlog_town",
+      "priority": 30,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "battle": "never",
+        "structure": "cobbletowns:pacifidlog_town"
+      }
+    },
+    {
+      "music": "dysfam_music:villages_bdsp_twinleaf_town_day",
+      "priority": 30,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "battle": "never",
+        "structure": "cobbletowns:twinleaf_town",
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "music": "dysfam_music:villages_bdsp_twinleaf_town_night",
+      "priority": 30,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "battle": "never",
+        "structure": "cobbletowns:twinleaf_town",
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    },
+    {
+      "music": "dysfam_music:villages_bdsp_floaroma_town",
+      "priority": 30,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "battle": "never",
+        "structure": "cobbletowns:floaroma_town"
+      }
+    },
+    {
+      "music": "dysfam_music:villages_bw_lentimas_town",
+      "priority": 30,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "battle": "never",
+        "structure": "cobbletowns:lentimas_town"
+      }
+    }
+  ]
+}

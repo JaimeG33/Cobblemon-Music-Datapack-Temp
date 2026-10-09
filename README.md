@@ -4,9 +4,11 @@ Unified music system for the DysFam Cobblemon modpack using CobbleSafari CSMusic
 
 ## Current status
 
-**RC3 Weather: Complete / Working. RC4 Villages is next.**
+**RC4 Villages: Built / Awaiting Gameplay QA. RC3 remains Complete / Working.**
 
-RC3 adds thunderstorm and local snowfall day/night music. Build and enable both cumulative RC3 packs; see [RC3 testing](docs/RC3_WEATHER_TESTING.md).
+RC4 adds basic, magic, cold and hot village day/night pools, seven named CobbleTowns settlements, Ecruteak Village and Lavender Town's Pokémon Tower. Twinleaf uses Day/Night tracks; nonlegendary traditional villages retain ambient music. Install both cumulative RC4 packs; see [RC4 installation and gameplay QA](docs/RC4_VILLAGE_TESTING.md).
+
+RC4 contains 407 DysFam tracks, 1,306 rules, 16 trigger files and 416 resource events/OGGs. With the installed CobbleSafari defaults, expect 413 tracks / 1,310 rules / 19 trigger files. Static verification is documented in the testing guide; in-game RC4 behavior still requires user QA.
 
 Completed and tested:
 

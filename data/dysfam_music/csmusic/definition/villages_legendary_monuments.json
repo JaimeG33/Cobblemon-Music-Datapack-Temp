@@ -1,0 +1,13 @@
+{
+  "rules": [
+    {
+      "music": "dysfam_music:villages_hgss_ecruteak_city",
+      "priority": 30,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "battle": "never",
+        "structure": "legendarymonuments:traditional_village/ecruteak"
+      }
+    }
+  ]
+}
