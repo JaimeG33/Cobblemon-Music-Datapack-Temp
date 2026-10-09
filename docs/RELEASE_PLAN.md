@@ -1,21 +1,19 @@
 # Release Plan
 
-The releases are cumulative. Only the newest datapack and newest resource pack should be enabled during normal testing.
+Releases are cumulative. Only the newest DysFam datapack and resource pack should be enabled during normal QA.
 
 | Release | Feature layer | Technical priority | Status |
 |---|---|---:|---|
 | RC1 | Ambient biomes / dimensions | 10 | Working |
-| RC2 | Generic wild battles by generation | 50 | Full candidate / QA |
-| RC3 | Weather | 40 | Planned |
+| RC2 | Generic wild battles by generation | 50 | Complete / Working |
+| RC3 | Weather | 40 | Next |
 | RC4 | Villages | 30 | Planned |
-| RC5 | Pokecenter / Pokemart / specific buildings | 42 | Planned |
+| RC5 | PokÃ©center / PokÃ©mart / specific buildings | 42 | Planned |
 | RC6 | General / special structures | 41 | Planned |
-| RC7 | Advanced/special Pokemon battles | 60 | Planned |
-| Optional | Trainer battle layer | 55 | Research/possible |
+| RC7 | Advanced/special PokÃ©mon battles | 60 | Planned |
+| Optional | Trainer battle layer | 55 | Research / possible |
 
-## RC2 full generic wild-battle candidate
-
-Generic wild battle mapping:
+## RC2 completed mapping
 
 - Gen 1 -> LGPE - Battle Wild Pokemon
 - Gen 2 -> HGSS - Battle Wild Pokemon
@@ -27,9 +25,22 @@ Generic wild battle mapping:
 - Gen 8 -> SWSH - Battle Wild Pokemon
 - Gen 9 -> SV - Battle Wild Pokemon
 
-All nine intro/loop pairs are included in the RC2 resource manifest and all nine track definitions are added to the datapack.
+RC2 contains all nine intro/loop pairs and 1,016 exact base-species rules generated from:
 
-Prototype validation passed for Pikachu, Lucario, and Sprigatito.`r`n`r`nThe full candidate generates 1,016 exact base-species rules from `docs/reference/cobblemon_species_1.7.3.csv`, split across nine generation trigger files.`r`n`r`nAdd-on/custom species outside the base Cobblemon JAR are not covered yet.`r`n
+`docs/reference/cobblemon_species_1.7.3.csv`
+
+## Later battle work
+
+Still planned:
+
+- add-on/custom species;
+- trainer/NPC/PvP themes;
+- special species/forms;
+- legendary/mythical/special encounters;
+- boss/raid-specific music where appropriate.
+
+These later rules should override the generic priority-50 battle layer rather than replace it.
+
 ## Deferred issue
 
-Rapid dimension hopping previously produced a possible multi-track overlap during a heavily lagged test sequence. Because this is unlikely in ordinary survival play and may be an engine/client cleanup issue rather than a datapack mapping issue, it is deferred while higher-impact gameplay layers are implemented.
+Rapid dimension-hopping overlap is intentionally deferred until final integration QA.

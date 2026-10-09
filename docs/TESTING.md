@@ -1,110 +1,37 @@
 # Testing
 
-## Clean CSMusic test environment
+## Clean CSMusic QA environment
 
 Keep enabled:
 
 - CobbleSafari 0.3.4
 - the normal DysFam modpack
-- only the newest DysFam CSMusic datapack/resource pack under test
+- only the newest DysFam CSMusic datapack/resource pack
 
-Disable while validating battle music:
+Disable while validating CSMusic:
 
 - ReactiveMusic
 - CobbleThemes
 - old Pokemon Music Pack by ToaRex
-- obsolete CSMusic resource-pack builds
+- obsolete DysFam CSMusic builds
 
-If Chat Patches duplicate-message counting makes diagnostics hard to read, disable its duplicate counter during testing.
-
-## Build RC2 resource pack
-
-From the repository root:
+## Build RC2
 
 ```powershell
+.\DysFam_CSMusic_Ambient_RC1_Package\tools\build_csmusic_rc2_datapack.ps1
 .\DysFam_CSMusic_Ambient_RC1_Package\tools\build_csmusic_rc2_resourcepack.ps1
 ```
 
-The default source archive is:
+Expected outputs:
 
-`C:\Users\Jaime\Downloads\DysFam Music OGG Files.zip`
+- `build_output\DysFam_CSMusic_RC2_Datapack.zip`
+- `build_output\DysFam_CSMusic_RC2_ResourcePack.zip`
 
-Expected output:
+Both builders must finish with validation passed.
 
-`DysFam_CSMusic_Ambient_RC1_Package\build_output\DysFam_CSMusic_RC2_ResourcePack.zip`
+## Known-good RC2 runtime totals
 
-The builder must finish with ZIP validation passed.
-
-## Datapack diagnostics
-
-Useful in-game commands:
-
-```mcfunction
-/reload
-/datapack list enabled
-/cobblesafari csmusic list
-/cobblesafari csmusic current
-/cobblesafari csmusic structures
-```
-
-RC1 baseline before RC2 was approximately:
-
-- 274 total loaded music definitions including CobbleSafari built-ins
-- 251 trigger rules from 6 files
-- zero skipped/rejected
-
-RC2 prototype should add:
-
-- 9 DysFam music definitions
-- 3 trigger rules
-- 1 trigger-definition file
-
-Exact totals can vary if CobbleSafari's built-ins change, so zero skipped/rejected matters more than matching a hardcoded total.
-
-## RC2 prototype battle tests
-
-Spawn/fight one of each test species:
-
-```mcfunction
-/spawnpokemon pikachu
-/spawnpokemon lucario
-/spawnpokemon sprigatito
-```
-
-Expected mapping:
-
-- Pikachu -> `dysfam_music:battle_gen1` -> LGPE
-- Lucario -> `dysfam_music:battle_gen4` -> BDSP
-- Sprigatito -> `dysfam_music:battle_gen9` -> SV
-
-For each test verify:
-
-1. Ambient music is audible before battle.
-2. Battle start causes ambient to yield.
-3. Correct battle intro plays once.
-4. Correct loop continues after the intro.
-5. Cobblemon/CobbleThemes music does not overlap.
-6. `/cobblesafari csmusic current` shows the expected battle track.
-7. Ending/fleeing the battle stops battle music.
-8. Ambient music resumes afterward.
-
-Do not generate the full 1,016-species rule table until all three prototype generations pass.
-
-## Regression checks
-
-After battle testing, briefly verify:
-
-- Plains day/night ambient
-- Desert day/night ambient
-- one underground pool
-- Nether
-- End
-
-This catches accidental RC1 regressions before expanding RC2.
-
-## RC2 full candidate
-
-Expected runtime with CobbleSafari 0.3.4:
+With CobbleSafari 0.3.4:
 
 - 283 music definitions
 - 1,267 trigger rules
@@ -112,16 +39,59 @@ Expected runtime with CobbleSafari 0.3.4:
 - 0 skipped definitions
 - 0 rejected trigger files
 
-Useful checks:
+## Diagnostics
 
-`mcfunction
+```mcfunction
+/reload
+/datapack list enabled
 /function dysfam_music:check
 /function dysfam_music:check_audio
-`
+/cobblesafari csmusic list
+/cobblesafari csmusic current
+```
 
-Generation smoke-test species:
-Pikachu, Hoppip, Mudkip, Lucario, Snivy, Froakie, Rowlet, Wooloo, Sprigatito.
+## Generation regression sample
 
-## Datapack ZIP rule
+Recommended species:
 
-The datapack ZIP must contain forward-slash paths (data/dysfam_music/...). The earlier Windows backslash ZIP caused Minecraft to enable the pack while CobbleSafari could not discover its CSMusic resources. Always use 	ools/build_csmusic_rc2_datapack.ps1.
+```mcfunction
+/spawnpokemon pikachu
+/spawnpokemon hoppip
+/spawnpokemon mudkip
+/spawnpokemon lucario
+/spawnpokemon snivy
+/spawnpokemon froakie
+/spawnpokemon rowlet
+/spawnpokemon wooloo
+/spawnpokemon sprigatito
+```
+
+Expected tracks:
+
+- Pikachu -> Gen 1 / LGPE
+- Hoppip -> Gen 2 / HGSS
+- Mudkip -> Gen 3 / ORAS
+- Lucario -> Gen 4 / BDSP
+- Snivy -> Gen 5 / SVID
+- Froakie -> Gen 6 / PLZA
+- Rowlet -> Gen 7 / USUM
+- Wooloo -> Gen 8 / SWSH
+- Sprigatito -> Gen 9 / SV
+
+For each battle verify correct intro/loop, no ambient overlap, correct `battle_genN`, and ambient resume afterward.
+
+## Ambient regression
+
+Verify at least Plains day/night, Desert day/night, one underground pool, Nether, and End.
+
+## Add-on species
+
+A custom/add-on PokÃ©mon not present in `docs/reference/cobblemon_species_1.7.3.csv` is outside RC2 base-species scope.
+
+## Critical ZIP rule
+
+Always build the datapack using:
+
+`DysFam_CSMusic_Ambient_RC1_Package\tools\build_csmusic_rc2_datapack.ps1`
+
+The builder forces `/` ZIP paths. A previous Windows ZIP used backslashes, which Minecraft accepted while CobbleSafari failed to discover the CSMusic files.

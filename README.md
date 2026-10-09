@@ -4,34 +4,46 @@ Unified music system for the DysFam Cobblemon modpack using CobbleSafari CSMusic
 
 ## Current status
 
-**RC2 full generic wild-battle candidate**
+**RC2 complete: Ambient + Generic Wild Battles**
 
-- RC1 ambient biome/dimension music is already working.
-- RC2 adds the nine generic Gen 1-9 wild battle themes.
-- Prototype tests passed for Pikachu (Gen 1), Lucario (Gen 4), and Sprigatito (Gen 9).`r`n- RC2 now maps all 1,016 base Cobblemon 1.7.3 species to their generation battle theme.`r`n- Add-on/custom species outside the base Cobblemon table remain unmapped for now.`r`n- The rapid dimension-hopping overlap issue is currently deferred because it is a low-priority edge case.
+Completed and tested:
+
+- RC1 ambient biome/dimension music remains the environmental baseline.
+- RC2 adds nine generic wild battle themes, one per PokÃ©mon generation.
+- All 1,016 base species present in Cobblemon 1.7.3 are mapped to their generation theme.
+- Battle testing confirmed correct track selection and ambient -> battle -> ambient transitions.
+- `/function dysfam_music:check` reports expected pack status/counts.
+- `/function dysfam_music:check_audio` manually verifies a battle sound event.
+- Players receive a short "ToaRex music pack is online" message once per world/server load or `/reload`.
+
+Not part of RC2:
+
+- addon/custom species outside base Cobblemon 1.7.3;
+- trainer/NPC/PvP themes;
+- special legendary/species/form overrides;
+- rapid dimension-hopping overlap investigation.
+
+The rapid dimension-hopping issue is intentionally deferred until all planned music layers are complete.
 
 ## Repository layout
 
 - `data/` + `pack.mcmeta` - active datapack
-- `DysFam_CSMusic_Ambient_RC1_Package/manifest/` - resource and rule manifests
-- `DysFam_CSMusic_Ambient_RC1_Package/tools/` - resource-pack builders
+- `DysFam_CSMusic_Ambient_RC1_Package/manifest/` - cumulative manifests
+- `DysFam_CSMusic_Ambient_RC1_Package/tools/` - datapack/resource-pack builders
 - `DysFam_CSMusic_Ambient_RC1_Package/resourcepack_template/` - resource-pack metadata template
-- `docs/` - architecture, roadmap, testing, and generated references
+- `docs/` - architecture, release plan, testing, build notes, and references
 - `build_output/` - generated locally and intentionally ignored by Git
-
-The package directory keeps its historical RC1 name to avoid unnecessary path churn; it is now the cumulative CSMusic build workspace.
-
-## Important external source
-
-The large finalized music archive is intentionally not stored in Git:
-
-`C:\Users\Jaime\Downloads\DysFam Music OGG Files.zip`
-
-See `docs/README.md` for the full project guide.
 
 ## Player diagnostics
 
-- /function dysfam_music:check
-- /function dysfam_music:check_audio
+```mcfunction
+/function dysfam_music:check
+/function dysfam_music:check_audio
+/cobblesafari csmusic current
+```
 
-The pack also displays **"ToaRex music pack is online"** once per world/server load or /reload.
+## External music source
+
+The finalized source OGG archive is intentionally not stored in Git:
+
+`C:\Users\Jaime\Downloads\DysFam Music OGG Files.zip`

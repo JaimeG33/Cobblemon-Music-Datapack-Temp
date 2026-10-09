@@ -18,4 +18,5 @@ Do not invent mappings for blanks or ambiguous conditions.
 
 For runtime schema/behavior, the installed CobbleSafari 0.3.4 implementation is the authority.
 
-For exact base Cobblemon species IDs/generations, use the generated 1.7.3 species CSV rather than manually typing a PokÃ©dex list.
+For exact base Cobblemon species IDs/generations, use the generated 1.7.3 species CSV rather than manually typing a PokÃƒÂ©dex list.
+- RC2_COMPLETION.md - finalized RC2 scope, known-good counts, and deferred battle work.

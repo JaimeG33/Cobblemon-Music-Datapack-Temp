@@ -1,5 +1,5 @@
 param(
-    [string]$Repo = "C:\Users\Jaime\OneDrive\Desktop\Minecraft Datapacks\DysFam_CSMusic_Ambient_RC1_Datapack"
+    [string]$Repo = "D:\Minecraft Stuff\Minecraft Datapacks\DysFam_CSMusic_Ambient_RC1_Datapack"
 )
 
 $ErrorActionPreference = "Stop"
