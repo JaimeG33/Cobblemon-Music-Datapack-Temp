@@ -1,0 +1,45 @@
+{
+  "rules": [
+    {
+      "music": "dysfam_music:weather_oras_heavy_rain",
+      "priority": 40,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "battle": "never",
+        "weather": [
+          "thunder"
+        ]
+      }
+    },
+    {
+      "music": "dysfam_music:weather_nps_shiver_snowfields_day",
+      "priority": 40,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "battle": "never",
+        "weather": [
+          "snow"
+        ],
+        "time_range": [
+          0,
+          12000
+        ]
+      }
+    },
+    {
+      "music": "dysfam_music:weather_nps_shiver_snowfields_night",
+      "priority": 40,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "battle": "never",
+        "weather": [
+          "snow"
+        ],
+        "time_range": [
+          12000,
+          24000
+        ]
+      }
+    }
+  ]
+}

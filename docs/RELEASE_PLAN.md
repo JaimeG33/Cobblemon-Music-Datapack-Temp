@@ -6,7 +6,7 @@ Releases are cumulative. Only the newest DysFam datapack and resource pack shoul
 |---|---|---:|---|
 | RC1 | Ambient biomes / dimensions | 10 | Working |
 | RC2 | Generic wild battles by generation | 50 | Complete / Working |
-| RC3 | Weather | 40 | Next |
+| RC3 | Weather | 40 | Prototype / QA |
 | RC4 | Villages | 30 | Planned |
 | RC5 | PokÃ©center / PokÃ©mart / specific buildings | 42 | Planned |
 | RC6 | General / special structures | 41 | Planned |

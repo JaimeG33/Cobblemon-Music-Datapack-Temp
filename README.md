@@ -4,7 +4,9 @@ Unified music system for the DysFam Cobblemon modpack using CobbleSafari CSMusic
 
 ## Current status
 
-**RC2 complete: Ambient + Generic Wild Battles**
+**RC3 Weather: implemented, awaiting in-game QA. RC2 remains the tested baseline.**
+
+RC3 adds thunderstorm and local snowfall day/night music. Build and enable both cumulative RC3 packs; see [RC3 testing](docs/RC3_WEATHER_TESTING.md).
 
 Completed and tested:
 
