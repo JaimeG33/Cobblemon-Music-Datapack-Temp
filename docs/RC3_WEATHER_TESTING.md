@@ -1,7 +1,7 @@
-# RC3 Weather — Prototype / QA
+# RC3 Weather — Complete / Working
 
 RC3 contains the completed RC2 ambient and generic wild-battle layers plus weather.
-Packaging/static checks do not establish in-game playback. RC3 remains awaiting gameplay QA.
+The user confirmed successful gameplay QA, including the follow-up snowfall-at-night check. RC3 is the working cumulative baseline for RC4.
 
 ## Source and installed schema
 
@@ -58,7 +58,9 @@ Root and historical datapack mirror are synchronized. `/function dysfam_music:ch
 - An independent selection matrix passed 96 dimension/battle/weather/time combinations, including the day/night boundary.
 - All RC2 music JSON remains unchanged after Git line-ending normalization; all original 286 manifest records are preserved. Root and mirror data files match byte-for-byte.
 - Counts were computed from source and the installed JAR: project 280 definitions / 1,266 rules / 13 files, plus built-ins 6 definitions / 4 rules / 3 files.
-- In-game weather transitions, battle interruption/resumption, and seasonal-mod interaction remain unverified.
+- User gameplay QA passed: ordinary rain retains ambient; thunder selects Heavy Rain; snow selects the day/night tracks; clear weather restores ambient; battles interrupt weather and weather resumes afterward. The snowfall-at-night follow-up was explicitly confirmed successful.
+- Seasonal-mod edge cases were not separately established. Rapid dimension-hopping remains deferred.
+- Existing built packs retain their original QA labels; this documentation update does not require reinstalling them.
 
 ## Build
 
