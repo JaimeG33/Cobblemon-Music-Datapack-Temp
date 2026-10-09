@@ -3,6 +3,32 @@
 Research before implementation. No world, mod, pack activation, or profile configuration changes were made.
 User clarified that the standalone `O` in Magic Villages Night is a typo; magical villages retain priority 30.
 
+## Completed follow-up audit — 2026-10-09
+
+The new handoff was checked against the current local files, original Villages workbook, audio source ZIP, 263 mod/global/world-pack archives, saved `level.dat` selections and `latest.log`. This follow-up supersedes the earlier activation snapshot below. Only documentation and the research CSV were updated; the profile, worlds, original archives, runtime datapack and release outputs were not changed.
+
+Deliverables:
+
+- [Exact structure-to-music and special-building map](RC4_STRUCTURE_MUSIC_MAP.md): all 13 BCA villages, two Terralith villages, seven CobbleTowns towns, both Legendary Monuments variants, and building-template candidates.
+- [Audio inventory and missing registrations](RC4_AUDIO_INVENTORY.md), with [exact per-track CSV](reference/rc4_village_audio_inventory.csv).
+- [Activation, archive compatibility and optional-pack audit](RC4_DATAPACK_AUDIT.md): current selections, portable policy proposal, all 49 optional archive declarations and relevant overlapping resources.
+- [RC4 implementation proposal and gameplay QA](RC4_IMPLEMENTATION_PLAN.md): expected files, supported schema, tower precedence, cumulative counts and future build commands.
+
+Verified changes since the first handoff:
+
+1. `simple_datapacks.json` is already portable: empty required list and only relative `datapacks` in the optional list. Both obsolete absolute paths have been removed. The history/author of that edit is not inferred.
+2. `RC3 ver 1 Weather Test/level.dat` now enables CobbleTowns and RC3. `Update again` still disables CobbleTowns and uses RC2. One copied CobbleTowns ZIP in the RC3 save matches the profile ZIP byte-for-byte.
+3. The log independently confirms Pallet Town locate at X -1568, Z 5824, `[bounds: 1, piece: 1]`, and `cobbletowns:pallet_town/rare_structures/lab`; it also confirms two noncontainment observations. Y and the exact movement cannot be reconstructed from those log lines. The user's report supplies the inside/above/outside context.
+4. CobbleTowns has an actual additional defect: the Lentimas small chest loot table fails to parse in-game because of `minecraft:grass`. Its malformed metadata remains present. These defects coexist with successful Pallet generation/detection and do not prove that its other structures fail.
+5. Terralith `custom_structures` is enabled. The target structure resources have no differing root-file overrides in the scanned archives; only BCA provides the replacement vanilla village structure set.
+6. Villages contains 127 unique song labels. With both Twinleaf versions, all 128 candidate source OGGs exist, one Kitakami registration is reusable, and 127 new events/tracks are needed. Source audio additions total about 313.12 MiB before ZIP compression.
+7. Installed bytecode resolves equal priorities by ascending source key after descending priority. A piece does not automatically beat a structure. Put tower at rule index 0 and Lavender Town at index 1 in the same new trigger file to preserve priority 30 with deterministic precedence. Runtime Tower detection and entry/exit QA remain outstanding.
+8. Root and historical mirrored runtime data currently match exactly. Repository counts are 280 tracks / 1,266 rules / 13 trigger files; CobbleSafari contributes 6 tracks / 4 rules / 3 trigger files, explaining the actual logged totals 286 / 1,270 / 16. The manifest has 289 DysFam events.
+
+**Decision requiring song selection:** workbook I25 has unsuffixed Twinleaf Town, but the library offers separate Day and Night versions. Recommend both with time rules. The nonlegendary traditional village has no workbook assignment; recommend keeping ambient unless the user explicitly extends the mapping. Intended mandatory optional-pack selection cannot be recovered from the historical server handoff; that broader policy does not block QA in the already configured test world.
+
+Runtime versus handoff evidence: the second handoff reports successful BCA categories, both Terralith villages and Ecruteak location tests. Their archive IDs were independently confirmed here. The retained log independently verifies the Pallet test; this review did not launch Minecraft or reproduce every reported test.
+
 ## Earlier documentation
 
 `C:/Users/Jaime/Downloads/CSMusic_Ambient_RC1_Testing_Handoff_2026-09-01.md`, sections 8–9 (lines 156–199), explicitly records that the mini-test targeted vanilla `minecraft:village_*` while the world used Terralith/BCA villages. Later diagnostics identified the correct structures. Observed IDs included `terralith:fortified_village`, `#terralith:fortified_villages`, `#bca:villages`, and `bca:default/one_off/pokecenter`.
@@ -32,16 +58,16 @@ No competing copy of that resource was found among the scanned archives. This ex
 
 For RC4, map the BCA IDs instead of restoring vanilla generation. Restoration, if wanted independently, would require an intentional worldgen compatibility change, not a music fix.
 
-### CobbleTowns exists on disk but is disabled in the saved worlds
+### Historical snapshot: CobbleTowns was disabled in both saved worlds
 
-`datapacks/CobbleTowns 1.1.3 (for 1.6).zip` is explicitly in `DataPacks.Disabled` in both:
+At the earlier inspection, `datapacks/CobbleTowns 1.1.3 (for 1.6).zip` was explicitly in `DataPacks.Disabled` in both:
 
 - `saves/RC3 ver 1 Weather Test/level.dat`
 - `saves/Update again/level.dat`
 
 Both saves have generation enabled and the BCA/Terralith/Legendary Monuments mod datapacks enabled. Numerous other profile-level optional ZIPs are also disabled. Therefore these local worlds do not necessarily reproduce the friend's complete server datapack setup.
 
-`config/simple_datapacks.json` has a required path `A:\Modrinth\profiles\DysFam Cobblemon 2.0\datapacks`, which does not exist here. Optional paths include the valid relative `datapacks` folder and nonexistent `C:\Users\toare\Downloads`. The current log reports failed directory listing for both obsolete absolute paths.
+The earlier `config/simple_datapacks.json` had a required path `A:\Modrinth\profiles\DysFam Cobblemon 2.0\datapacks`, which does not exist here. Optional paths included the valid relative `datapacks` folder and nonexistent `C:\Users\toare\Downloads`. The log examined then reported failed directory listing for both obsolete absolute paths. The current configuration no longer contains these paths, and the latest log does not report those directory-listing failures.
 
 The [Simple Datapacks author's documentation](https://modrinth.com/mod/simple-datapacks) distinguishes automatic required packs from optional packs offered for selection. The stale required path plausibly explains why intended mandatory global packs became optional locally. Historical intent cannot be determined from this configuration alone.
 
