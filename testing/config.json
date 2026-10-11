@@ -1,0 +1,9 @@
+{
+  "profile": "D:/Minecraft Stuff/ModrinthApp/profiles/DysFam Cobblemon 2.0 6.0.0",
+  "source_world": "RC4 Village Test",
+  "expected_counts": [413, 1310, 19],
+  "expected_datapack": "file/DysFam_CSMusic_RC4_Datapack.zip",
+  "command_timeout": 15,
+  "locate_timeout": 240,
+  "settle_seconds": 35
+}

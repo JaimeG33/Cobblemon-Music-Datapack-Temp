@@ -1,0 +1,45 @@
+{
+  "session_date": "2026-10-10",
+  "branch": "codex/csmusic-test-harness",
+  "static_audit": "pass",
+  "controller_unit_tests": {
+    "passed": 10
+  },
+  "dry_run": "pass",
+  "live_smoke": "pass",
+  "live_smoke_counts": [
+    413,
+    1310,
+    19
+  ],
+  "pallet": {
+    "status": "fail",
+    "expected": "dysfam_music:villages_lgpe_pallet_town",
+    "observed": "dysfam_music:villages_lgpe_lavender_town",
+    "priority": 30,
+    "position": [
+      -3663.5,
+      68,
+      720.5
+    ],
+    "cause": "Both Pallet and Lavender have bounds containment; equal-priority Lavender rule sorts first",
+    "evidence": "results/20261010-194237-d9c180/report.json",
+    "temporary_forceload_cleaned": true
+  },
+  "native_screenshots_verified": 17,
+  "audible_playback": "not tested",
+  "regression_sequences_implemented_not_run": [
+    "pallet_weather",
+    "twinleaf_exact_boundaries"
+  ],
+  "remaining": [
+    "Pallet-only waypoint",
+    "battle control fixtures",
+    "biome transition waypoints",
+    "structure edge/vertical fixtures",
+    "tower entry/exit fixtures",
+    "unattended launcher/world selection",
+    "audio observation"
+  ],
+  "production_files_modified": false
+}

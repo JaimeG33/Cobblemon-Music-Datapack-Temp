@@ -1,0 +1,551 @@
+{
+  "structures": [
+    {
+      "id": "cobbletowns_lavender_town_0",
+      "structure": "cobbletowns:lavender_town",
+      "priority": 30,
+      "time": 1000,
+      "weather": "clear",
+      "source": "data\\dysfam_music\\csmusic\\definition\\villages_cobbletowns.json#0",
+      "music": "dysfam_music:villages_lgpe_pokemon_tower",
+      "piece": "cobbletowns:lavender_town/buildings/pokemon_tower"
+    },
+    {
+      "id": "cobbletowns_lavender_town_1",
+      "structure": "cobbletowns:lavender_town",
+      "priority": 30,
+      "time": 1000,
+      "weather": "clear",
+      "source": "data\\dysfam_music\\csmusic\\definition\\villages_cobbletowns.json#1",
+      "music": "dysfam_music:villages_lgpe_lavender_town"
+    },
+    {
+      "id": "pallet_town",
+      "structure": "cobbletowns:pallet_town",
+      "priority": 30,
+      "time": 1000,
+      "weather": "clear",
+      "source": "data\\dysfam_music\\csmusic\\definition\\villages_cobbletowns.json#2",
+      "music": "dysfam_music:villages_lgpe_pallet_town"
+    },
+    {
+      "id": "cobbletowns_cherrygrove_city_3",
+      "structure": "cobbletowns:cherrygrove_city",
+      "priority": 30,
+      "time": 1000,
+      "weather": "clear",
+      "source": "data\\dysfam_music\\csmusic\\definition\\villages_cobbletowns.json#3",
+      "music": "dysfam_music:villages_hgss_cherrygrove_city"
+    },
+    {
+      "id": "cobbletowns_pacifidlog_town_4",
+      "structure": "cobbletowns:pacifidlog_town",
+      "priority": 30,
+      "time": 1000,
+      "weather": "clear",
+      "source": "data\\dysfam_music\\csmusic\\definition\\villages_cobbletowns.json#4",
+      "music": "dysfam_music:villages_oras_pacificlog_town"
+    },
+    {
+      "id": "cobbletowns_twinleaf_town_5",
+      "structure": "cobbletowns:twinleaf_town",
+      "priority": 30,
+      "time": 0,
+      "weather": "clear",
+      "source": "data\\dysfam_music\\csmusic\\definition\\villages_cobbletowns.json#5",
+      "music": "dysfam_music:villages_bdsp_twinleaf_town_day"
+    },
+    {
+      "id": "cobbletowns_twinleaf_town_6",
+      "structure": "cobbletowns:twinleaf_town",
+      "priority": 30,
+      "time": 12000,
+      "weather": "clear",
+      "source": "data\\dysfam_music\\csmusic\\definition\\villages_cobbletowns.json#6",
+      "music": "dysfam_music:villages_bdsp_twinleaf_town_night"
+    },
+    {
+      "id": "cobbletowns_floaroma_town_7",
+      "structure": "cobbletowns:floaroma_town",
+      "priority": 30,
+      "time": 1000,
+      "weather": "clear",
+      "source": "data\\dysfam_music\\csmusic\\definition\\villages_cobbletowns.json#7",
+      "music": "dysfam_music:villages_bdsp_floaroma_town"
+    },
+    {
+      "id": "cobbletowns_lentimas_town_8",
+      "structure": "cobbletowns:lentimas_town",
+      "priority": 30,
+      "time": 1000,
+      "weather": "clear",
+      "source": "data\\dysfam_music\\csmusic\\definition\\villages_cobbletowns.json#8",
+      "music": "dysfam_music:villages_bw_lentimas_town"
+    },
+    {
+      "id": "bca_village_default_small_0",
+      "structure": "bca:village/default_small",
+      "priority": 30,
+      "time": 0,
+      "weather": "clear",
+      "source": "data\\dysfam_music\\csmusic\\definition\\villages_generic.json#0",
+      "pool": "village_basic_day"
+    },
+    {
+      "id": "bca_village_default_small_1",
+      "structure": "bca:village/default_small",
+      "priority": 30,
+      "time": 12000,
+      "weather": "clear",
+      "source": "data\\dysfam_music\\csmusic\\definition\\villages_generic.json#1",
+      "pool": "village_basic_night"
+    },
+    {
+      "id": "bca_village_default_mid_2",
+      "structure": "bca:village/default_mid",
+      "priority": 30,
+      "time": 0,
+      "weather": "clear",
+      "source": "data\\dysfam_music\\csmusic\\definition\\villages_generic.json#2",
+      "pool": "village_basic_day"
+    },
+    {
+      "id": "bca_village_default_mid_3",
+      "structure": "bca:village/default_mid",
+      "priority": 30,
+      "time": 12000,
+      "weather": "clear",
+      "source": "data\\dysfam_music\\csmusic\\definition\\villages_generic.json#3",
+      "pool": "village_basic_night"
+    },
+    {
+      "id": "bca_village_default_large_4",
+      "structure": "bca:village/default_large",
+      "priority": 30,
+      "time": 0,
+      "weather": "clear",
+      "source": "data\\dysfam_music\\csmusic\\definition\\villages_generic.json#4",
+      "pool": "village_basic_day"
+    },
+    {
+      "id": "bca_village_default_large_5",
+      "structure": "bca:village/default_large",
+      "priority": 30,
+      "time": 12000,
+      "weather": "clear",
+      "source": "data\\dysfam_music\\csmusic\\definition\\villages_generic.json#5",
+      "pool": "village_basic_night"
+    },
+    {
+      "id": "bca_village_fighting_small_6",
+      "structure": "bca:village/fighting_small",
+      "priority": 30,
+      "time": 0,
+      "weather": "clear",
+      "source": "data\\dysfam_music\\csmusic\\definition\\villages_generic.json#6",
+      "pool": "village_basic_day"
+    },
+    {
+      "id": "bca_village_fighting_small_7",
+      "structure": "bca:village/fighting_small",
+      "priority": 30,
+      "time": 12000,
+      "weather": "clear",
+      "source": "data\\dysfam_music\\csmusic\\definition\\villages_generic.json#7",
+      "pool": "village_basic_night"
+    },
+    {
+      "id": "bca_village_fighting_mid_8",
+      "structure": "bca:village/fighting_mid",
+      "priority": 30,
+      "time": 0,
+      "weather": "clear",
+      "source": "data\\dysfam_music\\csmusic\\definition\\villages_generic.json#8",
+      "pool": "village_basic_day"
+    },
+    {
+      "id": "bca_village_fighting_mid_9",
+      "structure": "bca:village/fighting_mid",
+      "priority": 30,
+      "time": 12000,
+      "weather": "clear",
+      "source": "data\\dysfam_music\\csmusic\\definition\\villages_generic.json#9",
+      "pool": "village_basic_night"
+    },
+    {
+      "id": "bca_village_fighting_large_10",
+      "structure": "bca:village/fighting_large",
+      "priority": 30,
+      "time": 0,
+      "weather": "clear",
+      "source": "data\\dysfam_music\\csmusic\\definition\\villages_generic.json#10",
+      "pool": "village_basic_day"
+    },
+    {
+      "id": "bca_village_fighting_large_11",
+      "structure": "bca:village/fighting_large",
+      "priority": 30,
+      "time": 12000,
+      "weather": "clear",
+      "source": "data\\dysfam_music\\csmusic\\definition\\villages_generic.json#11",
+      "pool": "village_basic_night"
+    },
+    {
+      "id": "bca_village_dark_small_12",
+      "structure": "bca:village/dark_small",
+      "priority": 30,
+      "time": 0,
+      "weather": "clear",
+      "source": "data\\dysfam_music\\csmusic\\definition\\villages_generic.json#12",
+      "pool": "village_magic_day"
+    },
+    {
+      "id": "bca_village_dark_small_13",
+      "structure": "bca:village/dark_small",
+      "priority": 30,
+      "time": 12000,
+      "weather": "clear",
+      "source": "data\\dysfam_music\\csmusic\\definition\\villages_generic.json#13",
+      "pool": "village_magic_night"
+    },
+    {
+      "id": "bca_village_dark_mid_14",
+      "structure": "bca:village/dark_mid",
+      "priority": 30,
+      "time": 0,
+      "weather": "clear",
+      "source": "data\\dysfam_music\\csmusic\\definition\\villages_generic.json#14",
+      "pool": "village_magic_day"
+    },
+    {
+      "id": "bca_village_dark_mid_15",
+      "structure": "bca:village/dark_mid",
+      "priority": 30,
+      "time": 12000,
+      "weather": "clear",
+      "source": "data\\dysfam_music\\csmusic\\definition\\villages_generic.json#15",
+      "pool": "village_magic_night"
+    },
+    {
+      "id": "bca_village_fairy_small_16",
+      "structure": "bca:village/fairy_small",
+      "priority": 30,
+      "time": 0,
+      "weather": "clear",
+      "source": "data\\dysfam_music\\csmusic\\definition\\villages_generic.json#16",
+      "pool": "village_magic_day"
+    },
+    {
+      "id": "bca_village_fairy_small_17",
+      "structure": "bca:village/fairy_small",
+      "priority": 30,
+      "time": 12000,
+      "weather": "clear",
+      "source": "data\\dysfam_music\\csmusic\\definition\\villages_generic.json#17",
+      "pool": "village_magic_night"
+    },
+    {
+      "id": "bca_village_fairy_mid_18",
+      "structure": "bca:village/fairy_mid",
+      "priority": 30,
+      "time": 0,
+      "weather": "clear",
+      "source": "data\\dysfam_music\\csmusic\\definition\\villages_generic.json#18",
+      "pool": "village_magic_day"
+    },
+    {
+      "id": "bca_village_fairy_mid_19",
+      "structure": "bca:village/fairy_mid",
+      "priority": 30,
+      "time": 12000,
+      "weather": "clear",
+      "source": "data\\dysfam_music\\csmusic\\definition\\villages_generic.json#19",
+      "pool": "village_magic_night"
+    },
+    {
+      "id": "bca_village_ice_small_20",
+      "structure": "bca:village/ice_small",
+      "priority": 30,
+      "time": 0,
+      "weather": "clear",
+      "source": "data\\dysfam_music\\csmusic\\definition\\villages_generic.json#20",
+      "pool": "village_cold_day"
+    },
+    {
+      "id": "bca_village_ice_small_21",
+      "structure": "bca:village/ice_small",
+      "priority": 30,
+      "time": 12000,
+      "weather": "clear",
+      "source": "data\\dysfam_music\\csmusic\\definition\\villages_generic.json#21",
+      "pool": "village_cold_night"
+    },
+    {
+      "id": "bca_village_ice_mid_22",
+      "structure": "bca:village/ice_mid",
+      "priority": 30,
+      "time": 0,
+      "weather": "clear",
+      "source": "data\\dysfam_music\\csmusic\\definition\\villages_generic.json#22",
+      "pool": "village_cold_day"
+    },
+    {
+      "id": "bca_village_ice_mid_23",
+      "structure": "bca:village/ice_mid",
+      "priority": 30,
+      "time": 12000,
+      "weather": "clear",
+      "source": "data\\dysfam_music\\csmusic\\definition\\villages_generic.json#23",
+      "pool": "village_cold_night"
+    },
+    {
+      "id": "bca_village_ice_large_24",
+      "structure": "bca:village/ice_large",
+      "priority": 30,
+      "time": 0,
+      "weather": "clear",
+      "source": "data\\dysfam_music\\csmusic\\definition\\villages_generic.json#24",
+      "pool": "village_cold_day"
+    },
+    {
+      "id": "bca_village_ice_large_25",
+      "structure": "bca:village/ice_large",
+      "priority": 30,
+      "time": 12000,
+      "weather": "clear",
+      "source": "data\\dysfam_music\\csmusic\\definition\\villages_generic.json#25",
+      "pool": "village_cold_night"
+    },
+    {
+      "id": "terralith_fortified_village_26",
+      "structure": "terralith:fortified_village",
+      "priority": 30,
+      "time": 0,
+      "weather": "clear",
+      "source": "data\\dysfam_music\\csmusic\\definition\\villages_generic.json#26",
+      "pool": "village_basic_day"
+    },
+    {
+      "id": "terralith_fortified_village_27",
+      "structure": "terralith:fortified_village",
+      "priority": 30,
+      "time": 12000,
+      "weather": "clear",
+      "source": "data\\dysfam_music\\csmusic\\definition\\villages_generic.json#27",
+      "pool": "village_basic_night"
+    },
+    {
+      "id": "terralith_fortified_desert_village_28",
+      "structure": "terralith:fortified_desert_village",
+      "priority": 30,
+      "time": 0,
+      "weather": "clear",
+      "source": "data\\dysfam_music\\csmusic\\definition\\villages_generic.json#28",
+      "pool": "village_hot_day"
+    },
+    {
+      "id": "terralith_fortified_desert_village_29",
+      "structure": "terralith:fortified_desert_village",
+      "priority": 30,
+      "time": 12000,
+      "weather": "clear",
+      "source": "data\\dysfam_music\\csmusic\\definition\\villages_generic.json#29",
+      "pool": "village_hot_night"
+    },
+    {
+      "id": "legendarymonuments_traditional_village_ecruteak_0",
+      "structure": "legendarymonuments:traditional_village/ecruteak",
+      "priority": 30,
+      "time": 1000,
+      "weather": "clear",
+      "source": "data\\dysfam_music\\csmusic\\definition\\villages_legendary_monuments.json#0",
+      "music": "dysfam_music:villages_hgss_ecruteak_city"
+    }
+  ],
+  "regressions": [
+    {
+      "id": "ambient_biome_transition",
+      "status": "requires calibrated safe biome waypoints",
+      "expected": "priority 10, appropriate biome pool"
+    },
+    {
+      "id": "ambient_day_night",
+      "times": [
+        0,
+        11999,
+        12000,
+        23999
+      ],
+      "expected": "correct day/night pool at priority 10"
+    },
+    {
+      "id": "ordinary_rain",
+      "weather": "rain",
+      "requires": "runtime weather rain, not snow",
+      "expected": "ambient or village retains selection"
+    },
+    {
+      "id": "thunder",
+      "weather": "thunder",
+      "music": "dysfam_music:weather_oras_heavy_rain",
+      "priority": 40
+    },
+    {
+      "id": "snow_boundaries",
+      "weather": "rain",
+      "requires": "runtime weather snow",
+      "times": [
+        0,
+        11999,
+        12000,
+        23999
+      ],
+      "expected": "day/night Shiver Snowfields at priority 40"
+    },
+    {
+      "id": "battle_generations",
+      "generations": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "priority": 50,
+      "requires": "controlled wild encounter and battle completion; no battle automation yet"
+    },
+    {
+      "id": "battle_transitions",
+      "contexts": [
+        "ambient",
+        "weather",
+        "village"
+      ],
+      "expected": "generation music during battle; appropriate context resumes afterward",
+      "requires": "battle fixture"
+    },
+    {
+      "id": "village_bounds",
+      "positions": [
+        "inside",
+        "edge",
+        "outside",
+        "above",
+        "inside"
+      ],
+      "expected": "priority 30 only inside bounds; ambient fallback outside",
+      "requires": "verified bounding box coordinates"
+    },
+    {
+      "id": "tower_lavender_transition",
+      "piece": "cobbletowns:lavender_town/buildings/pokemon_tower",
+      "sequence": [
+        "tower",
+        "town",
+        "tower"
+      ],
+      "priority": 30,
+      "requires": "exact piece diagnostic calibration and safe waypoints"
+    },
+    {
+      "id": "weather_over_village",
+      "weather": "thunder",
+      "priority": 40
+    },
+    {
+      "id": "twinleaf_boundaries",
+      "times": [
+        0,
+        11999,
+        12000,
+        23999,
+        0
+      ],
+      "expected": "Twinleaf day/night track at priority 30"
+    },
+    {
+      "id": "pallet_weather",
+      "setup_id": "pallet_town",
+      "steps": [
+        {
+          "id": "clear",
+          "weather": "clear",
+          "context_weather": "none",
+          "music": "dysfam_music:villages_lgpe_pallet_town",
+          "priority": 30
+        },
+        {
+          "id": "ordinary_rain",
+          "weather": "rain",
+          "context_weather": "rain",
+          "music": "dysfam_music:villages_lgpe_pallet_town",
+          "priority": 30
+        },
+        {
+          "id": "thunder_override",
+          "weather": "thunder",
+          "context_weather": "thunder",
+          "music": "dysfam_music:weather_oras_heavy_rain",
+          "priority": 40
+        },
+        {
+          "id": "clear_restores_town",
+          "weather": "clear",
+          "context_weather": "none",
+          "music": "dysfam_music:villages_lgpe_pallet_town",
+          "priority": 30
+        }
+      ]
+    },
+    {
+      "id": "twinleaf_exact_boundaries",
+      "setup_id": "cobbletowns_twinleaf_town_5",
+      "steps": [
+        {
+          "id": "tick_0_0",
+          "time": 0,
+          "weather": "clear",
+          "context_weather": "none",
+          "music": "dysfam_music:villages_bdsp_twinleaf_town_day",
+          "priority": 30
+        },
+        {
+          "id": "tick_11999_1",
+          "time": 11999,
+          "weather": "clear",
+          "context_weather": "none",
+          "music": "dysfam_music:villages_bdsp_twinleaf_town_day",
+          "priority": 30
+        },
+        {
+          "id": "tick_12000_2",
+          "time": 12000,
+          "weather": "clear",
+          "context_weather": "none",
+          "music": "dysfam_music:villages_bdsp_twinleaf_town_night",
+          "priority": 30
+        },
+        {
+          "id": "tick_23999_3",
+          "time": 23999,
+          "weather": "clear",
+          "context_weather": "none",
+          "music": "dysfam_music:villages_bdsp_twinleaf_town_night",
+          "priority": 30
+        },
+        {
+          "id": "tick_0_4",
+          "time": 0,
+          "weather": "clear",
+          "context_weather": "none",
+          "music": "dysfam_music:villages_bdsp_twinleaf_town_day",
+          "priority": 30
+        }
+      ]
+    }
+  ]
+}
