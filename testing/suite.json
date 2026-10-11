@@ -547,5 +547,61 @@
         }
       ]
     }
-  ]
+  ],
+  "modes": {
+    "quick": [
+      "pallet_town"
+    ],
+    "representative": [
+      "bca_village_default_small_0",
+      "bca_village_dark_small_12",
+      "bca_village_ice_small_20",
+      "terralith_fortified_village_26",
+      "terralith_fortified_desert_village_28",
+      "pallet_town",
+      "cobbletowns_twinleaf_town_5",
+      "cobbletowns_lavender_town_1",
+      "cobbletowns_lavender_town_0",
+      "legendarymonuments_traditional_village_ecruteak_0"
+    ],
+    "diagnostic": [
+      "cobbletowns_cherrygrove_city_3",
+      "cobbletowns_pacifidlog_town_4",
+      "cobbletowns_floaroma_town_7",
+      "cobbletowns_lentimas_town_8",
+      "bca_village_default_mid_2",
+      "bca_village_fighting_small_6",
+      "bca_village_dark_mid_14",
+      "bca_village_fairy_small_16",
+      "bca_village_ice_mid_22",
+      "terralith_fortified_village_27",
+      "pallet_town",
+      "cobbletowns_twinleaf_town_6",
+      "cobbletowns_lavender_town_1",
+      "cobbletowns_lavender_town_0"
+    ],
+    "escalation_policy": {
+      "repeat_same_position": 1,
+      "alternate_waypoints": 2,
+      "locate_attempts": 3,
+      "max_search_distance": 100000,
+      "automatic_world_generation": false,
+      "on_ambiguous_fixture": "request_assistance"
+    }
+  },
+  "mode_regressions": {
+    "quick": [],
+    "representative": [
+      "pallet_weather",
+      "twinleaf_exact_boundaries"
+    ],
+    "diagnostic": [
+      "pallet_weather",
+      "twinleaf_exact_boundaries"
+    ],
+    "exhaustive": [
+      "pallet_weather",
+      "twinleaf_exact_boundaries"
+    ]
+  }
 }

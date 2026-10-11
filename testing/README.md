@@ -1,83 +1,91 @@
-# CSMusic Windows testing prototype
+# CSMusic testing harness
 
-This controller uses PyAutoGUI for Windows keyboard input and screenshots, and fresh Minecraft system-chat log responses for evidence. It never treats sending a command, a screenshot, declared pack counts, or old log entries as a runtime pass. Production music files and release ZIPs are not edited.
+The Windows controller tests RC4 using a verified, disposable copy of `RC4 Village Test`. It edits only files under `testing/` in this repository and test-only files in that copied world. It never changes production trigger rules, release ZIPs, or the source save.
 
-## Setup and use
+## Setup and run modes
 
-Run from the repository root in PowerShell:
+From the repository root in PowerShell:
 
 ```powershell
 .\testing\run.ps1 setup
-.\testing\run.ps1 audit
 .\testing\run.ps1 self-test
+.\testing\run.ps1 audit
 .\testing\run.ps1 dry-run
-# Close Minecraft before copying a save:
-.\testing\run.ps1 prepare
 ```
 
-`config.json` selects the profile, source save, expected release totals and timeouts. Preparation makes a new timestamped `CSMusic Automation ...` save, preserving the source save and all unrelated packs. It changes only the copy to creative mode with cheats and installs a test-only identity/terrain-probe datapack. `prepared.json` records the copy identity. Never copy its identity pack into another world. The current source is **RC4 Village Test**, not the obsolete RC3 save name in the task brief.
+When Minecraft is closed, `prepare` makes a timestamped `CSMusic Automation ...` copy and writes an identity receipt. The local October 10 copy is described by ignored `testing/prepared.json`; only use it after the controller verifies its receipt and fresh in-game identity. The source save remains `RC4 Village Test`.
 
-Launch the existing profile through Modrinth, load the named copied save, and leave it unpaused, outside chat or menus. Start a test, then allow the controller to focus Minecraft. Do not type during a run:
+Launch the existing Modrinth profile, load the copied world, leave the game unpaused and at a safe state, close chat/menus, and keep Minecraft in the foreground. The controller will not steal focus. Supported play modes are:
 
 ```powershell
 .\testing\run.ps1 smoke
+.\testing\run.ps1 quick
+.\testing\run.ps1 representative
+.\testing\run.ps1 diagnostic
+.\testing\run.ps1 exhaustive
 .\testing\run.ps1 structure -Case pallet_town
-```
-
-The structure command repeats the smoke gate before attempting travel. `suite.json` contains the RC4 structure rules, named settlements and generic pools; use the desired entry's `id` for `-Case`.
-
-Two configurable regression sequences are implemented (their execution status is in the session report):
-
-```powershell
-.\testing\run.ps1 regression -Case pallet_weather
 .\testing\run.ps1 regression -Case twinleaf_exact_boundaries
 ```
 
-They travel through the structure fixture, apply each weather/time step, allow arbitration, and assert the playing source, priority and observed weather. Boundary tests freeze the copied world's daylight cycle and restore its prior setting on normal completion. A failed fixture, such as rain being classified as snow, blocks rather than misdiagnosing the music. Other regression entries are an explicit fixture backlog, **not implemented gameplay coverage**. Battle creation/completion, calibrated biome transitions, structure edge/vertical transitions and tower piece transitions still need fixtures or additional control work.
+`quick` runs smoke plus Pallet Town selection. The default `representative` plan covers BCA basic/magic/cold, Terralith basic/hot, Pallet, Twinleaf day, Lavender Town and Pokémon Tower, and Ecruteak, followed by the Pallet weather and Twinleaf boundary sequences. `diagnostic` expands to more variants; `exhaustive` visits every configured structure and then the supported representative sequences. Static coverage and live scenario results remain separate. These plans do not claim unvisited structures passed.
 
-## Stop and recovery
+Runs use bounded `/locate` and travel. They do not generate distant terrain or guess safe alternate coordinates. An ambiguous or inaccessible fixture stops with a BLOCKED category and asks for actionable user help; a later invocation rechecks identity and focus. The known Pallet/Lavender overlap is an arbitration case, not a Pallet-only pass or a proven music defect. The earlier run at approximately `[-3663.5, 68, 720.5]` had both structures in bounds and selected Lavender's priority-30 source.
 
-- Press **F8**, move the mouse to any primary-screen corner, switch focus away from Minecraft, or create `testing/STOP`.
-- Stop checks run before every typed character and during waits. There is a small OS scheduling race between a focus check and an input event; GUI automation cannot make those two operations atomic.
-- Focus loss is terminal for that run. The controller never refocuses or sends cleanup keys after an abort. Clear any partially typed chat manually before restarting.
-- Delete the STOP file manually when ready to run again. Ctrl+C also aborts.
-- The copied world remains where the test stopped, with any test time/weather changes. The original is never restored over, deleted or regenerated.
-- Travel temporarily force-loads one destination chunk if it was not already forced. Normal cleanup removes only that new ticket. After an emergency stop, `observed.temporary_forceload` records a ticket that may need manual removal in the copy. No cleanup command is sent while another app has focus.
-- To recover that ticket once the copied world is ready, run `.\testing\.venv\Scripts\python.exe .\testing\harness.py capture --recover-report <interrupted-report.json>`. Recovery verifies the copy identity and the interrupted run's ownership evidence. A regression interrupted while daylight is frozen also records `daylight_cycle_restore_pending`; restore that documented value manually in the copy.
+## Audio capture and references
 
-## Evidence and validation levels
+Setup installs pinned PyAudioWPatch, which exposes the system's WASAPI loopback endpoint. Inspect devices without recording:
 
-Every run gets a unique ignored `testing/results/<timestamp>-<id>/` directory with `report.json`, `report.md`, `commands.log` and command screenshots when available. Exit code 0 means that mode passed; code 2 means failure or blocked. A dry-run pass means controls can be imported and queried without input; it is not a gameplay pass.
+```powershell
+.\testing\run.ps1 audio-devices
+```
 
-If desktop capture is completely black, the controller uses the verified F2 binding and copies Minecraft's native screenshot into the run evidence. The original native screenshot is retained in the profile's screenshots directory. If native capture also fails, the run blocks. Earlier prototype runs had black screenshots; their usable evidence is the log, as identified in the session report.
+This machine currently exposes `Speaker (Realtek(R) Audio) [Loopback]`, 48 kHz stereo, matching the Windows default output. Endpoint capture records the digital output mix and can include other applications; it does not verify physical speaker output or isolate Minecraft. No device or global volume settings are changed.
 
-The report distinguishes static validation from runtime selection and always marks audible playback **not tested**. CSMusic's `current` output describes the selected source/pool; it does not prove the individual sound in a random pool is audible. No audio capture is implemented.
+Capture a local WAV while a known track is playing, or opt in to a gameplay run with `-Audio`:
 
-Each command is enclosed by unpredictable BEGIN/END `tellraw` markers. Only new `[System] [CHAT]` lines between those markers are parsed. Normal player chat, historical entries, partial lines and rotated/truncated logs cannot satisfy a request. Empty/unknown responses block their assertion. English client messages are required by the current parsers.
+```powershell
+.\testing\run.ps1 audio-capture -Duration 30
+.\testing\run.ps1 quick -Audio
+```
 
-Smoke proves the copy identity, creative mode, enabled RC4 pack, RC4 status function, fresh loader counts with zero skips/rejections after `/reload`, and a parseable playing source. The status function's declared counts are never substituted for live loader counts. Reloading happens only in the verified copy.
+The installed RC4 resource-pack ZIP is used directly as the reference source. `audio-identify` resolves named tracks or every track in a pool, ranks waveform subsequence and spectral candidates, and can compare two selections:
 
-## Controller states
+```powershell
+.\testing\run.ps1 audio-identify -Recording <recording.wav> `
+  -Selection dysfam_music:villages_lgpe_pallet_town `
+  -NegativeSelection dysfam_music:villages_lgpe_lavender_town
+.\testing\run.ps1 audio-benchmark `
+  -Selection dysfam_music:villages_lgpe_pallet_town `
+  -NegativeSelection dysfam_music:villages_lgpe_lavender_town
+```
 
-| State | Success/evidence | Timeout/recovery |
-|---|---|---|
-| PREFLIGHT | Installed version/hash inventory and computed source + built-in counts | Abort on incompatible/missing inputs |
-| READY | Correct process/profile; fresh copy token; creative assertion | Bounded command roundtrips; abort without world edits |
-| LOCATE | Exact structure ID and fresh coordinate response | 240 seconds per locate; abort if incomplete/error |
-| PARSE | Valid X/Z, retain unknown Y explicitly | Reject malformed/out-of-range results |
-| TRAVEL | Probe confirms numeric XYZ, safe floor and headroom; teleport and player-position confirmation | Bounded commands, no guessed landing Y |
-| SETTLE | Focus held through cache allowance | 35 seconds by default |
-| QUERY | Fresh `structures` and `current` responses | 15 seconds per command |
-| VERIFY | Bounds containment plus playing music/pool and priority | Mismatch fails; unavailable evidence blocks |
-| RECORD | JSON/Markdown/log/screenshot evidence | Local writes; errors surface to operator |
-| CLEANUP | Close handles; remove owned force-load ticket only while focused | No automatic recovery input following abort |
+Current matcher evidence is **synthetic only**: reference-derived volume-scaled and background-noise samples separate these two tracks, silence scores zero, and a two-track overlap is ambiguous. A first spectral-only ranking confused the town tracks. No Minecraft loopback recording has been captured or calibrated, so the threshold is unset, every matcher result is `INCONCLUSIVE_AUDIO`, and `FAIL_AUDIO` is never emitted. Audio is not a required gameplay gate until controlled live match/nonmatch/silence and mixed-transition recordings establish useful thresholds.
 
-The terrain probe uses a conservative solid-block allowlist and two exact air blocks. It can decline snow-layer surfaces or custom floors. It selects the highest valid landing point, which might be a roof; actual CSMusic bounds must still match. Lack of containment is blocked pending another verified landing point, not a music failure. Piece-specific cases require the exact piece line under the correct containing parent, and block if the landing point misses it. The tower still needs calibrated landing/entry/exit waypoints; its gameplay behavior has not been tested by this harness.
+Static inspection of installed CobbleSafari 0.3.4 found a private client music player with current track/voice state, a private voice sample-position field, and 1-second synchronized, 5-second crossfade, and 2.5-second fade constants. The standard client log records load errors but did not expose normal per-track start/stop events. This harness does not instrument or modify CobbleSafari. A test-only companion/mixin remains optional future work.
 
-## Feasibility and limitations
+## Loading, images and minimap
 
-The installed 1.21.1 client log contains `csmusic current`, structure bounds, and loader totals. A Fabric logging mod is therefore unnecessary for the initial smoke path. Nonce markers detect missing feedback rather than assuming all chat is logged. A future bridge could expose world identity, chunk height/bounds, structured command callbacks, exact piece containment and sound-engine observations without UI typing; it must remain test-only and must not change selection behavior.
+After teleport, the harness verifies world identity and exact player XYZ, checks destination chunk loading, polls structure bounds and music sources until stable, and captures native screenshots. Defaults are a 35-second minimum settle, 7-second polling, 180-second loading limit, and two stable observations. These are configurable in `config.json`. A valid `/tp` message alone is never considered ready.
 
-No supported unattended launch interface was verified for the local Modrinth installation. Launching and selecting the copy currently require the user. No launcher account data or tokens are stored in evidence. Minecraft freeze detection combines Windows hung-window checks and response deadlines; a locate timeout does not forcibly terminate the game/server task.
+The configured top-right minimap region is cropped into adjacent `*-minimap.png` evidence. Pixel statistics and screenshots are retained as visual corroboration only; the harness does not claim automated scene understanding. Structure bounds and exact piece containment remain authoritative. The installed profile has Xaero Minimap and Xaero World Map.
 
-PyAutoGUI's documented fail-safe is retained: [official documentation](https://pyautogui.readthedocs.io/en/latest/index.html#fail-safes). The implementation additionally checks focus and F8 during waits. See `SESSION_RESULTS.md` for what was actually executed during implementation.
+## Stop, assistance and recovery
+
+- Press F8, move the cursor to a primary-screen corner, switch focus, or create `testing/STOP` to halt input.
+- The controller never resumes or sends cleanup keys after focus loss. A partially typed command is replaced with Ctrl+A before the next fresh command, but a new run still requires the user to confirm the game is ready and foreground.
+- BLOCKED fixture/loading/focus reports include a specific assistance request. The Windows alert does not play a Minecraft sound or refocus the game. Start a new run only after the requested action; there is no automatic resume.
+- Owned temporary force-load tickets and pending daylight-cycle restoration are recorded. Once the copied world is loaded and ready, recover an interrupted report with:
+
+```powershell
+.\testing\run.ps1 recover -RecoverReport <interrupted-report.json>
+```
+
+Recovery verifies the copied-world token and receipt, queries current `doDaylightCycle`, restores only the documented original value if needed, and removes only a force-load ticket proven to be owned by that report. It cannot send input while focus is lost.
+
+## Reports and status
+
+Each run writes `report.json`, `report.md`, `commands.log`, and a bounded set of screenshots under ignored `testing/results/`. Audio WAVs are stored with their local reports and are excluded from Git. Existing failure evidence is never automatically deleted. The report retains exceptions and distinguishes selection failures, fixture/arbitration blocks, loading/focus problems, audio-device/tool issues, inconclusive audio, and untested layers.
+
+The source contains trigger IDs and indices, the runtime parser retains the exact winning source key and index, and reports include competing sources and bounds. Only a verified single-structure fixture with fresh, parseable source evidence can produce `FAIL_SELECTION`. `PASS` means the configured selection-level gates passed; audio remains separately marked `NOT_TESTED` or `INCONCLUSIVE_AUDIO`.
+
+October 10 runtime results remain historical in `SESSION_RESULTS.md` and `SESSION_RESULTS.json`. Phase 2 implementation and this session's new evidence are recorded separately in `PHASE2_IMPLEMENTATION.md`, `PHASE2_SESSION_RESULTS.md`, `PHASE2_SESSION_RESULTS.json`, and `COVERAGE.json`. The live Pallet overlap report is `results/20261011-152306-492b67/report.md`; the Lavender-only selection pass is `results/20261011-152808-d4cec2/report.md`. Ignored screenshots, logs and the copied-world receipt are local evidence and are not in Git.

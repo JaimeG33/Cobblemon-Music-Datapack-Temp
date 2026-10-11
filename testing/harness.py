@@ -42,6 +42,53 @@ def write_json(path, value):
     Path(path).write_text(json.dumps(value, indent=2, ensure_ascii=False), encoding='utf-8')
 
 
+def assistance_message(report):
+    category = report.get('failure_category', '')
+    if category == 'BLOCKED_SCENARIOS':
+        blocked = [item for item in report.get('scenarios', []) if item.get('status') == 'BLOCKED']
+        if blocked:
+            details = ', '.join(item['id'] + ': ' + str(item['category']) for item in blocked[:5])
+            return 'Review the blocked scenarios (' + details + '), perform the documented safe action, then explicitly start a new run. No automatic resume occurs.'
+    messages = {
+        'BLOCKED_FIXTURE': 'Please move or identify a safe waypoint inside the requested structure/piece, then start a new run.',
+        'BLOCKED_LOADING': 'Please wait for the destination to finish loading, confirm Minecraft is responsive, then start a new run.',
+        'BLOCKED_FOCUS': 'Please inspect and clear Minecraft chat/menu state, foreground the verified copied world, then explicitly start recovery or a new run.',
+        'OVERLAPPING_STRUCTURES_EXPECTED_ARBITRATION': 'This is a verified structure overlap. Choose a Pallet-only waypoint or treat the overlap as its own arbitration regression.'}
+    return messages.get(category)
+
+
+def notify_assistance(config, message):
+    options = config.get('assistance', {})
+    try:
+        if options.get('beep', True):
+            import winsound
+            winsound.MessageBeep(winsound.MB_ICONEXCLAMATION)
+    except Exception:
+        pass
+    if options.get('windows_notification', True) and os.name == 'nt':
+        ctypes.windll.user32.MessageBoxW(0, message, 'CSMusic harness needs assistance', 0x40 | 0x1000)
+
+
+def gamerule_value(response):
+    match = re.search(r'doDaylightCycle is currently set to: (true|false)', response)
+    require(match is not None, 'Cannot verify current doDaylightCycle value')
+    return match.group(1)
+
+
+def expected_rule_sources(selection, priority):
+    """Resolve declared sources for a track/pool at priority without altering runtime ordering."""
+    results = []
+    for path in sorted((REPO / 'data/dysfam_music/csmusic/definition').glob('*.json')):
+        data = json.loads(path.read_bytes())
+        for index, rule in enumerate(data.get('rules', [])):
+            if int(rule.get('priority', -9999)) != int(priority):
+                continue
+            selected = rule.get('music') or ('#' + rule['tag'] if rule.get('tag') else None)
+            if selected == selection:
+                results.append(f'definition:csmusic/definition/{path.name}#{index}')
+    return results
+
+
 def install_probe(world):
     """Read-only terrain queries, installed exclusively in the receipted test copy."""
     pack = world / 'datapacks/csmusic_harness'
@@ -121,6 +168,29 @@ def audit(config):
                 require(z.read(name) == source.read_bytes(), 'Installed datapack differs from repository: ' + name)
                 compared += 1
     resource_options = [line for line in (profile / 'options.txt').read_text(encoding='utf-8').splitlines() if line.startswith('resourcePacks:')]
+    rp_path = Path(config.get('audio', {}).get('reference_resource_pack', ''))
+    audio_inventory = {'reference_pack': str(rp_path), 'available': rp_path.is_file(),
+                       'loopback_runtime_events_logged': False, 'instrumentation': 'not detected in ordinary client log'}
+    if rp_path.is_file():
+        with zipfile.ZipFile(rp_path) as z:
+            sound_path = 'assets/dysfam_music/sounds.json'
+            audio_inventory['sound_events'] = len(json.loads(z.read(sound_path))) if sound_path in z.namelist() else None
+            audio_inventory['ogg_files'] = sum(n.endswith('.ogg') and n.startswith('assets/dysfam_music/sounds/') for n in z.namelist())
+    safari_jar = Path(mods['cobblesafari']['file'])
+    with zipfile.ZipFile(safari_jar) as z:
+        class_names = [n for n in z.namelist() if n.startswith('maxigregrze/cobblesafari/client/audio/') and n.endswith('.class')]
+    audio_inventory['cobblesafari_audio_classes'] = class_names
+    audio_inventory['cobblesafari_jar_sha256'] = mods['cobblesafari']['sha256']
+    audio_inventory['static_bytecode_findings'] = {
+        'private_client_state_fields': ['CsMusicPlayer.currentTrackId', 'CsMusicPlayer.currentVoice', 'CsMusicVoice.positionSamples'],
+        'fade_constants_ms': {'synced_crossfade': 1000, 'crossfade': 5000, 'fade': 2500},
+        'normal_track_start_stop_log_events': False,
+        'runtime_instrumentation_added': False}
+    log_audio = [line for line in old.splitlines() if re.search(r'\b(csmusic|sound engine|sound event|openal|playing sound)\b', line, re.I)]
+    audio_inventory['relevant_log_lines'] = log_audio[-40:]
+    audio_inventory['client_instrumentation_found'] = any(re.search(r'playing sound|sound event.*play', line, re.I) for line in log_audio)
+    minimap_jars = [p.name for p in (profile / 'mods').glob('*.jar') if re.search(r'minimap|worldmap|xaero', p.name, re.I)]
+    minimap_configs = [str(p) for p in (profile / 'config').glob('*xaero*')]
     return {'profile': str(profile), 'saves': [p.name for p in (profile / 'saves').iterdir() if p.is_dir()],
             'mods': mods, 'metadata_warnings': metadata_warnings, 'source_counts': source_counts, 'builtin_counts': defaults,
             'computed_total': [a+b for a,b in zip(source_counts, defaults)],
@@ -128,6 +198,10 @@ def audit(config):
             'resource_pack_options_disk_snapshot': resource_options,
             'windows': windows(), 'java_running': java_running(),
             'previous_log_evidence_only': [line for line in old.splitlines() if '[CSMusic] Loaded' in line or 'Loading Minecraft ' in line],
+            'audio_investigation': audio_inventory,
+            'minimap_investigation': {'mod_jars': minimap_jars, 'configuration_paths': minimap_configs,
+                                      'roi': config.get('minimap_roi'),
+                                      'authority': 'visual corroboration only; structure bounds and piece diagnostics remain authoritative'},
             'settings': json.loads((profile / 'config/cobblesafari/csmusic_settings.json').read_bytes())}
 
 
@@ -190,7 +264,84 @@ def framed_response(text, nonce):
 
 
 def playing(text):
-    return re.findall(r'^- \[[^\n]+\] ([#\w:./-]+)(?: \([^\n]*?\))? \(priority (-?\d+)\) <= playing$', text, re.M)
+    return [item for item in music_sources(text) if item['playing']]
+
+
+def music_sources(text):
+    """Parse source identity, rule index, selected track/pool, priority and winner flag."""
+    result = []
+    pattern = re.compile(
+        r'^- \[(?P<source>[^\]]+)#(?P<index>\d+)\] '
+        r'(?P<selection>[#\w:./-]+)(?: \([^\n]*?\))? '
+        r'\(priority (?P<priority>-?\d+)\)(?P<playing> <= playing)?$', re.M)
+    for match in pattern.finditer(text):
+        rule_index = int(match['index'])
+        result.append({'source': match['source'], 'rule_index': rule_index,
+                       'source_key': match['source'] + '#' + str(rule_index),
+                       'selection': match['selection'], 'priority': int(match['priority']),
+                       'playing': bool(match['playing'])})
+    return result
+
+
+def runtime_source(source):
+    """Translate a suite source path to CobbleSafari's displayed source-key format."""
+    normalized = source.replace('\\', '/')
+    marker = '/csmusic/'
+    require(marker in normalized and re.fullmatch(r'.+\.json#\d+', normalized),
+            'Invalid suite source identifier: ' + source)
+    relative = normalized.split(marker, 1)[1]
+    return 'definition:csmusic/' + relative
+
+
+def selection_diagnosis(case, bounds, current, all_cases):
+    """Classify mismatch only when runtime source and containment evidence are complete."""
+    matches = music_sources(current)
+    winners = [entry for entry in matches if entry['playing']]
+    expected_source = runtime_source(case['source'])
+    expected = case.get('music') or '#' + case['pool']
+    expected_matches = [entry for entry in matches
+                        if entry['source_key'] == expected_source and entry['selection'] == expected
+                        and entry['priority'] == int(case['priority'])]
+    structures = re.findall(r'^- ([\w:./-]+)\s+\[bounds: 1,', bounds, re.M)
+    source_cases = {runtime_source(item['source']): item for item in all_cases}
+    if not bounds.startswith('Structures at '):
+        return {'category': 'INCOMPLETE_DIAGNOSTIC_EVIDENCE', 'expected_source': expected_source,
+                'matching_structures': structures, 'sources': matches}
+    if not contains_structure(bounds, case['structure'], case.get('piece')):
+        return {'category': 'INVALID_OR_AMBIGUOUS_FIXTURE', 'expected_source': expected_source,
+                'matching_structures': structures, 'sources': matches}
+    if not winners or not matches:
+        return {'category': 'INCOMPLETE_DIAGNOSTIC_EVIDENCE', 'expected_source': expected_source,
+                'matching_structures': structures, 'sources': matches}
+    competing = [entry for entry in winners if entry['source_key'] != expected_source
+                 and entry['source_key'] in source_cases
+                 and contains_structure(bounds, source_cases[entry['source_key']]['structure'],
+                                        source_cases[entry['source_key']].get('piece'))]
+    higher_priority = [entry for entry in winners if entry['priority'] > int(case['priority'])]
+    if higher_priority:
+        return {'category': 'EXPECTED_PRIORITY_ARBITRATION', 'expected_source': expected_source,
+                'matching_structures': structures, 'sources': matches,
+                'winning_competitor': higher_priority[0]}
+    if competing:
+        category = ('OVERLAPPING_STRUCTURES_EXPECTED_ARBITRATION'
+                    if competing[0]['priority'] == int(case['priority']) else 'EXPECTED_PRIORITY_ARBITRATION')
+        return {'category': category, 'expected_source': expected_source,
+                'matching_structures': structures, 'sources': matches,
+                'winning_competitor': competing[0]}
+    unmapped = [entry for entry in winners if entry['priority'] == int(case['priority'])
+                and entry['source_key'] != expected_source and entry['source_key'] not in source_cases]
+    if unmapped:
+        return {'category': 'INCOMPLETE_DIAGNOSTIC_EVIDENCE', 'expected_source': expected_source,
+                'matching_structures': structures, 'sources': matches,
+                'unmapped_winner': unmapped[0]}
+    if expected_matches and any(entry['playing'] for entry in expected_matches):
+        return {'category': 'PASS_SELECTION', 'expected_source': expected_source,
+                'matching_structures': structures, 'sources': matches}
+    if not expected_matches:
+        return {'category': 'INCOMPLETE_DIAGNOSTIC_EVIDENCE', 'expected_source': expected_source,
+                'matching_structures': structures, 'sources': matches}
+    return {'category': 'VALID_FIXTURE_WRONG_SELECTION', 'expected_source': expected_source,
+            'matching_structures': structures, 'sources': matches}
 
 
 def contains_structure(text, structure, piece=None):
@@ -228,6 +379,7 @@ def allowed_command(command):
              'gamerule doDaylightCycle', 'gamerule doDaylightCycle true', 'gamerule doDaylightCycle false',
              'execute if entity @s[gamemode=creative] run tellraw @s "CSMUSIC_CREATIVE"'}
     patterns = [r'tellraw @s "CSMUSIC_[a-f0-9]+_(?:BEGIN|END)"',
+                r'execute if loaded -?\d+ -?\d+ -?\d+ run tellraw @s "CSMUSIC_LOADED"',
                 r'locate structure [a-z0-9_.-]+:[a-z0-9_/.-]+',
                 r'forceload (?:query|add|remove) -?\d+ -?\d+',
                 r'function csmusic_harness:probe \{x:-?\d+,z:-?\d+\}',
@@ -305,7 +457,7 @@ class Desktop:
         screen = self.gui.screenshot(region=(rect.left, rect.top, rect.right-rect.left, rect.bottom-rect.top))
         if screen.convert('RGB').getbbox() is not None:
             screen.save(path)
-            return
+            return path
         # Some OpenGL/fullscreen sessions return an all-black desktop capture. F2 captures
         # the actual game framebuffer and avoids claiming a black image as useful evidence.
         require(self.profile is not None, 'Black desktop screenshot; native capture profile unavailable')
@@ -326,7 +478,7 @@ class Desktop:
                         captured.load()
                         require(captured.convert('RGB').getbbox() is not None, 'Native screenshot also black')
                     shutil.copy2(fresh[0], path)
-                    return
+                    return path
                 except (OSError, PermissionError):
                     pass  # Screenshot may still be being written.
             time.sleep(.1)
@@ -340,11 +492,15 @@ class Controller:
         self.start = time.monotonic()
         self.out = HERE / 'results' / (datetime.now().strftime('%Y%m%d-%H%M%S') + '-' + uuid.uuid4().hex[:6])
         self.out.mkdir(parents=True)
-        self.report = {'id': mode if not case else case['id'], 'description': 'CSMusic ' + mode,
+        run_id = mode if not case else (case['id'] if isinstance(case, dict) else mode)
+        self.report = {'id': run_id, 'description': 'CSMusic ' + mode,
                        'started': stamp(), 'status': 'blocked', 'validation': 'static' if mode in ('audit', 'dry-run') else 'runtime selection',
+                       'test_level': 'selection-only; audio is not a required gate unless calibrated and explicitly configured',
+                       'verification_layers': {'music_selection': 'NOT_RUN', 'client_sound_event': 'NOT_AVAILABLE',
+                                               'windows_loopback_audio': 'NOT_TESTED'},
                        'audible_playback': 'not tested', 'commands': [], 'states': [],
                        'controller_sha256': digest(Path(__file__)),
-                       'expected': case or {'counts': config['expected_counts'], 'release': 'RC4'}, 'observed': {}}
+                       'expected': case if isinstance(case, (dict, list)) else {'counts': config['expected_counts'], 'release': 'RC4'}, 'observed': {}}
         if mode == 'capture':
             self.report['expected'] = {'evidence': 'nonblack screenshot and fresh playing-source response; this mode does not rerun RC4 smoke'}
         self.desktop = self.tail = None
@@ -367,9 +523,37 @@ class Controller:
 
     def capture(self, name):
         if self.desktop:
-            self.desktop.screenshot(self.out / (name + '.png'))
+            max_images = int(self.config.get('max_screenshots_per_run', 20))
+            existing = [p for p in self.out.glob('*.png') if not p.stem.endswith('-minimap')]
+            if len(existing) >= max_images:
+                self.report.setdefault('observed', {}).setdefault('visual_capture_skipped', []).append(
+                    {'name': name, 'reason': 'configured per-run screenshot limit reached'})
+                return None
+            path = self.desktop.screenshot(self.out / (name + '.png'))
+            try:
+                from PIL import Image, ImageStat
+                with Image.open(path) as image:
+                    image.load()
+                    width, height = image.size
+                    roi = self.config.get('minimap_roi', [0.70, 0.0, 0.30, 0.32])
+                    x0, y0 = int(width*roi[0]), int(height*roi[1])
+                    x1, y1 = min(width, int(width*(roi[0]+roi[2]))), min(height, int(height*(roi[1]+roi[3])))
+                    crop = image.crop((x0, y0, x1, y1))
+                    crop.save(path.with_name(path.stem + '-minimap.png'))
+                    stats = ImageStat.Stat(crop.convert('RGB'))
+                    self.report.setdefault('observed', {}).setdefault('visual_samples', []).append({
+                        'image': path.name, 'minimap_crop': path.stem + '-minimap.png',
+                        'dimensions': [width, height], 'roi_pixels': [x0, y0, x1, y1],
+                        'roi_rgb_mean': [round(v, 2) for v in stats.mean],
+                        'roi_rgb_stddev': [round(v, 2) for v in stats.stddev],
+                        'interpretation': 'visual evidence only; no automated structure or loading conclusion'})
+            except Exception as exc:
+                self.report.setdefault('observed', {}).setdefault('visual_analysis_errors', []).append(
+                    {'image': path.name, 'type': type(exc).__name__, 'message': str(exc)})
+            return path
+        return None
 
-    def command(self, command, timeout=None):
+    def command(self, command, timeout=None, screenshot=True):
         timeout = timeout or self.config['command_timeout']
         nonce = 'CSMUSIC_' + uuid.uuid4().hex
         item = {'command': '/' + command, 'started': stamp(), 'status': 'input pending', 'timeout': timeout}
@@ -394,7 +578,8 @@ class Controller:
             if result is not None:
                 item.update({'status': 'response captured', 'response': result, 'finished': stamp()})
                 require(not re.search(r'Unknown or incomplete command|Incorrect argument|Unknown function|You do not have permission|No entity was found', result), 'Command rejected: ' + result)
-                self.capture('command-' + str(len(self.report['commands'])))
+                if screenshot:
+                    self.capture('command-' + str(len(self.report['commands'])))
                 return result
             time.sleep(.05)
         item['status'] = 'timeout'
@@ -402,6 +587,7 @@ class Controller:
 
     def runtime_ready(self):
         receipt = json.loads((HERE / 'prepared.json').read_bytes())
+        self.receipt = receipt
         world = Path(receipt['world']).resolve()
         require(world.parent == (Path(self.config['profile']) / 'saves').resolve(), 'Copy belongs to another profile')
         require(json.loads((world / 'csmusic-harness-copy.json').read_bytes()) == receipt, 'Copy receipt mismatch')
@@ -412,7 +598,9 @@ class Controller:
         proc = subprocess.run(['powershell', '-NoProfile', '-Command', script], capture_output=True, text=True, check=True)
         require(str(Path(self.config['profile'])).lower() in proc.stdout.replace('/', '\\').lower(), 'Window process is not the configured profile')
         self.desktop = Desktop(wins[0]['hwnd'], HERE / 'STOP', self.config['profile'])
-        self.desktop.focus()
+        # Do not take focus away from the user's active application. The operator must leave
+        # Minecraft foreground before a run; any later focus loss is terminal.
+        self.desktop.guard()
         self.tail = LogTail(Path(self.config['profile']) / 'logs/latest.log')
         self.state('READY', 90, 'Fresh copy-specific identity response and creative mode')
         identity = self.command('function csmusic_harness:identity')
@@ -420,6 +608,112 @@ class Controller:
         creative = self.command('execute if entity @s[gamemode=creative] run tellraw @s "CSMUSIC_CREATIVE"')
         require('CSMUSIC_CREATIVE' in creative.splitlines(), 'Copied world must be creative')
         self.report['environment']['test_world'] = str(world)
+
+    def await_readiness(self, case, x, y, z):
+        loading = self.config.get('loading', {})
+        minimum = int(loading.get('minimum_settle_seconds', self.config['settle_seconds']))
+        interval = int(loading.get('poll_seconds', 7))
+        timeout = int(loading.get('timeout_seconds', 180))
+        required = int(loading.get('stable_observations', 2))
+        self.state('WAIT_LOAD', timeout, 'Loaded destination, stable bounds and stable CSMusic winner with screenshots retained')
+        started = time.monotonic()
+        self.wait(minimum)
+        observations = self.report['observed'].setdefault('readiness_observations', [])
+        previous = None
+        stable = 0
+        while time.monotonic() - started < timeout:
+            self.guard()
+            loaded = self.command(f'execute if loaded {x} {y} {z} run tellraw @s "CSMUSIC_LOADED"', screenshot=False)
+            identity = self.command('function csmusic_harness:identity', screenshot=False)
+            require('CSMUSIC_WORLD_' + self.receipt['token'] in identity,
+                    'Copied-world identity changed during teleport readiness polling')
+            bounds = self.command('cobblesafari csmusic structures', screenshot=False)
+            current = self.command('cobblesafari csmusic current', screenshot=False)
+            image = self.capture('readiness-' + str(len(observations) + 1))
+            winners = playing(current)
+            signature = (loaded.strip(), bounds.strip(), tuple((e['source_key'], e['selection'], e['priority']) for e in winners))
+            item = {'elapsed_seconds': round(time.monotonic() - started, 1),
+                    'destination_loaded': 'CSMUSIC_LOADED' in loaded,
+                    'bounds_contain_expected': contains_structure(bounds, case['structure'], case.get('piece')),
+                    'playing_sources': winners, 'screenshot': image.name if image else None,
+                    'render_loading_indicator_automated': False}
+            observations.append(item)
+            if item['destination_loaded'] and winners and signature == previous:
+                stable += 1
+            else:
+                stable = 1 if item['destination_loaded'] and winners else 0
+            previous = signature
+            if stable >= required and time.monotonic() - started >= minimum:
+                if not item['bounds_contain_expected']:
+                    self.report['failure_category'] = 'BLOCKED_FIXTURE'
+                    raise Blocked('Loaded diagnostic point does not meet requested structure or exact piece containment')
+                self.report['observed']['loading_readiness'] = {
+                    'status': 'ready', 'elapsed_seconds': round(time.monotonic() - started, 1),
+                    'stable_observations': stable, 'destination_loaded': True,
+                    'bounds_and_music_stable': True}
+                return
+            self.wait(interval)
+        self.report['failure_category'] = 'BLOCKED_LOADING'
+        self.report['observed']['loading_readiness'] = {
+            'status': 'timeout', 'elapsed_seconds': round(time.monotonic() - started, 1),
+            'stable_observations': stable, 'maximum_seconds': timeout}
+        raise Blocked('Destination loading and stable CSMusic observations were not established')
+
+    def await_music_stability(self, label):
+        loading = self.config.get('loading', {})
+        minimum = int(loading.get('minimum_settle_seconds', self.config['settle_seconds']))
+        interval = int(loading.get('poll_seconds', 7))
+        timeout = int(loading.get('timeout_seconds', 180))
+        required = int(loading.get('stable_observations', 2))
+        self.state('WAIT_MUSIC', timeout, 'Post-context music selection is stable across repeated fresh responses')
+        started = time.monotonic()
+        self.wait(minimum)
+        previous, stable = None, 0
+        observations = self.report['observed'].setdefault('music_stability_observations', [])
+        while time.monotonic() - started < timeout:
+            current = self.command('cobblesafari csmusic current', screenshot=False)
+            winners = playing(current)
+            context = re.search(r'time: (\d+) \| weather: (\w+)', current)
+            signature = (context.groups() if context else None,
+                         tuple((e['source_key'], e['selection'], e['priority']) for e in winners))
+            observations.append({'label': label, 'elapsed_seconds': round(time.monotonic()-started, 1),
+                                 'context': context.groups() if context else None, 'playing_sources': winners})
+            stable = stable + 1 if current and signature == previous and winners and context else (1 if winners and context else 0)
+            previous = signature
+            if stable >= required:
+                return current
+            self.wait(interval)
+        self.report['failure_category'] = 'BLOCKED_LOADING'
+        raise Blocked('Music selection did not stabilize after the context change: ' + label)
+
+    def capture_audio(self, selection):
+        audio_config = self.config.get('audio', {})
+        if not audio_config.get('enabled', False):
+            return {'status': 'NOT_TESTED', 'classification': 'NOT_TESTED',
+                    'reason': 'Audio capture is disabled in testing/config.json'}
+        from audio import AudioUnavailable, capture_loopback, identify
+        seconds = min(int(audio_config.get('capture_seconds', 30)), int(audio_config.get('maximum_seconds', 90)))
+        self.state('AUDIO_CAPTURE', seconds + 20, 'WASAPI endpoint capture with validated recording and candidate ranking')
+        path = self.out / 'audio-loopback.wav'
+        try:
+            evidence = capture_loopback(path, seconds, audio_config.get('device_index'))
+            limit = int(audio_config.get('maximum_recording_megabytes', 180)) * 1024 * 1024
+            require(path.stat().st_size <= limit, 'Audio recording exceeds configured evidence size limit')
+            if evidence['rms_int16'] < float(audio_config.get('minimum_capture_rms_int16', 100)):
+                evidence.update({'status': 'BLOCKED_AUDIO_DEVICE', 'classification': 'BLOCKED_AUDIO_DEVICE',
+                                 'reason': 'Loopback recording was near silent; no selection conclusion'})
+            else:
+                result = identify(path, selection, Path(audio_config['reference_resource_pack']), audio_config.get('ffmpeg'))
+                evidence.update({'status': 'INCONCLUSIVE_AUDIO', 'classification': result['classification'],
+                                 'match': result})
+                limit = float(audio_config.get('clipping_fraction_limit', 0.01))
+                if evidence['clipped_fraction'] > limit:
+                    evidence['classification'] = 'INCONCLUSIVE_AUDIO'
+                    evidence['clipping_warning'] = f"{evidence['clipped_fraction']:.4%} of samples meet the clipping threshold {limit:.2%}"
+            return evidence
+        except AudioUnavailable as exc:
+            return {'status': exc.category, 'classification': exc.category,
+                    'exception': {'type': type(exc).__name__, 'message': str(exc)}}
 
     def smoke(self):
         self.state('QUERY', 300, 'Enabled RC4 pack, status function, current selection, and fresh loader totals')
@@ -445,7 +739,11 @@ class Controller:
         require(counts == self.config['expected_counts'] and d[1] == r[2] == '0', 'Runtime load counts/rejections differ')
         current = self.command('cobblesafari csmusic current')
         require('csmusic sources for ' in current and playing(current), 'No parseable playing selection')
-        self.report['observed'].update({'runtime_counts': counts, 'current': current, 'pack_check': check, 'enabled_packs': packs})
+        self.report['observed'].update({'runtime_counts': counts, 'current': current,
+                                        'music_sources': music_sources(current),
+                                        'playing_source': playing(current),
+                                        'pack_check': check, 'enabled_packs': packs})
+        self.report['verification_layers']['music_selection'] = 'SMOKE_SELECTION_RESPONSE_CAPTURED'
         self.state('VERIFY', 1, 'All fresh smoke assertions passed')
 
     def structure(self, case):
@@ -479,26 +777,61 @@ class Controller:
             pos = self.command('data get entity @s Pos')
             numbers = re.search(r'\[(-?[\d.]+)d, (-?[\d.]+)d, (-?[\d.]+)d\]', pos)
             require(numbers and all(abs(float(a)-b) < .1 for a,b in zip(numbers.groups(), (x+.5, y, z+.5))), 'Player did not reach verified XYZ')
+            self.report['observed']['player_xyz'] = [float(v) for v in numbers.groups()]
             weather = case.get('weather', 'clear')
             ticks = case.get('time', 1000)
             require(weather in ('clear', 'rain', 'thunder') and isinstance(ticks, int) and 0 <= ticks < 24000, 'Invalid scenario time/weather')
             require('Set the weather' in self.command('weather ' + weather), 'Weather change not confirmed')
             require('Set the time' in self.command('time set ' + str(ticks)), 'Time change not confirmed')
-            self.state('SETTLE', self.config['settle_seconds'] + 1, 'Allow configured structure cache to refresh while focus remains held')
-            self.wait(self.config['settle_seconds'])
+            self.await_readiness(case, x, y, z)
             self.state('QUERY', 90, 'Structure containment and current playing source captured')
             bounds = self.command('cobblesafari csmusic structures')
             current = self.command('cobblesafari csmusic current')
             self.report['observed'].update({'structures': bounds, 'structure_current': current})
             self.state('VERIFY', 1, 'Exact structure bounds, expected selection and priority')
-            require(contains_structure(bounds, sid), 'Located ground is not within structure bounds; needs another tested landing point')
-            if case.get('piece'):
-                require(contains_structure(bounds, sid, case['piece']), 'Landing point is not inside the exact required piece; calibrated piece waypoint needed')
             expected = case.get('music') or '#' + case['pool']
-            selected = playing(current)
-            if (expected, str(case['priority'])) not in selected:
-                self.report['status'] = 'fail'
-                raise AssertionError(f'Expected {expected} at priority {case["priority"]}; observed {selected}. Inspect structures/current for overlapping bounds and equal-priority sources before treating this as a datapack defect.')
+            all_cases = json.loads((HERE / 'suite.json').read_bytes())['structures']
+            diagnosis = selection_diagnosis(case, bounds, current, all_cases)
+            self.report['observed']['selection_diagnosis'] = diagnosis
+            self.report['observed']['expected_selection'] = {
+                'source': diagnosis['expected_source'], 'selection': expected,
+                'priority': int(case['priority'])}
+            if diagnosis['category'] == 'PASS_SELECTION':
+                self.report['observed']['music_selection_status'] = 'PASS'
+                self.report['verification_layers']['music_selection'] = 'PASS'
+                if self.config.get('audio', {}).get('enabled', False):
+                    settle = int(self.config.get('audio', {}).get('post_transition_settle_seconds', 15))
+                    self.state('AUDIO_SETTLE', settle + 2, 'Wait for fade/crossfade before loopback sampling')
+                    self.wait(settle)
+                    self.report['observed']['audio'] = self.capture_audio(expected)
+                    self.report['verification_layers']['windows_loopback_audio'] = self.report['observed']['audio']['classification']
+                    if self.config.get('audio', {}).get('required_for_selection_pass', False) and \
+                            self.report['observed']['audio']['classification'] != 'PASS_AUDIO':
+                        self.report['failure_category'] = 'INCONCLUSIVE_AUDIO'
+                        self.report['status'] = 'blocked'
+                        raise Blocked('Audio is required by configuration, but no calibrated PASS_AUDIO evidence is available')
+                else:
+                    self.report['observed']['audio'] = {'status': 'NOT_TESTED', 'classification': 'NOT_TESTED'}
+                return
+            if diagnosis['category'] == 'OVERLAPPING_STRUCTURES_EXPECTED_ARBITRATION':
+                self.report['status'] = 'blocked'
+                self.report['failure_category'] = diagnosis['category']
+                raise Blocked('Expected source is eligible, but overlapping structures select another equal-priority rule')
+            if diagnosis['category'] == 'EXPECTED_PRIORITY_ARBITRATION':
+                self.report['status'] = 'blocked'
+                self.report['failure_category'] = diagnosis['category']
+                raise Blocked('A higher-priority matching source currently supersedes the requested structure rule')
+            if diagnosis['category'] == 'INVALID_OR_AMBIGUOUS_FIXTURE':
+                self.report['status'] = 'blocked'
+                self.report['failure_category'] = diagnosis['category']
+                raise Blocked('Located point is outside the requested structure or required piece')
+            if diagnosis['category'] == 'INCOMPLETE_DIAGNOSTIC_EVIDENCE':
+                self.report['status'] = 'blocked'
+                self.report['failure_category'] = diagnosis['category']
+                raise Blocked('Current output did not expose enough source evidence to diagnose the mismatch')
+            self.report['status'] = 'fail'
+            self.report['failure_category'] = 'FAIL_SELECTION'
+            raise AssertionError(f'Verified fixture selects an incorrect rule: expected {diagnosis["expected_source"]} -> {expected} at priority {case["priority"]}; observed {diagnosis["sources"]}')
         finally:
             if owned:
                 # Guard first: never resume input or steal focus during recovery.
@@ -515,11 +848,9 @@ class Controller:
         self.structure(setup)
         self.state('QUERY', 60, 'Read and freeze daylight cycle for exact tick-boundary testing')
         before = self.command('gamerule doDaylightCycle')
-        match = re.search(r'doDaylightCycle is currently set to: (true|false)', before)
-        require(match, 'Cannot read daylight-cycle rule; no boundary test')
-        original = match.group(1)
-        self.command('gamerule doDaylightCycle false')
-        self.report['observed']['daylight_cycle_restore_pending'] = original
+        original = gamerule_value(before)
+        checkpoint = self.out / 'recovery.json'
+        recovery = self.set_daylight_with_checkpoint(original, checkpoint)
         steps = self.report['observed']['regression_steps'] = []
         try:
             for step in case['steps']:
@@ -530,10 +861,7 @@ class Controller:
                 if 'weather' in step:
                     require(step['weather'] in ('clear', 'rain', 'thunder'), 'Invalid weather fixture')
                     require('Set the weather' in self.command('weather ' + step['weather']), 'Weather command not confirmed')
-                self.state('SETTLE', self.config['settle_seconds'] + 1, 'Wait for changed context arbitration')
-                self.wait(self.config['settle_seconds'])
-                self.state('QUERY', 45, 'Fresh regression selection and context')
-                current = self.command('cobblesafari csmusic current')
+                current = self.await_music_stability(step['id'])
                 observation = {'expected': step, 'current': current, 'status': 'fail'}
                 steps.append(observation)
                 expected = step.get('music') or '#' + step['pool']
@@ -543,15 +871,70 @@ class Controller:
                     require(context[2] == step['context_weather'], 'Biome/weather fixture mismatch')
                 if 'time' in step:
                     require(int(context[1]) == step['time'], 'Clock not frozen at requested boundary')
-                if (expected, str(step['priority'])) not in playing(current):
+                winning = playing(current)
+                possible_sources = ([runtime_source(step['source'])] if step.get('source')
+                                    else expected_rule_sources(expected, step['priority']))
+                observation['expected_sources'] = possible_sources
+                observation['winning_sources'] = winning
+                if not possible_sources:
+                    observation['status'] = 'blocked'
+                    observation['category'] = 'INCOMPLETE_DIAGNOSTIC_EVIDENCE'
+                    raise Blocked('No statically declared trigger rule matches the regression expectation')
+                all_rows = music_sources(current)
+                if 'csmusic sources for ' not in current or not all_rows:
+                    observation['status'] = 'blocked'
+                    observation['category'] = 'INCOMPLETE_DIAGNOSTIC_EVIDENCE'
+                    raise Blocked('Fresh CSMusic response did not contain parseable source rows')
+                actual = [item for item in winning if item['selection'] == expected
+                          and item['priority'] == int(step['priority'])
+                          and item['source_key'] in possible_sources]
+                observation['actual_expected_rule'] = actual
+                if not actual:
+                    eligible = [item for item in all_rows if item['source_key'] in possible_sources
+                                and item['selection'] == expected and item['priority'] == int(step['priority'])]
+                    if not eligible:
+                        observation['status'] = 'blocked'
+                        observation['category'] = 'INCOMPLETE_DIAGNOSTIC_EVIDENCE'
+                        raise Blocked('Expected regression source was not exposed among matching rules')
+                    observation['category'] = 'FAIL_SELECTION'
+                    self.report['failure_category'] = 'FAIL_SELECTION'
                     raise AssertionError('Regression selection mismatch: ' + step['id'])
                 observation['status'] = 'pass'
         finally:
             self.desktop.guard()
             self.state('CLEANUP', 45, 'Restore copied-world daylight-cycle setting')
-            response = self.command('gamerule doDaylightCycle ' + original)
-            require('doDaylightCycle' in response and original in response, 'Daylight-cycle restoration not confirmed')
+            self.restore_daylight(checkpoint, recovery)
             self.report['observed']['daylight_cycle_restore_pending'] = None
+
+    def set_daylight_with_checkpoint(self, original, checkpoint):
+        world = Path(self.report['environment']['test_world']).resolve()
+        recovery = {'world': str(world), 'world_receipt_sha256': digest(world / 'csmusic-harness-copy.json'),
+                    'original': original, 'desired': 'false', 'phase': 'intent_persisted', 'updated': stamp()}
+        # Persist the original value and intended mutation before sending any mutating command.
+        write_json(checkpoint, recovery)
+        self.report['observed']['daylight_cycle_restore_pending'] = original
+        self.report['observed']['recovery_checkpoint'] = str(checkpoint)
+        changed = self.command('gamerule doDaylightCycle false')
+        require('doDaylightCycle' in changed and 'false' in changed, 'Daylight freeze not confirmed')
+        recovery.update({'phase': 'change_confirmed', 'updated': stamp()})
+        write_json(checkpoint, recovery)
+        return recovery
+
+    def restore_daylight(self, checkpoint, recovery):
+        world = Path(self.report['environment']['test_world']).resolve()
+        require(recovery.get('world') == str(world), 'Daylight checkpoint belongs to another copied world')
+        require(recovery.get('world_receipt_sha256') == digest(world / 'csmusic-harness-copy.json'),
+                'Copied-world identity receipt changed since checkpoint')
+        observed = gamerule_value(self.command('gamerule doDaylightCycle'))
+        if observed != recovery['original']:
+            response = self.command('gamerule doDaylightCycle ' + recovery['original'])
+            require('doDaylightCycle' in response and recovery['original'] in response,
+                    'Daylight-cycle restoration not confirmed')
+            observed = gamerule_value(self.command('gamerule doDaylightCycle'))
+            require(observed == recovery['original'], 'Daylight-cycle value did not persist after restoration')
+        recovery.update({'phase': 'restored', 'updated': stamp()})
+        write_json(checkpoint, recovery)
+        return observed
 
     def recover(self):
         old = json.loads(self.recover_report.read_bytes())
@@ -564,7 +947,95 @@ class Controller:
             require(any(c['command'] == f'/forceload add {x} {z}' and 'Marked chunk' in c.get('response', '') for c in old['commands']), 'No evidence this run owned the ticket')
             result = self.command(f'forceload remove {x} {z}')
             require('Unmarked chunk' in result or 'No chunks were removed' in result, 'Recovery cleanup not confirmed')
+        recovery_path = Path(old['observed'].get('recovery_checkpoint', ''))
+        if recovery_path.is_file():
+            pending = json.loads(recovery_path.read_bytes())
+            self.restore_daylight(recovery_path, pending)
+            pending['recovered_by'] = str(self.out)
+            write_json(recovery_path, pending)
+            self.report['observed']['daylight_cycle_recovered'] = pending['original']
+        elif old['observed'].get('daylight_cycle_restore_pending') in ('true', 'false'):
+            # Older interrupted reports recorded the original value but had no durable checkpoint.
+            world = Path(self.report['environment']['test_world']).resolve()
+            recovery_path = Path(old.get('report_directory', self.recover_report.parent)) / 'recovery.json'
+            pending = {'world': str(world),
+                       'world_receipt_sha256': digest(world / 'csmusic-harness-copy.json'),
+                       'original': old['observed']['daylight_cycle_restore_pending'],
+                       'desired': 'false', 'phase': 'legacy_report_recovery', 'updated': stamp()}
+            self.restore_daylight(recovery_path, pending)
+            self.report['observed']['daylight_cycle_recovered'] = pending['original']
         self.report['observed']['recovered_report'] = str(self.recover_report)
+
+    def scheduled_suite(self, plan):
+        self.runtime_ready()
+        self.smoke()
+        results = []
+        root_observed = self.report['observed']
+        for case in plan.get('structures', []):
+            scenario = {'id': case['id'], 'expected': case, 'status': 'BLOCKED',
+                        'category': None, 'observed': {}}
+            self.report['observed'] = scenario['observed']
+            self.report.pop('failure_category', None)
+            try:
+                self.structure(case)
+                scenario['status'] = 'PASS'
+                scenario['category'] = 'PASS_SELECTION'
+            except Exception as exc:
+                category = self.report.get('failure_category')
+                if not category:
+                    message = str(exc).lower()
+                    if 'focus' in message:
+                        category = 'BLOCKED_FOCUS'
+                    elif 'loaded' in message or 'chunk' in message or 'readiness' in message:
+                        category = 'BLOCKED_LOADING'
+                    else:
+                        category = 'BLOCKED_CONTROLLER_OR_FIXTURE'
+                scenario.update({'status': 'FAIL' if category == 'FAIL_SELECTION' else 'BLOCKED',
+                                 'category': category,
+                                 'exception': {'type': type(exc).__name__, 'message': str(exc)}})
+                if category == 'FAIL_SELECTION':
+                    scenario['status'] = 'FAIL'
+                if category == 'BLOCKED_FOCUS':
+                    results.append(scenario)
+                    break
+            results.append(scenario)
+        if not any(item['category'] == 'BLOCKED_FOCUS' for item in results):
+            regression_cases = json.loads((HERE / 'suite.json').read_bytes())['regressions']
+            for regression_id in plan.get('regressions', []):
+                case = next(c for c in regression_cases if c['id'] == regression_id)
+                scenario = {'id': case['id'], 'expected': case, 'status': 'BLOCKED',
+                            'category': None, 'observed': {}}
+                self.report['observed'] = scenario['observed']
+                self.report.pop('failure_category', None)
+                try:
+                    self.regression(case)
+                    scenario['status'] = 'PASS'
+                    scenario['category'] = 'PASS_SELECTION'
+                except Exception as exc:
+                    category = self.report.get('failure_category', 'BLOCKED_CONTROLLER_OR_FIXTURE')
+                    scenario.update({'status': 'FAIL' if category == 'FAIL_SELECTION' else 'BLOCKED',
+                                     'category': category,
+                                     'exception': {'type': type(exc).__name__, 'message': str(exc)}})
+                    if category == 'BLOCKED_FOCUS':
+                        results.append(scenario)
+                        break
+                results.append(scenario)
+        self.report['observed'] = root_observed
+        self.report['scenarios'] = results
+        if any(item['status'] == 'FAIL' for item in results):
+            self.report['status'] = 'fail'
+            self.report['failure_category'] = 'FAIL_SELECTION'
+            self.report['possible_cause'] = 'One or more verified fixture scenarios produced a genuine selection mismatch; blocked scenarios remain listed separately.'
+        elif any(item['status'] == 'BLOCKED' for item in results):
+            self.report['status'] = 'blocked'
+            self.report['failure_category'] = 'BLOCKED_SCENARIOS'
+            self.report['verification_layers']['music_selection'] = 'PARTIAL_OR_BLOCKED'
+            details = ', '.join(item['id'] + ' (' + str(item['category']) + ')' for item in results if item['status'] == 'BLOCKED')
+            self.report['possible_cause'] = 'Scenarios blocked before a complete selection-level conclusion: ' + details
+        else:
+            self.report['status'] = 'pass'
+            self.report['failure_category'] = 'PASS_SELECTION'
+            self.report['possible_cause'] = 'All configured selection-level scenarios passed; see verification_layers for audio and client sound-event status.'
 
     def run(self):
         try:
@@ -585,24 +1056,43 @@ class Controller:
                 self.report['observed']['controls'] = {'screen': list(pyautogui.size()), 'failsafe': pyautogui.FAILSAFE, 'input_sent': False}
                 self.report['status'] = 'pass'
             else:
-                self.runtime_ready()
+                if self.mode in ('quick', 'representative', 'diagnostic', 'exhaustive'):
+                    self.scheduled_suite(self.case)
+                else:
+                    self.runtime_ready()
                 if self.recover_report:
                     self.recover()
-                if self.mode == 'capture':
+                elif self.mode == 'capture':
                     self.state('QUERY', 90, 'Native framebuffer evidence and fresh selection response')
                     self.capture('native-evidence')
                     current = self.command('cobblesafari csmusic current')
                     require('csmusic sources for ' in current and playing(current), 'No current selection captured')
                     self.report['observed']['current'] = current
-                else:
+                elif self.mode not in ('quick', 'representative', 'diagnostic', 'exhaustive'):
                     self.smoke()
                 if self.mode == 'regression':
                     self.regression(self.case)
-                elif self.case:
+                elif self.case and self.mode not in ('quick', 'representative', 'diagnostic', 'exhaustive'):
                     self.structure(self.case)
-                self.report['status'] = 'pass'
+                if self.mode not in ('quick', 'representative', 'diagnostic', 'exhaustive'):
+                    self.report['status'] = 'pass'
         except (Exception, KeyboardInterrupt) as exc:
-            self.report['status'] = 'blocked' if isinstance(exc, (Blocked, KeyboardInterrupt, FileNotFoundError)) or type(exc).__name__ == 'FailSafeException' else 'fail'
+            if self.report.get('failure_category') == 'FAIL_SELECTION':
+                self.report['status'] = 'fail'
+            else:
+                self.report['status'] = 'blocked'
+                if not self.report.get('failure_category'):
+                    message = str(exc).lower()
+                    if 'focus' in message:
+                        category = 'BLOCKED_FOCUS'
+                    elif isinstance(exc, (FileNotFoundError, ImportError, ModuleNotFoundError)):
+                        category = 'BLOCKED_DEPENDENCY'
+                    elif isinstance(exc, AssertionError):
+                        category = 'BLOCKED_EVIDENCE_OR_FIXTURE'
+                    else:
+                        category = 'CONTROLLER_OR_EVIDENCE_ERROR'
+                    self.report['failure_category'] = category
+            self.report['exception'] = {'type': type(exc).__name__, 'message': str(exc)}
             self.report['possible_cause'] = f'{type(exc).__name__}: {exc}'
         finally:
             self.state('RECORD', 5, 'JSON, Markdown, log excerpt persisted')
@@ -612,28 +1102,112 @@ class Controller:
                 self.tail.close()
             self.report['duration_seconds'] = round(time.monotonic() - self.start, 3)
             self.report['finished'] = stamp()
-            self.report['evidence'] = sorted(p.name for p in self.out.glob('*.png')) + ['commands.log']
+            if 'outcome' not in self.report:
+                if self.report.get('failure_category'):
+                    self.report['outcome'] = self.report.get('failure_category')
+                elif self.report['status'] == 'pass':
+                    self.report['outcome'] = {'audit': 'PASS_STATIC', 'dry-run': 'PASS_DRY_RUN'}.get(self.mode, 'PASS_SELECTION')
+                else:
+                    self.report['outcome'] = 'BLOCKED_CONTROLLER_OR_EVIDENCE'
+            self.report['evidence'] = sorted(p.name for pattern in ('*.png', '*.wav') for p in self.out.glob(pattern)) + ['commands.log']
+            if (self.out / 'recovery.json').is_file():
+                self.report['evidence'].append('recovery.json')
+            help_text = assistance_message(self.report)
+            if help_text:
+                self.report['assistance'] = {'requested': True, 'message': help_text,
+                                             'confirmation': 'not received; no automatic resume',
+                                             'resume_requires': 'user action followed by a new invocation and fresh world/focus checks'}
+                write_json(self.out / 'assistance.json', self.report['assistance'])
             (self.out / 'commands.log').write_text(self.raw, encoding='utf-8')
             write_json(self.out / 'report.json', self.report)
-            lines = [f"# {self.report['id']}: {self.report['status']}", '', f"Validation: {self.report['validation']}. Audible playback: not tested.", '',
+            lines = [f"# {self.report['id']}: {self.report['status']}", '',
+                     f"Outcome: {self.report['outcome']}. Validation: {self.report['validation']}. Audible playback: not physically verified.", '',
                      self.report.get('possible_cause', 'All assertions for this mode passed.'), '', f"Duration: {self.report['duration_seconds']} seconds.", '',
                      'Expected: `' + json.dumps(self.report['expected']) + '`', '', 'See [complete structured evidence](report.json) and [fresh log excerpt](commands.log).', '']
+            if self.report.get('scenarios'):
+                lines.extend(['## Scenario outcomes', ''])
+                for scenario in self.report['scenarios']:
+                    lines.append(f"- `{scenario['id']}`: **{scenario['status']}** — {scenario.get('category', 'unknown')}.")
+                lines.append('')
             for c in self.report['commands']:
                 lines.extend(['## `' + c['command'] + '`', '', c['status'], '', '```text', c.get('response', ''), '```', ''])
             lines.extend(f'![{p.name}]({p.name})' for p in self.out.glob('*.png'))
             (self.out / 'report.md').write_text('\n'.join(lines), encoding='utf-8')
+            if help_text:
+                notify_assistance(self.config, help_text)
             print(str(self.out / 'report.md'), flush=True)
         return 0 if self.report['status'] == 'pass' else 2
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('mode', choices=['audit', 'prepare', 'install-probe', 'dry-run', 'smoke', 'structure', 'regression', 'capture'])
+    parser.add_argument('mode', choices=['audit', 'prepare', 'install-probe', 'dry-run', 'smoke', 'structure', 'regression', 'capture',
+                                        'quick', 'representative', 'diagnostic', 'exhaustive', 'audio-devices',
+                                        'audio-capture', 'audio-identify', 'audio-benchmark'])
     parser.add_argument('--config', type=Path, default=HERE / 'config.json')
     parser.add_argument('--case', default='pallet_town')
     parser.add_argument('--recover-report', type=Path)
+    parser.add_argument('--recording', type=Path)
+    parser.add_argument('--selection', default='dysfam_music:villages_lgpe_pallet_town')
+    parser.add_argument('--negative-selection', default='dysfam_music:villages_lgpe_lavender_town')
+    parser.add_argument('--audio', action='store_true', help='Capture loopback audio during supported gameplay modes')
+    parser.add_argument('--duration', type=int)
+    parser.add_argument('--device-index', type=int)
     args = parser.parse_args()
     config = json.loads(args.config.read_bytes())
+    if args.audio:
+        config.setdefault('audio', {})['enabled'] = True
+    if args.mode.startswith('audio-'):
+        from audio import AudioUnavailable, capture_loopback, identify, list_devices, synthetic_benchmark
+        audio_config = config.get('audio', {})
+        try:
+            if args.mode == 'audio-devices':
+                result = list_devices()
+            elif args.mode == 'audio-capture':
+                duration = args.duration or int(audio_config.get('capture_seconds', 30))
+                require(duration <= int(audio_config.get('maximum_seconds', 90)), 'Duration exceeds configured maximum')
+                output = HERE / 'results' / ('audio-' + datetime.now().strftime('%Y%m%d-%H%M%S'))
+                output.mkdir(parents=True, exist_ok=True)
+                evidence = capture_loopback(output / 'loopback.wav', duration,
+                                           args.device_index if args.device_index is not None else audio_config.get('device_index'))
+                if evidence['rms_int16'] < float(audio_config.get('minimum_capture_rms_int16', 100)):
+                    evidence['classification'] = 'BLOCKED_AUDIO_DEVICE'
+                    evidence['signal_warning'] = 'Loopback recording was near silent; no audio identity conclusion.'
+                else:
+                    evidence['classification'] = 'INCONCLUSIVE_AUDIO'
+                if evidence['clipped_fraction'] > float(audio_config.get('clipping_fraction_limit', 0.01)):
+                    evidence['clipping_warning'] = 'Recorded waveform contains substantial clipped samples.'
+                evidence['calibrated'] = False
+                result = evidence
+                write_json(output / 'report.json', result)
+                (output / 'report.md').write_text(
+                    '# Audio loopback capture\n\nClassification: `INCONCLUSIVE_AUDIO` (recording only; no calibrated track assertion).\n\n'
+                    + '```json\n' + json.dumps(result, indent=2, ensure_ascii=False) + '\n```\n', encoding='utf-8')
+            elif args.mode == 'audio-identify':
+                require(args.recording is not None and args.recording.is_file(), '--recording must name a local WAV recording')
+                result = identify(args.recording, args.selection, Path(audio_config['reference_resource_pack']),
+                                  audio_config.get('ffmpeg'), args.negative_selection)
+            else:
+                result = synthetic_benchmark(args.selection, args.negative_selection,
+                                             Path(audio_config['reference_resource_pack']), audio_config.get('ffmpeg'))
+            print(json.dumps(result, indent=2, ensure_ascii=False))
+            if args.mode != 'audio-capture':
+                output = HERE / 'results' / ('audio-' + datetime.now().strftime('%Y%m%d-%H%M%S'))
+                output.mkdir(parents=True, exist_ok=True)
+                write_json(output / 'report.json', result)
+                (output / 'report.md').write_text(
+                    '# ' + args.mode + '\n\nClassification: `' + str(result.get('classification', result.get('calibration_status', 'device inventory'))) + '`\n\n'
+                    + '```json\n' + json.dumps(result, indent=2, ensure_ascii=False) + '\n```\n', encoding='utf-8')
+                print('Evidence report: ' + str(output / 'report.json'))
+            return 0
+        except AudioUnavailable as exc:
+            print(json.dumps({'status': exc.category, 'classification': exc.category,
+                              'exception': {'type': type(exc).__name__, 'message': str(exc)}}, indent=2))
+            return 2
+        except Exception as exc:
+            print(json.dumps({'status': 'BLOCKED_AUDIO_TOOL', 'classification': 'BLOCKED_AUDIO_TOOL',
+                              'exception': {'type': type(exc).__name__, 'message': str(exc)}}, indent=2))
+            return 2
     if args.mode == 'prepare':
         print(json.dumps(prepare(config), indent=2))
         return 0
@@ -646,9 +1220,15 @@ def main():
         print('Installed terrain probe in copied world only; reload needed')
         return 0
     case = None
+    suites = json.loads((HERE / 'suite.json').read_bytes())
     if args.mode in ('structure', 'regression'):
-        cases = json.loads((HERE / 'suite.json').read_bytes())['structures' if args.mode == 'structure' else 'regressions']
+        cases = suites['structures' if args.mode == 'structure' else 'regressions']
         case = next(c for c in cases if c['id'] == args.case)
+    elif args.mode in ('quick', 'representative', 'diagnostic', 'exhaustive'):
+        ids = suites['modes'].get(args.mode, [])
+        structures = suites['structures'] if args.mode == 'exhaustive' else [
+            next(c for c in suites['structures'] if c['id'] == case_id) for case_id in ids]
+        case = {'structures': structures, 'regressions': suites.get('mode_regressions', {}).get(args.mode, [])}
     return Controller(config, args.mode, case, args.recover_report).run()
 
 

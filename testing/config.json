@@ -5,5 +5,38 @@
   "expected_datapack": "file/DysFam_CSMusic_RC4_Datapack.zip",
   "command_timeout": 15,
   "locate_timeout": 240,
-  "settle_seconds": 35
+  "settle_seconds": 35,
+  "loading": {
+    "minimum_settle_seconds": 35,
+    "poll_seconds": 7,
+    "timeout_seconds": 180,
+    "stable_observations": 2,
+    "stable_interval_seconds": 7
+  },
+  "audio": {
+    "enabled": false,
+    "required_for_selection_pass": false,
+    "capture_seconds": 30,
+    "maximum_seconds": 90,
+    "post_transition_settle_seconds": 15,
+    "device_index": null,
+    "minimum_capture_rms_int16": 100,
+    "clipping_fraction_limit": 0.01,
+    "reference_resource_pack": "D:/Minecraft Stuff/ModrinthApp/profiles/DysFam Cobblemon 2.0 6.0.0/resourcepacks/DysFam_CSMusic_RC4_ResourcePack.zip",
+    "ffmpeg": "D:/Minecraft Stuff/ModrinthApp/profiles/Cobblemon Freedom Frontiers/config/trueadaptivemusic/ffmpeg_binaries/ffmpeg.exe",
+    "maximum_recording_megabytes": 180
+  },
+  "minimap_roi": [0.70, 0.0, 0.30, 0.32],
+  "max_screenshots_per_run": 20,
+  "assistance": {
+    "windows_notification": true,
+    "beep": true,
+    "minecraft_sound_alert": false,
+    "minimum_alert_interval_seconds": 60
+  },
+  "escalation": {
+    "max_alternate_waypoints": 2,
+    "max_locate_attempts": 3,
+    "max_travel_distance": 100000
+  }
 }

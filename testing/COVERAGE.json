@@ -1,0 +1,85 @@
+{
+  "updated": "2026-10-11",
+  "release": "RC4",
+  "static_validation": {
+    "source_definitions": 407,
+    "runtime_definitions": 413,
+    "trigger_rules": 1310,
+    "trigger_files": 19,
+    "resource_sound_events": 416,
+    "resource_ogg_files": 416,
+    "status": "verified by local audit and historical runtime reload; original production files unchanged"
+  },
+  "coverage": [
+    {
+      "behavior": "RC4 loader counts and selection command",
+      "static": "PASS",
+      "runtime_selection": "PASS (live identity, creative, pack counts and CSMusic current checks)",
+      "client_sound_event": "NOT_AVAILABLE",
+      "windows_audio": "NOT_TESTED",
+      "manual": "not required",
+      "current_status": "live smoke pass"
+    },
+    {
+      "behavior": "Pallet Town only selection",
+      "static": "PASS",
+      "runtime_selection": "BLOCKED_FIXTURE (live diagnostic verified target point overlaps Lavender; Lavender #1 wins at equal priority)",
+      "client_sound_event": "NOT_AVAILABLE",
+      "windows_audio": "NOT_TESTED",
+      "manual": "Pallet-only waypoint required",
+      "current_status": "live Pallet diagnostic confirms overlap; not a Pallet-only selection failure"
+    },
+    {
+      "behavior": "Pallet/Lavender equal-priority overlap",
+      "static": "PASS",
+      "runtime_selection": "LIVE: Lavender source #1 wins over Pallet source #2 at priority 30; both structures bounds=1 at (-3664,68,720)",
+      "client_sound_event": "NOT_AVAILABLE",
+      "windows_audio": "NOT_TESTED",
+      "manual": "screenshots and structured evidence retained",
+      "current_status": "live expected arbitration; report results/20261011-152306-492b67/report.json"
+    },
+    {
+      "behavior": "Twinleaf day/night boundaries",
+      "static": "PASS",
+      "runtime_selection": "NOT_RUN",
+      "client_sound_event": "NOT_AVAILABLE",
+      "windows_audio": "NOT_TESTED",
+      "manual": "NOT_VERIFIED",
+      "current_status": "configured regression fixture only"
+    },
+    {
+      "behavior": "Representative BCA/Terralith/CobbleTowns/Ecruteak",
+      "static": "PASS",
+      "runtime_selection": "PARTIAL (live Lavender-only case passed; full representative suite not run)",
+      "client_sound_event": "NOT_AVAILABLE",
+      "windows_audio": "NOT_TESTED",
+      "manual": "NOT_VERIFIED",
+      "current_status": "Lavender selection pass; remaining representative cases scheduled"
+    },
+    {
+      "behavior": "Audio track recognition",
+      "static": "SYNTHETIC_ONLY",
+      "runtime_selection": "selection layer separate",
+      "client_sound_event": "NOT_AVAILABLE",
+      "windows_audio": "device found; no live recording",
+      "manual": "NOT_VERIFIED",
+      "current_status": "INCONCLUSIVE_AUDIO; synthetic matching only, confidence threshold unset"
+    },
+    {
+      "behavior": "Battle entry/exit, vertical boundaries, tower transitions",
+      "static": "PARTIAL",
+      "runtime_selection": "NOT_RUN",
+      "client_sound_event": "NOT_AVAILABLE",
+      "windows_audio": "NOT_TESTED",
+      "manual": "NOT_VERIFIED",
+      "current_status": "fixtures/instrumentation needed"
+    }
+  ],
+  "live_diagnostics": {
+    "pallet_overlap_report": "results/20261011-152306-492b67/report.json",
+    "lavender_only_report": "results/20261011-152808-d4cec2/report.json",
+    "gameplay_world": "CSMusic Automation 20261010-192614 (prepared copy)",
+    "production_files_changed": false,
+    "temporary_forceload_tickets_cleaned": true
+  }
+}

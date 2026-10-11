@@ -1,0 +1,131 @@
+{
+  "date": "2026-10-11",
+  "repository": "JaimeG33/Cobblemon-Music-Datapack-Temp",
+  "branch": "codex/csmusic-test-harness",
+  "base_commit": "34fc8be859a9fb4f729754c431bf4f8a5ffde568",
+  "publication": "not committed or pushed",
+  "implementation_status": "offline implementation and verification complete; live Pallet/Lavender diagnostics completed",
+  "scope": "testing/ only",
+  "checks": {
+    "unit_tests": {
+      "status": "PASS",
+      "passed": 20,
+      "latest_run": "2026-10-11"
+    },
+    "python_compile": "PASS",
+    "powershell_parse": "PASS",
+    "audit": {
+      "status": "PASS",
+      "report": "results/20261011-152005-3674a8/report.json"
+    },
+    "dry_run": {
+      "status": "PASS",
+      "report": "results/20261011-152005-ccb51d/report.json"
+    }
+  },
+  "historical_evidence_review": {
+    "source_report": "results/20261010-194237-d9c180/report.json",
+    "commands": 17,
+    "fresh_marker_pairs": 17,
+    "responses_revalidated": true,
+    "pallet_classification": "OVERLAPPING_STRUCTURES_EXPECTED_ARBITRATION",
+    "winning_source": "definition:csmusic/definition/villages_cobbletowns.json#1",
+    "bounds": [
+      "cobbletowns:lavender_town",
+      "cobbletowns:pallet_town"
+    ],
+    "temporary_forceload_cleaned": true
+  },
+  "audio": {
+    "device_inventory": {
+      "reference_pack": "D:\\Minecraft Stuff\\ModrinthApp\\profiles\\DysFam Cobblemon 2.0 6.0.0\\resourcepacks\\DysFam_CSMusic_RC4_ResourcePack.zip",
+      "available": true,
+      "loopback_runtime_events_logged": false,
+      "instrumentation": "not detected in ordinary client log",
+      "sound_events": 416,
+      "ogg_files": 416,
+      "relevant_log_lines": [
+        "[14:57:19] [Render thread/INFO]: OpenAL initialized on device OpenAL Soft on Speaker (Realtek(R) Audio)",
+        "[14:57:19] [Render thread/INFO]: Sound engine started"
+      ],
+      "client_instrumentation_found": false
+    },
+    "synthetic_benchmark": "results/audio-20261011-151250/report.json",
+    "live_wav_captured": false,
+    "calibration": "SYNTHETIC_ONLY; threshold unset; live matcher classification remains INCONCLUSIVE_AUDIO",
+    "engine": "private playback state, 1s/5s crossfade constants and 2.5s fade found in installed 0.3.4 bytecode; ordinary logs have no normal start/stop events"
+  },
+  "minimap": {
+    "mod_jars": [
+      "compasstomapxaeros-0.1.1.jar",
+      "xaerominimap-fabric-1.21.1-26.4.2.jar",
+      "xaeroworldmap-fabric-1.21.1-1.45.0.jar"
+    ],
+    "configuration_paths": [
+      "D:\\Minecraft Stuff\\ModrinthApp\\profiles\\DysFam Cobblemon 2.0 6.0.0\\config\\compasstomapxaeros-common.toml",
+      "D:\\Minecraft Stuff\\ModrinthApp\\profiles\\DysFam Cobblemon 2.0 6.0.0\\config\\xaero",
+      "D:\\Minecraft Stuff\\ModrinthApp\\profiles\\DysFam Cobblemon 2.0 6.0.0\\config\\xaerohud.txt",
+      "D:\\Minecraft Stuff\\ModrinthApp\\profiles\\DysFam Cobblemon 2.0 6.0.0\\config\\xaeropatreon.txt"
+    ],
+    "roi": [
+      0.7,
+      0.0,
+      0.3,
+      0.32
+    ],
+    "authority": "visual corroboration only; structure bounds and piece diagnostics remain authoritative"
+  },
+  "world_preservation": {
+    "prepared_receipt_matches_copy_receipt": true,
+    "source_level_dat_sha256_matches_receipt": true,
+    "source_level_sha256": "5c9d41fed2cd6726fafaf4fc2da659307bf4f386522782b47cf65a13afb462dc",
+    "production_files_changed": false
+  },
+  "new_gameplay_results": {
+    "status": "LIVE_SELECTION_DIAGNOSTICS_COMPLETE",
+    "profile": "DysFam Cobblemon 2.0 6.0.0",
+    "world_copy": "CSMusic Automation 20261010-192614",
+    "pallet_overlap": {
+      "status": "OVERLAPPING_STRUCTURES_EXPECTED_ARBITRATION",
+      "report": "results/20261011-152306-492b67/report.json",
+      "coordinates": [
+        -3664,
+        68,
+        720
+      ],
+      "bounds": {
+        "cobbletowns:lavender_town": 1,
+        "cobbletowns:pallet_town": 1
+      },
+      "winning_source": "definition:csmusic/definition/villages_cobbletowns.json#1",
+      "priority": 30,
+      "temporary_forceload_cleaned": true
+    },
+    "lavender_only": {
+      "status": "PASS_SELECTION",
+      "report": "results/20261011-152808-d4cec2/report.json",
+      "coordinates": [
+        -3712,
+        91,
+        720
+      ],
+      "bounds": {
+        "cobbletowns:lavender_town": 1,
+        "cobbletowns:pallet_town": 0
+      },
+      "winning_source": "definition:csmusic/definition/villages_cobbletowns.json#1",
+      "priority": 30,
+      "temporary_forceload_cleaned": true
+    },
+    "audio": "NOT_TESTED; no live WAV captured; audible playback not verified"
+  },
+  "limitations": [
+    "No Pallet-only waypoint established; shared Pallet/Lavender point is a verified overlap.",
+    "No live audio recording or calibration.",
+    "No client sound-event bridge.",
+    "No automatic far-region search without a verified safe origin.",
+    "No automated semantic minimap/screenshot classifier.",
+    "Battle and tower entry/exit scenarios remain untested."
+  ],
+  "local_evidence_preserved": true
+}

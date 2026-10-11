@@ -3,3 +3,6 @@ __pycache__/
 results/
 prepared.json
 STOP
+READY
+audio_cache/
+ASSISTANCE.json
