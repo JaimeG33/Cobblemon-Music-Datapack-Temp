@@ -1,7 +1,11 @@
 {
   "profile": "D:/Minecraft Stuff/ModrinthApp/profiles/DysFam Cobblemon 2.0 6.0.0",
   "source_world": "RC4 Village Test",
-  "expected_counts": [413, 1310, 19],
+  "expected_counts": [
+    413,
+    1310,
+    19
+  ],
   "expected_datapack": "file/DysFam_CSMusic_RC4_Datapack.zip",
   "command_timeout": 15,
   "locate_timeout": 240,
@@ -24,19 +28,30 @@
     "clipping_fraction_limit": 0.01,
     "reference_resource_pack": "D:/Minecraft Stuff/ModrinthApp/profiles/DysFam Cobblemon 2.0 6.0.0/resourcepacks/DysFam_CSMusic_RC4_ResourcePack.zip",
     "ffmpeg": "D:/Minecraft Stuff/ModrinthApp/profiles/Cobblemon Freedom Frontiers/config/trueadaptivemusic/ffmpeg_binaries/ffmpeg.exe",
-    "maximum_recording_megabytes": 180
+    "maximum_recording_megabytes": 180,
+    "case_ids": [
+      "bca_village_dark_small_12",
+      "cobbletowns_cherrygrove_city_3"
+    ]
   },
-  "minimap_roi": [0.70, 0.0, 0.30, 0.32],
+  "minimap_roi": [
+    0.7,
+    0.0,
+    0.3,
+    0.32
+  ],
   "max_screenshots_per_run": 20,
   "assistance": {
-    "windows_notification": true,
-    "beep": true,
-    "minecraft_sound_alert": false,
-    "minimum_alert_interval_seconds": 60
+    "windows_notification": false,
+    "beep": false,
+    "minecraft_sound_alert": true,
+    "minimum_alert_interval_seconds": 60,
+    "sound_command": "playsound minecraft:entity.ender_dragon.death master @s ~ ~ ~ 1 1"
   },
   "escalation": {
     "max_alternate_waypoints": 2,
     "max_locate_attempts": 3,
     "max_travel_distance": 100000
-  }
+  },
+  "test_gamemode": "spectator"
 }

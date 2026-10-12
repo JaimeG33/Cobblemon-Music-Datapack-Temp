@@ -3,7 +3,7 @@
   "repository": "JaimeG33/Cobblemon-Music-Datapack-Temp",
   "branch": "codex/csmusic-test-harness",
   "base_commit": "34fc8be859a9fb4f729754c431bf4f8a5ffde568",
-  "publication": "not committed or pushed",
+  "publication": "Phase 2 subsequently committed and pushed at 4bafbefd3e8e92d11c0e39c531497c48a602172d",
   "implementation_status": "offline implementation and verification complete; live Pallet/Lavender diagnostics completed",
   "scope": "testing/ only",
   "checks": {

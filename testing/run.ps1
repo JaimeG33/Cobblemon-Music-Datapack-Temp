@@ -9,7 +9,8 @@ param(
     [string]$NegativeSelection = 'dysfam_music:villages_lgpe_lavender_town',
     [string]$Recording,
     [string]$RecoverReport,
-    [switch]$Audio
+    [switch]$Audio,
+    [switch]$AtCurrentPosition
 )
 $ErrorActionPreference = 'Stop'
 $TestPython = Join-Path $PSScriptRoot '.venv\Scripts\python.exe'
@@ -29,6 +30,7 @@ if ($Mode -eq 'setup') {
         if ($Recording) { $Arguments += @('--recording', $Recording) }
     }
     if ($Audio) { $Arguments += '--audio' }
+    if ($AtCurrentPosition) { $Arguments += '--at-current-position' }
     if ($RecoverReport) { $Arguments += @('--recover-report', $RecoverReport) }
     & $TestPython @Arguments
 }

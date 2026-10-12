@@ -44,35 +44,43 @@
       "runtime_selection": "NOT_RUN",
       "client_sound_event": "NOT_AVAILABLE",
       "windows_audio": "NOT_TESTED",
-      "manual": "NOT_VERIFIED",
-      "current_status": "configured regression fixture only"
+      "manual": "SKIPPED_BY_USER",
+      "current_status": "Exact ticks declined as unnecessary; daytime selection passed. Interrupted retry reached travel only; no boundary pass."
     },
     {
       "behavior": "Representative BCA/Terralith/CobbleTowns/Ecruteak",
       "static": "PASS",
-      "runtime_selection": "PARTIAL (live Lavender-only case passed; full representative suite not run)",
+      "runtime_selection": "PASS: five generic daytime cases, Lavender, Cherrygrove, Twinleaf daytime; Ecruteak BLOCKED_FOCUS",
       "client_sound_event": "NOT_AVAILABLE",
       "windows_audio": "NOT_TESTED",
       "manual": "NOT_VERIFIED",
-      "current_status": "Lavender selection pass; remaining representative cases scheduled"
+      "current_status": "Representative selection passes; regressions and Ecruteak incomplete"
     },
     {
       "behavior": "Audio track recognition",
-      "static": "SYNTHETIC_ONLY",
+      "static": "SYNTHETIC AND LIVE CANDIDATE RANKING",
       "runtime_selection": "selection layer separate",
       "client_sound_event": "NOT_AVAILABLE",
-      "windows_audio": "device found; no live recording",
-      "manual": "NOT_VERIFIED",
-      "current_status": "INCONCLUSIVE_AUDIO; synthetic matching only, confidence threshold unset"
+      "windows_audio": "LIVE: Lavender, magic pool and Cherrygrove, all non-silent/unclipped",
+      "manual": "User tentatively reported Lavender music constantly playing; audibility supported, track identity uncertain",
+      "current_status": "INCONCLUSIVE_AUDIO: expected named tracks/valid pool member rank above Pallet; no threshold or transition/nonmatch controls yet"
     },
     {
       "behavior": "Battle entry/exit, vertical boundaries, tower transitions",
       "static": "PARTIAL",
-      "runtime_selection": "NOT_RUN",
+      "runtime_selection": "PARTIAL: Tower -> Lavender -> Tower selection passed; battle/village boundaries NOT_RUN",
       "client_sound_event": "NOT_AVAILABLE",
       "windows_audio": "NOT_TESTED",
+      "manual": "PASS_MANUAL: user heard village -> battle -> village after fleeing",
+      "current_status": "Tower selection transitions and manual battle return passed; village horizontal/vertical boundaries unverified"
+    },
+    {
+      "behavior": "Shared village weather overrides and return",
+      "static": "CONFIGURED",
+      "runtime_selection": "NOT_RUN",
+      "windows_audio": "NOT_TESTED",
       "manual": "NOT_VERIFIED",
-      "current_status": "fixtures/instrumentation needed"
+      "current_status": "Rain/thunder and snowy day/night were not completed; user preference is one shared-condition fixture, not each variant."
     }
   ],
   "live_diagnostics": {
@@ -80,6 +88,88 @@
     "lavender_only_report": "results/20261011-152808-d4cec2/report.json",
     "gameplay_world": "CSMusic Automation 20261010-192614 (prepared copy)",
     "production_files_changed": false,
-    "temporary_forceload_tickets_cleaned": true
+    "temporary_forceload_tickets_cleaned": "Completed scenarios cleaned; interrupted final Twinleaf retry has one pending owned ticket at block XZ (-3520,4352)."
+  },
+  "final_gameplay_session": {
+    "baseline_commit": "4bafbefd3e8e92d11c0e39c531497c48a602172d",
+    "state": "Closed at user request: consolidate evidence and publish testing changes; no further live tests scheduled.",
+    "lavender_report": "results/20261011-160519-258098/report.json",
+    "live_audio": "results/20261011-160519-258098/audio-loopback.wav",
+    "audio_match_report": "results/audio-20261011-161302/report.json",
+    "interrupted_listening_report": "results/20261011-161351-6f6ae9/report.json",
+    "selection_status": "PASS_SELECTION",
+    "audio_status": "INCONCLUSIVE_AUDIO",
+    "confirmed_rc4_defects": [],
+    "harness_findings": [
+      "Bundled FFmpeg has OGG support but no WAV demuxer; PCM WAV decode repaired",
+      "Short-reference spectral anchors clamped",
+      "Focus-loss abort now remains latched",
+      "Unsafe assumption that slash opened chat repaired with fresh text-entry and exact-command verification",
+      "Bounded clipboard-lock retry added",
+      "Representative-plan constructor repaired; unvisited cases explicitly NOT_RUN",
+      "Pre-probe loaded-chunk polling added; first BCA attempt sent no teleport",
+      "Async spawn broadcasts reset raw-text stability comparison; semantic diagnostic comparison implemented"
+    ],
+    "release_assessment": "Further internal testing: essential representative categories, transitions, regression and audio calibration remain insufficiently verified",
+    "representative_report": "results/20261011-164113-d08c27/report.json",
+    "input_safety_report": "results/20261011-162317-5af6a4/report.json",
+    "input_incident": "results/input-leak-incident-20261011/incident.json",
+    "notification_status": "LIVE: diagnostic and assistance tellraw/playsound responses verified; no capture active",
+    "manual_listening": "User tentatively reported Lavender constantly playing; track identity not independently verified by listening",
+    "unit_tests_passed": 33,
+    "second_representative_report": "results/20261011-170209-346cd8/report.json",
+    "generic_daytime_status": "PASS_SELECTION: BCA basic/magic/cold and Terralith basic/hot",
+    "tower_sequence": "PASS_SELECTION: Tower -> Lavender -> Tower",
+    "named_settlements": "PASS_SELECTION: Lavender, Cherrygrove, Twinleaf daytime; Ecruteak BLOCKED_FOCUS",
+    "live_audio_samples": 3,
+    "manual_tests": [
+      {
+        "id": "village_wild_battle_flee_return",
+        "status": "PASS_MANUAL",
+        "reported_by": "Jaime",
+        "observation": "Village music changed to battle music when fighting a Pokemon in a village, then returned to village music after fleeing.",
+        "limitations": "User listening report; structure/mod, XYZ, generation, exact track and priority were not recorded. No automated battle diagnostics or WAV captured."
+      }
+    ],
+    "pending_cleanup": [
+      {
+        "report": "results/20261011-175431-061aa5/report.json",
+        "world": "CSMusic Automation 20261010-192614",
+        "owned_forceload_block_xz": [
+          -3520,
+          4352
+        ],
+        "reason": "Focus/abort prevented safe cleanup; no new game input authorized for this reporting/push task.",
+        "recovery": "With copied world foreground and chat closed: .\\testing\\run.ps1 recover -RecoverReport testing/results/20261011-175431-061aa5/recovery-target.json",
+        "daylight_cycle_changed": false,
+        "recovery_report": "results/20261011-175431-061aa5/recovery-target.json"
+      }
+    ]
+  },
+  "testing_policy": {
+    "policy": "Minimum representative coverage; expand only on failures or materially different changed behavior.",
+    "sampling": "Start with one affected village per mod rather than repeating equivalent variants.",
+    "shared_conditions": "Test shared weather and day/night behavior at one suitable representative fixture; a second successful fixture is sufficient corroboration when warranted, not a reason to repeat every variant.",
+    "stop_rule": "Stop after the scoped representative checks pass; use manual assistance for slow or unreliable automation.",
+    "evidence_rule": "Shared-rule confidence is indirect coverage, not a claim that every untested variant passed.",
+    "waived": [
+      "Twinleaf exact tick boundaries explicitly declined by user."
+    ],
+    "preset": "representative now samples BCA basic, Terralith hot, and Cherrygrove; shared ordinary-rain/thunder and generic day/night checks use only BCA basic."
+  },
+  "release_readiness": {
+    "recommendation": "Beta candidate",
+    "assessment_state": "Final session assessment with user-accepted representative coverage and manually verified battle return.",
+    "reason": "All completed representative selection tests passed, real recordings favored expected tracks, and the user verified battle entry/flee/return. No confirmed RC4 defect.",
+    "stable_release_evidence": "Incomplete: weather override/return and village entry/exit remain unverified in this session; audio matching has no calibrated confidence threshold.",
+    "remaining": [
+      "Shared ordinary rain/thunder and snowy day/night behavior not executed",
+      "Village horizontal/vertical exit and environmental fallback not executed",
+      "Battle during active weather and outside-village battle not verified",
+      "Twinleaf exact ticks skipped by user",
+      "Ecruteak and other unsampled variants unverified",
+      "Controlled transition/SFX/nonmatch audio calibration incomplete"
+    ],
+    "scope": "This assessment does not authorize publishing an RC4 release artifact."
   }
 }

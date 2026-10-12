@@ -7,6 +7,7 @@ from ctypes import wintypes
 from datetime import datetime, timezone
 import hashlib
 import json
+import math
 import os
 from pathlib import Path
 import re
@@ -47,9 +48,17 @@ def assistance_message(report):
     if category == 'BLOCKED_SCENARIOS':
         blocked = [item for item in report.get('scenarios', []) if item.get('status') == 'BLOCKED']
         if blocked:
-            details = ', '.join(item['id'] + ': ' + str(item['category']) for item in blocked[:5])
-            return 'Review the blocked scenarios (' + details + '), perform the documented safe action, then explicitly start a new run. No automatic resume occurs.'
+            scenario = blocked[0]
+            target = scenario.get('expected', {}).get('structure', scenario['id'])
+            if 'Terrain probe' in scenario.get('exception', {}).get('message', ''):
+                return 'No safe landing at ' + target + '. Confirm readiness to try another verified waypoint.'
+            if scenario.get('expected', {}).get('piece'):
+                return 'Please stand safely inside Pokemon Tower and confirm readiness before restarting.'
+            return 'Test stopped: ' + scenario['id'] + '. Check the report and confirm readiness before restarting.'
     messages = {
+        'BLOCKED_CHAT_STATE': 'Please close all menus and chat, unpause the copied world, and confirm readiness before restarting.',
+        'BLOCKED_MANUAL_LISTENING': 'Please confirm Lavender music is audible. Reply in Codex, then return to Minecraft.',
+        'BLOCKED_MANUAL_TOWER': 'Please stand on a safe floor inside Pokemon Tower, close chat, and confirm readiness in Codex.',
         'BLOCKED_FIXTURE': 'Please move or identify a safe waypoint inside the requested structure/piece, then start a new run.',
         'BLOCKED_LOADING': 'Please wait for the destination to finish loading, confirm Minecraft is responsive, then start a new run.',
         'BLOCKED_FOCUS': 'Please inspect and clear Minecraft chat/menu state, foreground the verified copied world, then explicitly start recovery or a new run.',
@@ -60,12 +69,12 @@ def assistance_message(report):
 def notify_assistance(config, message):
     options = config.get('assistance', {})
     try:
-        if options.get('beep', True):
+        if options.get('beep', False):
             import winsound
             winsound.MessageBeep(winsound.MB_ICONEXCLAMATION)
     except Exception:
         pass
-    if options.get('windows_notification', True) and os.name == 'nt':
+    if options.get('windows_notification', False) and os.name == 'nt':
         ctypes.windll.user32.MessageBoxW(0, message, 'CSMusic harness needs assistance', 0x40 | 0x1000)
 
 
@@ -374,17 +383,38 @@ def locate_coordinates(text, structure):
 
 
 def allowed_command(command):
+    if command.startswith('tellraw @s {'):
+        try:
+            payload = json.loads(command[len('tellraw @s '):])
+            return (isinstance(payload, dict) and set(payload) == {'text', 'color'}
+                    and payload['color'] == 'gold' and isinstance(payload['text'], str)
+                    and payload['text'].startswith('[CSMusic Tester] ')
+                    and len(payload['text']) <= 160 and payload['text'].isascii()
+                    and not any(ord(c) < 32 for c in payload['text']))
+        except (ValueError, TypeError):
+            return False
     exact = {'datapack list enabled', 'function dysfam_music:check', 'function csmusic_harness:identity',
              'reload', 'cobblesafari csmusic current', 'cobblesafari csmusic structures', 'data get entity @s Pos',
+             'data get entity @s Inventory',
              'gamerule doDaylightCycle', 'gamerule doDaylightCycle true', 'gamerule doDaylightCycle false',
+             'execute if entity @s[gamemode=spectator] run tellraw @s "CSMUSIC_SPECTATOR"',
              'execute if entity @s[gamemode=creative] run tellraw @s "CSMUSIC_CREATIVE"'}
     patterns = [r'tellraw @s "CSMUSIC_[a-f0-9]+_(?:BEGIN|END)"',
                 r'execute if loaded -?\d+ -?\d+ -?\d+ run tellraw @s "CSMUSIC_LOADED"',
                 r'locate structure [a-z0-9_.-]+:[a-z0-9_/.-]+',
                 r'forceload (?:query|add|remove) -?\d+ -?\d+',
                 r'function csmusic_harness:probe \{x:-?\d+,z:-?\d+\}',
-                r'tp @s -?\d+\.5 -?\d+ -?\d+\.5', r'weather (?:clear|rain|thunder)', r'time set \d+']
+                r'tp @s -?\d+\.5 -?\d+ -?\d+\.5', r'weather (?:clear|rain|thunder)', r'time set \d+',
+                r'playsound minecraft:[a-z0-9_./]+ master @s ~ ~ ~ (?:0\.[1-9]\d?|1) (?:0\.[5-9]|1(?:\.[0-9])?|2)']
     return command in exact or any(re.fullmatch(p, command) for p in patterns)
+
+
+def structure_signature(response):
+    """Compare diagnostic records, ignoring unrelated fresh chat broadcasts and ordering."""
+    return tuple(sorted(line.strip() for line in response.splitlines()
+                        if re.match(r'^Structures at ', line)
+                        or re.match(r'^- [\w:./-]+\s+.*\[bounds: [01], piece: [01]\]', line)
+                        or re.match(r'^\s+piece:', line)))
 
 
 class LogTail:
@@ -428,27 +458,80 @@ class Desktop:
         self.guard()
 
     def guard(self):
-        require(not self.stop_file.exists(), 'Emergency STOP file present')
-        require(not self.user.GetAsyncKeyState(0x77) & 0x8000, 'Emergency F8 stop')
-        self.gui.failSafeCheck()
-        require(self.user.IsWindow(self.hwnd), 'Minecraft window closed')
-        require(not self.user.IsHungAppWindow(self.hwnd), 'Minecraft window unresponsive')
-        require(self.user.GetForegroundWindow() == self.hwnd, 'Minecraft lost focus; no further input permitted')
+        require(not getattr(self, 'aborted', False), 'Desktop input aborted; explicit new invocation required')
+        try:
+            require(not self.stop_file.exists(), 'Emergency STOP file present')
+            require(not self.user.GetAsyncKeyState(0x77) & 0x8000, 'Emergency F8 stop')
+            self.gui.failSafeCheck()
+            require(self.user.IsWindow(self.hwnd), 'Minecraft window closed')
+            require(not self.user.IsHungAppWindow(self.hwnd), 'Minecraft window unresponsive')
+            require(self.user.GetForegroundWindow() == self.hwnd, 'Minecraft lost focus; no further input permitted')
+        except BaseException:
+            self.aborted = True
+            raise
 
     def send(self, command):
         require('\n' not in command and '\r' not in command and command.isascii() and len(command) <= 255, 'Unsafe chat command')
         require(allowed_command(command), 'Command outside harness allowlist')
         self.guard()
         self.gui.press('/')
-        time.sleep(.2)
-        # Replace any unfinished chat input left by an interrupted run.
+        time.sleep(1.0)
+        # Prove that the slash reached a text field before typing command keys.
+        # A focused Minecraft window alone does not imply that chat is open.
         self.guard()
         self.gui.hotkey('ctrl', 'a')
+        try:
+            require(self.copy_selected_text() == '/',
+                    'Chat input not verified; no command text sent. Close menus/chat and restart.')
+        except BaseException:
+            self.aborted = True
+            raise
         for char in '/' + command:
             self.guard()
             self.gui.write(char)
         self.guard()
+        self.gui.hotkey('ctrl', 'a')
+        try:
+            require(self.copy_selected_text() == '/' + command,
+                    'Chat command text changed; Enter not sent. Close menus/chat and restart.')
+        except BaseException:
+            self.aborted = True
+            raise
+        self.guard()
         self.gui.press('enter')
+
+    def copy_selected_text(self):
+        """Require a fresh copy, without logging or examining unrelated clipboard contents."""
+        sequence = self.user.GetClipboardSequenceNumber()
+        self.guard()
+        self.gui.hotkey('ctrl', 'c')
+        deadline = time.monotonic() + 3
+        while time.monotonic() < deadline:
+            self.guard()
+            if self.user.GetClipboardSequenceNumber() != sequence:
+                self.user.GetClipboardData.restype = wintypes.HANDLE
+                kernel = ctypes.windll.kernel32
+                kernel.GlobalLock.argtypes = [wintypes.HGLOBAL]
+                kernel.GlobalLock.restype = ctypes.c_void_p
+                kernel.GlobalUnlock.argtypes = [wintypes.HGLOBAL]
+                if not self.user.OpenClipboard(None):
+                    # Clipboard history/tools may briefly hold the lock after Ctrl+C.
+                    # Retry only while the same focus and stop guards still pass.
+                    time.sleep(.05)
+                    continue
+                try:
+                    handle = self.user.GetClipboardData(13)  # CF_UNICODETEXT
+                    require(handle, 'Clipboard copy did not provide text; command entry stopped')
+                    pointer = kernel.GlobalLock(handle)
+                    require(pointer, 'Clipboard text unavailable; command entry stopped')
+                    try:
+                        return ctypes.wstring_at(pointer)
+                    finally:
+                        kernel.GlobalUnlock(handle)
+                finally:
+                    self.user.CloseClipboard()
+            time.sleep(.05)
+        raise Blocked('Chat copy did not complete; no text field verified')
 
     def screenshot(self, path):
         self.guard()
@@ -492,7 +575,7 @@ class Controller:
         self.start = time.monotonic()
         self.out = HERE / 'results' / (datetime.now().strftime('%Y%m%d-%H%M%S') + '-' + uuid.uuid4().hex[:6])
         self.out.mkdir(parents=True)
-        run_id = mode if not case else (case['id'] if isinstance(case, dict) else mode)
+        run_id = mode if not case else (case.get('id', mode) if isinstance(case, dict) else mode)
         self.report = {'id': run_id, 'description': 'CSMusic ' + mode,
                        'started': stamp(), 'status': 'blocked', 'validation': 'static' if mode in ('audit', 'dry-run') else 'runtime selection',
                        'test_level': 'selection-only; audio is not a required gate unless calibrated and explicitly configured',
@@ -505,6 +588,44 @@ class Controller:
             self.report['expected'] = {'evidence': 'nonblack screenshot and fresh playing-source response; this mode does not rerun RC4 smoke'}
         self.desktop = self.tail = None
         self.raw = ''
+        self.world_verified = False
+        self.command_state_safe = False
+        self.audio_recording = False
+
+    def request_assistance(self, message):
+        """Stop this invocation; confirmation and fresh checks belong to the next invocation."""
+        request = {'requested': True, 'message': message,
+                   'confirmation': 'not received; no automatic resume',
+                   'resume_requires': 'explicit user confirmation, then fresh world/focus/position/fixture checks',
+                   'notification': 'terminal/report', 'audio_recording_stopped': not self.audio_recording}
+        self.report['assistance'] = request
+        options = self.config.get('assistance', {})
+        if (self.audio_recording or not self.world_verified or not self.command_state_safe
+                or not self.desktop or not self.tail or not options.get('minecraft_sound_alert', True)):
+            return request
+        try:
+            self.desktop.guard()
+            marker = HERE / 'results' / 'last-assistance-notification.json'
+            previous = json.loads(marker.read_bytes()) if marker.exists() else {}
+            if time.time() - float(previous.get('unix_time', 0)) < options.get('minimum_alert_interval_seconds', 60):
+                request['notification'] = 'rate limited; terminal/report'
+                return request
+            self.state('ASSISTANCE', 60, 'Guarded in-game notification; run remains stopped')
+            identity = self.command('function csmusic_harness:identity', screenshot=False)
+            require('CSMUSIC_WORLD_' + self.receipt['token'] in identity, 'Identity changed before assistance')
+            text = '[CSMusic Tester] ' + message
+            # Keep the complete command within Minecraft chat's controller limit.
+            text = text[:160]
+            payload = json.dumps({'text': text, 'color': 'gold'}, separators=(',', ':'))
+            self.command('tellraw @s ' + payload, screenshot=False)
+            sound = options.get('sound_command', 'playsound minecraft:entity.ender_dragon.death master @s ~ ~ ~ 1 1')
+            require(allowed_command(sound) and sound.startswith('playsound '), 'Invalid assistance sound command')
+            self.command(sound, screenshot=False)
+            write_json(marker, {'unix_time': time.time(), 'report': str(self.out)})
+            request['notification'] = 'Minecraft tellraw and playsound'
+        except Exception as exc:
+            request['notification_error'] = {'type': type(exc).__name__, 'message': str(exc)}
+        return request
 
     def state(self, name, timeout, success):
         self.deadline = time.monotonic() + timeout
@@ -558,6 +679,7 @@ class Controller:
         nonce = 'CSMUSIC_' + uuid.uuid4().hex
         item = {'command': '/' + command, 'started': stamp(), 'status': 'input pending', 'timeout': timeout}
         self.report['commands'].append(item)
+        self.command_state_safe = False
         # Fresh tail + unpredictable exact system-chat markers; one outstanding request only.
         self.tail.read()
         self.guard()
@@ -578,6 +700,7 @@ class Controller:
             if result is not None:
                 item.update({'status': 'response captured', 'response': result, 'finished': stamp()})
                 require(not re.search(r'Unknown or incomplete command|Incorrect argument|Unknown function|You do not have permission|No entity was found', result), 'Command rejected: ' + result)
+                self.command_state_safe = True
                 if screenshot:
                     self.capture('command-' + str(len(self.report['commands'])))
                 return result
@@ -601,13 +724,30 @@ class Controller:
         # Do not take focus away from the user's active application. The operator must leave
         # Minecraft foreground before a run; any later focus loss is terminal.
         self.desktop.guard()
+        if self.config.pop('initial_chat_open', False):
+            # Used only with explicit operator confirmation of the initial empty chat.
+            self.desktop.gui.press('esc')
+            time.sleep(1.0)
+            self.desktop.guard()
+            self.report['observed']['initial_chat_closed'] = 'Escape, explicitly requested by user'
         self.tail = LogTail(Path(self.config['profile']) / 'logs/latest.log')
-        self.state('READY', 90, 'Fresh copy-specific identity response and creative mode')
+        mode = self.config.get('test_gamemode', 'creative')
+        require(mode in ('creative', 'spectator'), 'Test mode must be creative or explicitly authorized spectator')
+        self.state('READY', 90, 'Fresh copy-specific identity response and verified test gamemode')
         identity = self.command('function csmusic_harness:identity')
         require('CSMUSIC_WORLD_' + receipt['token'] in identity, 'Wrong world, title/menu screen, or copy identity pack not active')
-        creative = self.command('execute if entity @s[gamemode=creative] run tellraw @s "CSMUSIC_CREATIVE"')
-        require('CSMUSIC_CREATIVE' in creative.splitlines(), 'Copied world must be creative')
+        marker = 'CSMUSIC_' + mode.upper()
+        verified_mode = self.command(f'execute if entity @s[gamemode={mode}] run tellraw @s "{marker}"')
+        require(marker in verified_mode.splitlines(), 'Copied world must be in configured ' + mode + ' mode')
+        self.report['environment']['player_mode'] = mode
         self.report['environment']['test_world'] = str(world)
+        self.world_verified = True
+
+    def player_position(self):
+        response = self.command('data get entity @s Pos', screenshot=False)
+        numbers = re.search(r'\[(-?[\d.]+)d, (-?[\d.]+)d, (-?[\d.]+)d\]', response)
+        require(numbers, 'Player XYZ response unavailable')
+        return [float(v) for v in numbers.groups()]
 
     def await_readiness(self, case, x, y, z):
         loading = self.config.get('loading', {})
@@ -631,7 +771,8 @@ class Controller:
             current = self.command('cobblesafari csmusic current', screenshot=False)
             image = self.capture('readiness-' + str(len(observations) + 1))
             winners = playing(current)
-            signature = (loaded.strip(), bounds.strip(), tuple((e['source_key'], e['selection'], e['priority']) for e in winners))
+            signature = ('CSMUSIC_LOADED' in loaded.splitlines(), structure_signature(bounds),
+                         tuple((e['source_key'], e['selection'], e['priority']) for e in winners))
             item = {'elapsed_seconds': round(time.monotonic() - started, 1),
                     'destination_loaded': 'CSMUSIC_LOADED' in loaded,
                     'bounds_contain_expected': contains_structure(bounds, case['structure'], case.get('piece')),
@@ -686,7 +827,7 @@ class Controller:
         self.report['failure_category'] = 'BLOCKED_LOADING'
         raise Blocked('Music selection did not stabilize after the context change: ' + label)
 
-    def capture_audio(self, selection):
+    def capture_audio(self, selection, compare_selection=None):
         audio_config = self.config.get('audio', {})
         if not audio_config.get('enabled', False):
             return {'status': 'NOT_TESTED', 'classification': 'NOT_TESTED',
@@ -694,16 +835,21 @@ class Controller:
         from audio import AudioUnavailable, capture_loopback, identify
         seconds = min(int(audio_config.get('capture_seconds', 30)), int(audio_config.get('maximum_seconds', 90)))
         self.state('AUDIO_CAPTURE', seconds + 20, 'WASAPI endpoint capture with validated recording and candidate ranking')
-        path = self.out / 'audio-loopback.wav'
+        path = self.out / ('audio-loopback-' + uuid.uuid4().hex[:8] + '.wav')
         try:
-            evidence = capture_loopback(path, seconds, audio_config.get('device_index'))
+            self.audio_recording = True
+            try:
+                evidence = capture_loopback(path, seconds, audio_config.get('device_index'), guard=self.guard)
+            finally:
+                self.audio_recording = False
             limit = int(audio_config.get('maximum_recording_megabytes', 180)) * 1024 * 1024
             require(path.stat().st_size <= limit, 'Audio recording exceeds configured evidence size limit')
             if evidence['rms_int16'] < float(audio_config.get('minimum_capture_rms_int16', 100)):
                 evidence.update({'status': 'BLOCKED_AUDIO_DEVICE', 'classification': 'BLOCKED_AUDIO_DEVICE',
                                  'reason': 'Loopback recording was near silent; no selection conclusion'})
             else:
-                result = identify(path, selection, Path(audio_config['reference_resource_pack']), audio_config.get('ffmpeg'))
+                negative = compare_selection or audio_config.get('negative_selection', 'dysfam_music:villages_lgpe_pallet_town')
+                result = identify(path, selection, Path(audio_config['reference_resource_pack']), audio_config.get('ffmpeg'), negative)
                 evidence.update({'status': 'INCONCLUSIVE_AUDIO', 'classification': result['classification'],
                                  'match': result})
                 limit = float(audio_config.get('clipping_fraction_limit', 0.01))
@@ -712,8 +858,10 @@ class Controller:
                     evidence['clipping_warning'] = f"{evidence['clipped_fraction']:.4%} of samples meet the clipping threshold {limit:.2%}"
             return evidence
         except AudioUnavailable as exc:
-            return {'status': exc.category, 'classification': exc.category,
-                    'exception': {'type': type(exc).__name__, 'message': str(exc)}}
+            result = evidence if 'evidence' in locals() else {}
+            result.update({'status': exc.category, 'classification': exc.category,
+                           'exception': {'type': type(exc).__name__, 'message': str(exc)}})
+            return result
 
     def smoke(self):
         self.state('QUERY', 300, 'Enabled RC4 pack, status function, current selection, and fresh loader totals')
@@ -750,11 +898,48 @@ class Controller:
         sid = case['structure']
         require(re.fullmatch(r'[a-z0-9_.-]+:[a-z0-9_/.-]+', sid), 'Invalid structure ID')
         self.state('LOCATE', self.config['locate_timeout'] + 30, 'Fresh exact-ID locate response')
+        initial_xyz = self.player_position()
+        self.report['observed']['initial_xyz'] = initial_xyz
+        if case.get('at_current_position'):
+            case = dict(case, waypoint=[math.floor(v) for v in initial_xyz])
+            if self.config.get('test_gamemode') == 'spectator':
+                case['spectator_waypoint'] = case['waypoint']
+            self.report['observed']['human_intervention'] = 'User-confirmed current fixture; floor/headroom and containment rechecked'
         result = self.command('locate structure ' + sid, self.config['locate_timeout'])
         self.state('PARSE', 1, 'Complete numeric XYZ; never invent missing Y')
         x, y, z = locate_coordinates(result, sid)
         self.report['observed']['locate'] = [x, y, z]
+        spectator_point = case.get('spectator_waypoint') if self.config.get('test_gamemode') == 'spectator' else None
+        if spectator_point:
+            require(len(spectator_point) == 3 and all(isinstance(v, int) for v in spectator_point), 'Invalid spectator waypoint')
+            x, y, z = spectator_point
+            require(-63 <= y <= 318 and abs(x) < 29999984 and abs(z) < 29999984, 'Spectator waypoint outside world bounds')
+            self.report['observed']['spectator_candidate_xyz'] = spectator_point
+        if case.get('candidate_xz'):
+            candidate = case['candidate_xz']
+            require(len(candidate) == 2 and all(isinstance(v, int) for v in candidate), 'Invalid saved candidate XZ')
+            x, z = candidate
+            require(abs(x) < 29999984 and abs(z) < 29999984, 'Candidate outside world bounds')
+            self.report['observed']['saved_candidate_xz'] = candidate
+        if case.get('waypoint'):
+            waypoint = case['waypoint']
+            require(len(waypoint) == 3 and all(isinstance(v, int) for v in waypoint), 'Invalid candidate waypoint')
+            x, _, z = waypoint
+            require(abs(x) < 29999984 and abs(z) < 29999984, 'Waypoint outside world bounds')
+            self.report['observed']['candidate_waypoint'] = waypoint
+        if self.config.get('test_gamemode') == 'spectator' and not spectator_point:
+            height = case['waypoint'][1] if case.get('waypoint') else (y if y is not None else math.floor(initial_xyz[1]))
+            spectator_point = [x, height, z]
+            y = height
+            self.report['observed']['spectator_candidate_xyz'] = spectator_point
+            self.report['observed']['spectator_height_source'] = ('configured candidate' if case.get('waypoint')
+                                                                else 'locate height or current verified player height; containment not assumed')
+        require(math.hypot(x + .5 - initial_xyz[0], z + .5 - initial_xyz[2]) <=
+                self.config.get('escalation', {}).get('max_travel_distance', 100000), 'Destination exceeds travel limit')
         self.state('TRAVEL', 180, 'Verified destination air/headroom, solid floor, and exact numeric teleport')
+        if spectator_point:
+            mode = self.command('execute if entity @s[gamemode=spectator] run tellraw @s "CSMUSIC_SPECTATOR"', screenshot=False)
+            require('CSMUSIC_SPECTATOR' in mode.splitlines(), 'Spectator mode changed; floor waiver revoked')
         # Force-load only the destination chunk in the disposable copy, and preserve pre-existing tickets.
         ticket = self.command(f'forceload query {x} {z}')
         owned = 'is not marked for force loading' in ticket
@@ -765,19 +950,51 @@ class Controller:
             self.report['observed']['temporary_forceload'] = [x, z]
         try:
             self.wait(3)
-            probe = self.command(f'function csmusic_harness:probe {{x:{x},z:{z}}}')
-            candidates = re.findall(r'^CSMUSIC_GROUND (-?\d+) (-?\d+) (-?\d+)$', probe, re.M)
-            valid = [(int(a), int(b), int(c)) for a,b,c in candidates if int(a) == x and int(c) == z and -63 <= int(b) <= 318]
-            require(valid, 'Terrain probe found no loaded safe surface; no teleport sent')
-            destination = max(valid, key=lambda p: p[1])
+            loaded_attempts = self.report['observed']['pre_probe_loading'] = []
+            for attempt in range(4):
+                loaded = self.command(f'execute if loaded {x} 64 {z} run tellraw @s "CSMUSIC_LOADED"', screenshot=False)
+                loaded_attempts.append({'attempt': attempt+1, 'loaded': 'CSMUSIC_LOADED' in loaded, 'time': stamp()})
+                if 'CSMUSIC_LOADED' in loaded:
+                    break
+                self.wait(5)
+            require(loaded_attempts[-1]['loaded'], 'Destination chunk did not load before terrain probing; no teleport sent')
+            if spectator_point:
+                valid = []
+                destination = (x, y, z)
+                self.report['observed']['landing_verification'] = 'Floor/headroom not required: explicitly authorized, runtime-verified spectator mode'
+            else:
+                probe = self.command(f'function csmusic_harness:probe {{x:{x},z:{z}}}')
+                candidates = re.findall(r'^CSMUSIC_GROUND (-?\d+) (-?\d+) (-?\d+)$', probe, re.M)
+                valid = [(int(a), int(b), int(c)) for a,b,c in candidates if int(a) == x and int(c) == z and -63 <= int(b) <= 318]
+                require(valid, 'Terrain probe found no loaded safe surface; no teleport sent')
+                destination = max(valid, key=lambda p: p[1])
+            if case.get('waypoint') and not spectator_point:
+                preferred = case['waypoint'][1]
+                require(any(p[1] == preferred for p in valid), 'Candidate waypoint lacks verified safe floor/headroom')
+                destination = next(p for p in valid if p[1] == preferred)
             y = destination[1]
-            self.report['observed']['verified_ground'] = destination
+            self.report['observed']['verified_destination'] = destination
+            if not spectator_point:
+                self.report['observed']['verified_ground'] = destination
             travel = self.command(f'tp @s {x + 0.5} {y} {z + 0.5}')
             require('Teleported ' in travel, 'Teleport response unavailable')
             pos = self.command('data get entity @s Pos')
             numbers = re.search(r'\[(-?[\d.]+)d, (-?[\d.]+)d, (-?[\d.]+)d\]', pos)
             require(numbers and all(abs(float(a)-b) < .1 for a,b in zip(numbers.groups(), (x+.5, y, z+.5))), 'Player did not reach verified XYZ')
             self.report['observed']['player_xyz'] = [float(v) for v in numbers.groups()]
+            final_xyz = self.report['observed']['player_xyz']
+            self.report['observed']['travel'] = {
+                'initial_xyz': initial_xyz, 'locate_xyz': self.report['observed']['locate'],
+                'probe_candidates': valid, 'selected_probe_xyz': destination,
+                'teleport_destination': [x+.5, y, z+.5],
+                'command': f'/tp @s {x+.5} {y} {z+.5}', 'response': travel,
+                'verified_final_xyz': final_xyz, 'teleport_verified': True,
+                'horizontal_displacement': round(math.hypot(final_xyz[0]-initial_xyz[0], final_xyz[2]-initial_xyz[2]), 3),
+                'vertical_displacement': round(final_xyz[1]-initial_xyz[1], 3),
+                'already_near_player': math.hypot(x+.5-initial_xyz[0], z+.5-initial_xyz[2]) <= 64,
+                'surface_assessment': ('spectator position; floor/headroom checks waived by user, live containment required' if spectator_point
+                                       else 'safe floor/headroom verified; ground/roof/interior requires visual review')}
+            print('Travel: ' + json.dumps(self.report['observed']['travel']), flush=True)
             weather = case.get('weather', 'clear')
             ticks = case.get('time', 1000)
             require(weather in ('clear', 'rain', 'thunder') and isinstance(ticks, int) and 0 <= ticks < 24000, 'Invalid scenario time/weather')
@@ -799,12 +1016,25 @@ class Controller:
             if diagnosis['category'] == 'PASS_SELECTION':
                 self.report['observed']['music_selection_status'] = 'PASS'
                 self.report['verification_layers']['music_selection'] = 'PASS'
-                if self.config.get('audio', {}).get('enabled', False):
+                audio_cases = self.config.get('audio', {}).get('case_ids', [])
+                if self.config.get('audio', {}).get('enabled', False) and (not audio_cases or case['id'] in audio_cases):
                     settle = int(self.config.get('audio', {}).get('post_transition_settle_seconds', 15))
                     self.state('AUDIO_SETTLE', settle + 2, 'Wait for fade/crossfade before loopback sampling')
                     self.wait(settle)
                     self.report['observed']['audio'] = self.capture_audio(expected)
                     self.report['verification_layers']['windows_loopback_audio'] = self.report['observed']['audio']['classification']
+                    self.state('AUDIO_RECHECK', 90, 'Verify position, identity and selection after capture/matching')
+                    identity = self.command('function csmusic_harness:identity', screenshot=False)
+                    require('CSMUSIC_WORLD_' + self.receipt['token'] in identity, 'World changed during audio evidence collection')
+                    position_after_audio = self.player_position()
+                    require(all(abs(a-b) < .1 for a,b in zip(position_after_audio, final_xyz)), 'Player moved during audio evidence collection')
+                    bounds_after_audio = self.command('cobblesafari csmusic structures', screenshot=False)
+                    current_after_audio = self.command('cobblesafari csmusic current', screenshot=False)
+                    audio_recheck = selection_diagnosis(case, bounds_after_audio, current_after_audio, all_cases)
+                    self.report['observed']['audio_context_recheck'] = {
+                        'player_xyz': position_after_audio, 'structures': bounds_after_audio,
+                        'current': current_after_audio, 'selection_diagnosis': audio_recheck}
+                    require(audio_recheck['category'] == 'PASS_SELECTION', 'Selection changed during audio evidence collection')
                     if self.config.get('audio', {}).get('required_for_selection_pass', False) and \
                             self.report['observed']['audio']['classification'] != 'PASS_AUDIO':
                         self.report['failure_category'] = 'INCONCLUSIVE_AUDIO'
@@ -900,6 +1130,19 @@ class Controller:
                     self.report['failure_category'] = 'FAIL_SELECTION'
                     raise AssertionError('Regression selection mismatch: ' + step['id'])
                 observation['status'] = 'pass'
+                if step.get('record_audio'):
+                    observation['audio'] = self.capture_audio(expected, step.get('negative_selection'))
+                    self.report['verification_layers']['windows_loopback_audio'] = observation['audio']['classification']
+                    self.state('AUDIO_RECHECK', 90, 'Verify regression clock, position and exact source after capture')
+                    after = self.command('cobblesafari csmusic current', screenshot=False)
+                    position = self.player_position()
+                    observation['audio_context_recheck'] = {'current': after, 'player_xyz': position}
+                    require(all(abs(a-b) < .1 for a,b in zip(position, self.report['observed']['player_xyz'])), 'Player moved during regression audio capture')
+                    require(any(e['source_key'] in possible_sources and e['selection'] == expected and e['priority'] == int(step['priority'])
+                                for e in playing(after)), 'Regression source changed during audio capture')
+                    after_context = re.search(r'time: (\d+) \| weather: (\w+)', after)
+                    require(after_context and (not 'time' in step or int(after_context[1]) == step['time'])
+                            and (not 'context_weather' in step or after_context[2] == step['context_weather']), 'Regression context changed during audio capture')
         finally:
             self.desktop.guard()
             self.state('CLEANUP', 45, 'Restore copied-world daylight-cycle setting')
@@ -984,7 +1227,9 @@ class Controller:
                 category = self.report.get('failure_category')
                 if not category:
                     message = str(exc).lower()
-                    if 'focus' in message:
+                    if 'chat' in message or 'clipboard' in message:
+                        category = 'BLOCKED_CHAT_STATE'
+                    elif 'focus' in message or 'input aborted' in message:
                         category = 'BLOCKED_FOCUS'
                     elif 'loaded' in message or 'chunk' in message or 'readiness' in message:
                         category = 'BLOCKED_LOADING'
@@ -995,11 +1240,11 @@ class Controller:
                                  'exception': {'type': type(exc).__name__, 'message': str(exc)}})
                 if category == 'FAIL_SELECTION':
                     scenario['status'] = 'FAIL'
-                if category == 'BLOCKED_FOCUS':
+                if scenario['status'] == 'BLOCKED':
                     results.append(scenario)
                     break
             results.append(scenario)
-        if not any(item['category'] == 'BLOCKED_FOCUS' for item in results):
+        if not any(item['status'] == 'BLOCKED' for item in results):
             regression_cases = json.loads((HERE / 'suite.json').read_bytes())['regressions']
             for regression_id in plan.get('regressions', []):
                 case = next(c for c in regression_cases if c['id'] == regression_id)
@@ -1016,11 +1261,20 @@ class Controller:
                     scenario.update({'status': 'FAIL' if category == 'FAIL_SELECTION' else 'BLOCKED',
                                      'category': category,
                                      'exception': {'type': type(exc).__name__, 'message': str(exc)}})
-                    if category == 'BLOCKED_FOCUS':
+                    if scenario['status'] == 'BLOCKED':
                         results.append(scenario)
                         break
                 results.append(scenario)
         self.report['observed'] = root_observed
+        executed = {item['id'] for item in results}
+        for planned in plan.get('structures', []):
+            if planned['id'] not in executed:
+                results.append({'id': planned['id'], 'expected': planned, 'status': 'NOT_RUN',
+                                'category': 'NOT_EXECUTED_AFTER_SUITE_STOP', 'observed': {}})
+        for planned_id in plan.get('regressions', []):
+            if planned_id not in executed:
+                results.append({'id': planned_id, 'status': 'NOT_RUN',
+                                'category': 'NOT_EXECUTED_AFTER_SUITE_STOP', 'observed': {}})
         self.report['scenarios'] = results
         if any(item['status'] == 'FAIL' for item in results):
             self.report['status'] = 'fail'
@@ -1083,7 +1337,9 @@ class Controller:
                 self.report['status'] = 'blocked'
                 if not self.report.get('failure_category'):
                     message = str(exc).lower()
-                    if 'focus' in message:
+                    if 'chat' in message or 'clipboard' in message:
+                        category = 'BLOCKED_CHAT_STATE'
+                    elif 'focus' in message or 'input aborted' in message:
                         category = 'BLOCKED_FOCUS'
                     elif isinstance(exc, (FileNotFoundError, ImportError, ModuleNotFoundError)):
                         category = 'BLOCKED_DEPENDENCY'
@@ -1095,6 +1351,9 @@ class Controller:
             self.report['exception'] = {'type': type(exc).__name__, 'message': str(exc)}
             self.report['possible_cause'] = f'{type(exc).__name__}: {exc}'
         finally:
+            help_text = assistance_message(self.report)
+            if help_text:
+                self.request_assistance(help_text)
             self.state('RECORD', 5, 'JSON, Markdown, log excerpt persisted')
             # Do not send cleanup input after any abort/focus loss.
             self.state('CLEANUP', 1, 'Close log handle; leave copy and evidence intact; no GUI recovery input')
@@ -1112,11 +1371,7 @@ class Controller:
             self.report['evidence'] = sorted(p.name for pattern in ('*.png', '*.wav') for p in self.out.glob(pattern)) + ['commands.log']
             if (self.out / 'recovery.json').is_file():
                 self.report['evidence'].append('recovery.json')
-            help_text = assistance_message(self.report)
             if help_text:
-                self.report['assistance'] = {'requested': True, 'message': help_text,
-                                             'confirmation': 'not received; no automatic resume',
-                                             'resume_requires': 'user action followed by a new invocation and fresh world/focus checks'}
                 write_json(self.out / 'assistance.json', self.report['assistance'])
             (self.out / 'commands.log').write_text(self.raw, encoding='utf-8')
             write_json(self.out / 'report.json', self.report)
@@ -1151,6 +1406,7 @@ def main():
     parser.add_argument('--selection', default='dysfam_music:villages_lgpe_pallet_town')
     parser.add_argument('--negative-selection', default='dysfam_music:villages_lgpe_lavender_town')
     parser.add_argument('--audio', action='store_true', help='Capture loopback audio during supported gameplay modes')
+    parser.add_argument('--at-current-position', action='store_true', help='Reprobe the user-confirmed current fixture rather than locate landing')
     parser.add_argument('--duration', type=int)
     parser.add_argument('--device-index', type=int)
     args = parser.parse_args()
@@ -1224,6 +1480,9 @@ def main():
     if args.mode in ('structure', 'regression'):
         cases = suites['structures' if args.mode == 'structure' else 'regressions']
         case = next(c for c in cases if c['id'] == args.case)
+        if args.at_current_position:
+            require(args.mode == 'structure', '--at-current-position requires structure mode')
+            case = dict(case, at_current_position=True)
     elif args.mode in ('quick', 'representative', 'diagnostic', 'exhaustive'):
         ids = suites['modes'].get(args.mode, [])
         structures = suites['structures'] if args.mode == 'exhaustive' else [

@@ -1,7 +1,10 @@
 """Offline safety/feedback tests; these do not claim Minecraft gameplay passed."""
 import hashlib
+import ctypes
 import json
 import tempfile
+import types
+import wave
 from pathlib import Path
 import unittest
 from unittest.mock import Mock, patch
@@ -9,11 +12,215 @@ import numpy as np
 
 from harness import (Blocked, Controller, Desktop, LogTail, allowed_command, chat_lines,
                      contains_structure, framed_response, locate_coordinates, music_sources,
-                     expected_rule_sources, playing, runtime_source, selection_diagnosis)
-from audio import _wave_similarity
+                     expected_rule_sources, playing, runtime_source, selection_diagnosis, structure_signature)
+from audio import _wave_similarity, capture_loopback, identify
 
 
 class FeedbackTests(unittest.TestCase):
+    def test_structure_stability_ignores_spawn_chat_but_detects_bounds_changes(self):
+        response = ('Structures at -4736 70 -4192 (2):\n'
+                    '- minecraft:mineshaft #minecraft:mineshaft [bounds: 0, piece: 0]\n'
+                    '- bca:village/dark_small #bca:villages [bounds: 1, piece: 0]')
+        announced = 'A wild Common Hidden Ability Ledyba has appeared!\n' + response
+        self.assertEqual(structure_signature(response), structure_signature(announced))
+        self.assertNotEqual(structure_signature(response), structure_signature(response.replace('bounds: 1', 'bounds: 0')))
+
+    def test_floor_waiver_requires_spectator_and_still_verifies_exact_selection(self):
+        case = {'id': 'spectator_test', 'structure': 'bca:village/default_small', 'priority': 30,
+                'pool': 'village_basic_day', 'source': r'data\dysfam_music\csmusic\definition\villages_generic.json#0',
+                'spectator_waypoint': [10, 64, 20]}
+        for mode in ('spectator', 'creative'):
+            controller = Controller.__new__(Controller)
+            controller.config = {'test_gamemode': mode, 'locate_timeout': 10, 'audio': {'enabled': False}}
+            controller.report = {'observed': {}, 'verification_layers': {}}
+            controller.desktop = Mock()
+            controller.state = controller.wait = controller.await_readiness = Mock()
+            queries = []
+            positions = iter(['[0.5d, 64.0d, 0.5d]', '[10.5d, 64.0d, 20.5d]'])
+            def response(command, *args, **kwargs):
+                queries.append(command)
+                if command == 'data get entity @s Pos': return next(positions)
+                if command.startswith('locate '): return 'The nearest bca:village/default_small is at [10, ~, 20]'
+                if command.startswith('execute if entity'): return 'CSMUSIC_SPECTATOR'
+                if command.startswith('forceload query'): return 'Chunk is marked for force loading'
+                if command.startswith('execute if loaded'): return 'CSMUSIC_LOADED'
+                if command.startswith('function csmusic_harness:probe'): return ''
+                if command.startswith('tp @s'): return 'Teleported player'
+                if command.startswith('weather '): return 'Set the weather'
+                if command.startswith('time set '): return 'Set the time'
+                if command.endswith('structures'): return 'Structures at 10 64 20 (1):\n- bca:village/default_small [bounds: 1, piece: 0]'
+                if command.endswith('current'): return 'csmusic sources for player\n- [definition:csmusic/definition/villages_generic.json#0] #village_basic_day (priority 30) <= playing'
+                raise AssertionError(command)
+            controller.command = response
+            if mode == 'spectator':
+                controller.structure(case)
+                self.assertFalse(any('probe' in q for q in queries))
+                self.assertTrue(controller.report['observed']['travel']['teleport_verified'])
+                self.assertEqual(controller.report['observed']['selection_diagnosis']['category'], 'PASS_SELECTION')
+            else:
+                with self.assertRaisesRegex(Blocked, 'no loaded safe surface'):
+                    controller.structure(case)
+                self.assertFalse(any(q.startswith('tp @s') for q in queries))
+
+    def test_suite_plan_without_case_id_constructs_and_preserves_unrun_cases(self):
+        with tempfile.TemporaryDirectory() as folder, patch('harness.HERE', Path(folder)):
+            plan = {'structures': [{'id': 'first'}, {'id': 'second'}], 'regressions': ['third']}
+            controller = Controller({'expected_counts': [413, 1310, 19]}, 'representative', plan)
+            controller.runtime_ready = Mock()
+            controller.smoke = Mock()
+            controller.structure = Mock(side_effect=Blocked('invalid fixture'))
+            controller.scheduled_suite(plan)
+            self.assertEqual(controller.report['id'], 'representative')
+            controller.structure.assert_called_once_with({'id': 'first'})
+            self.assertEqual([s['status'] for s in controller.report['scenarios']], ['BLOCKED', 'NOT_RUN', 'NOT_RUN'])
+
+    def test_fresh_text_copy_retries_transient_clipboard_lock(self):
+        desk = Desktop.__new__(Desktop)
+        desk.gui = Mock()
+        desk.guard = Mock()
+        desk.user = Mock()
+        desk.user.GetClipboardSequenceNumber.side_effect = [1, 2, 2]
+        desk.user.OpenClipboard.side_effect = [False, True]
+        desk.user.GetClipboardData.return_value = 123
+        copied = ctypes.create_unicode_buffer('/')
+        kernel = Mock()
+        kernel.GlobalLock.return_value = ctypes.addressof(copied)
+        with patch('harness.ctypes.windll.kernel32', kernel), patch('harness.time.sleep'):
+            self.assertEqual(desk.copy_selected_text(), '/')
+        self.assertEqual(desk.user.OpenClipboard.call_count, 2)
+        desk.user.CloseClipboard.assert_called_once()
+        kernel.GlobalUnlock.assert_called_once_with(123)
+
+    def test_failed_chat_opening_never_types_command_or_presses_enter(self):
+        desk = Desktop.__new__(Desktop)
+        desk.gui = Mock()
+        desk.guard = Mock()
+        desk.copy_selected_text = Mock(return_value='')
+        with patch('harness.time.sleep'), self.assertRaisesRegex(Blocked, 'Chat input not verified'):
+            desk.send('function csmusic_harness:identity')
+        desk.gui.write.assert_not_called()
+        self.assertEqual(desk.gui.press.call_args_list, [(('/',), {})])
+        self.assertTrue(desk.aborted)
+
+    def test_changed_chat_text_is_never_submitted(self):
+        desk = Desktop.__new__(Desktop)
+        desk.gui = Mock()
+        desk.guard = Mock()
+        desk.copy_selected_text = Mock(side_effect=['/', 'wrong text'])
+        with patch('harness.time.sleep'), self.assertRaisesRegex(Blocked, 'Enter not sent'):
+            desk.send('reload')
+        self.assertEqual(desk.gui.press.call_args_list, [(('/',), {})])
+        self.assertTrue(desk.aborted)
+
+    def test_focus_loss_is_latched_even_after_focus_returns(self):
+        desk = Desktop.__new__(Desktop)
+        desk.hwnd = 42
+        desk.stop_file = Mock()
+        desk.stop_file.exists.return_value = False
+        desk.gui = Mock()
+        desk.user = Mock()
+        desk.user.GetAsyncKeyState.return_value = 0
+        desk.user.IsWindow.return_value = True
+        desk.user.IsHungAppWindow.return_value = False
+        desk.user.GetForegroundWindow.return_value = 0
+        with self.assertRaisesRegex(Blocked, 'lost focus'):
+            desk.guard()
+        desk.user.GetForegroundWindow.return_value = 42
+        with self.assertRaisesRegex(Blocked, 'aborted'):
+            desk.send('reload')
+        desk.gui.press.assert_not_called()
+
+    def test_pcm_wav_decode_does_not_require_ffmpeg_wav_demuxer(self):
+        samples = np.random.default_rng(7).integers(-2000, 2000, 22050*3, dtype=np.int16)
+        stereo = np.column_stack((samples, samples)).astype('<i2')
+        with tempfile.TemporaryDirectory() as folder:
+            recording = Path(folder) / 'loopback.wav'
+            with wave.open(str(recording), 'wb') as output:
+                output.setnchannels(2)
+                output.setsampwidth(2)
+                output.setframerate(22050)
+                output.writeframes(stereo.tobytes())
+            refs = [{'track': 'test:known', 'event': 'test:known', 'archive_entry': 'test.ogg', 'bytes': b'ogg'}]
+            with patch('audio._ffmpeg', return_value='test-ogg-only'), patch('audio.resolve_reference', return_value=refs), \
+                    patch('audio._decode_bytes', return_value=samples.astype(np.float32)/32768) as decoder:
+                result = identify(recording, 'test:known', Path(folder)/'references.zip')
+            decoder.assert_called_once_with(b'ogg', 'test-ogg-only', 'test.ogg')
+            self.assertGreater(result['best']['score'], .99)
+            self.assertEqual(result['classification'], 'INCONCLUSIVE_AUDIO')
+
+    def assistance_controller(self, folder):
+        controller = Controller.__new__(Controller)
+        controller.config = {'assistance': {'minimum_alert_interval_seconds': 60}}
+        controller.report = {}
+        controller.out = Path(folder)
+        controller.world_verified = controller.command_state_safe = True
+        controller.audio_recording = False
+        controller.desktop = Mock()
+        controller.tail = Mock()
+        controller.receipt = {'token': 'testtoken'}
+        controller.state = Mock()
+        controller.command = Mock(return_value='CSMUSIC_WORLD_testtoken')
+        return controller
+
+    def test_assistance_allowlist_excludes_actions_and_nonself_targets(self):
+        self.assertTrue(allowed_command('playsound minecraft:entity.ender_dragon.death master @s ~ ~ ~ 1 1'))
+        self.assertTrue(allowed_command('tellraw @s {"text":"[CSMusic Tester] Please enter the tower.","color":"gold"}'))
+        for command in ('playsound minecraft:test master @a ~ ~ ~ 1 1',
+                        'playsound minecraft:test master @s ~ ~ ~ 10 1',
+                        'tellraw @s {"text":"[CSMusic Tester] Help","color":"gold","clickEvent":{"action":"run_command","value":"/kill"}}',
+                        'tellraw @a {"text":"[CSMusic Tester] Help","color":"gold"}'):
+            self.assertFalse(allowed_command(command))
+
+    def test_assistance_never_sends_during_audio_or_unsafe_command_state(self):
+        with tempfile.TemporaryDirectory() as folder:
+            for attribute, value in (('audio_recording', True), ('command_state_safe', False), ('world_verified', False)):
+                controller = self.assistance_controller(folder)
+                setattr(controller, attribute, value)
+                controller.request_assistance('Please enter the tower.')
+                controller.command.assert_not_called()
+
+    def test_assistance_focus_loss_prevents_all_notifications(self):
+        with tempfile.TemporaryDirectory() as folder:
+            controller = self.assistance_controller(folder)
+            controller.desktop.guard.side_effect = Blocked('focus lost')
+            controller.request_assistance('Please return to Minecraft.')
+            controller.command.assert_not_called()
+            self.assertIn('notification_error', controller.report['assistance'])
+
+    def test_assistance_rechecks_identity_and_rate_limits_across_invocations(self):
+        with tempfile.TemporaryDirectory() as folder, patch('harness.HERE', Path(folder)):
+            (Path(folder) / 'results').mkdir()
+            controller = self.assistance_controller(folder)
+            request = controller.request_assistance('Please enter the tower.')
+            self.assertEqual(controller.command.call_count, 3)
+            self.assertEqual(controller.command.call_args_list[0].args[0], 'function csmusic_harness:identity')
+            self.assertEqual(request['notification'], 'Minecraft tellraw and playsound')
+            controller.command.reset_mock()
+            controller.request_assistance('Please enter the tower.')
+            controller.command.assert_not_called()
+
+    def test_loopback_interruption_closes_stream_and_preserves_partial_wav(self):
+        stream = Mock()
+        stream.read.return_value = b'\x01\x00' * 2048
+        endpoint = {'name': 'Test [Loopback]', 'index': 2, 'maxInputChannels': 2, 'defaultSampleRate': 48000}
+        audio = Mock()
+        audio.get_host_api_info_by_type.return_value = {'defaultOutputDevice': 1}
+        audio.get_device_info_by_index.return_value = {'name': 'Test'}
+        audio.get_loopback_device_info_generator.return_value = iter([endpoint])
+        audio.open.return_value = stream
+        context = Mock()
+        context.__enter__ = Mock(return_value=audio)
+        context.__exit__ = Mock(return_value=False)
+        module = types.SimpleNamespace(PyAudio=lambda: context, paWASAPI=1, paInt16=8)
+        with tempfile.TemporaryDirectory() as folder, patch.dict('sys.modules', {'pyaudiowpatch': module}):
+            output = Path(folder) / 'partial.wav'
+            with self.assertRaisesRegex(Blocked, 'Emergency stop'):
+                capture_loopback(output, 1, guard=Mock(side_effect=[None, Blocked('Emergency stop')]))
+            stream.stop_stream.assert_called_once()
+            stream.close.assert_called_once()
+            with wave.open(str(output)) as recording:
+                self.assertEqual(recording.getnframes(), 1024)
+
     def test_destructive_and_unrelated_commands_are_denied(self):
         for command in ('kill @e', 'fill 0 0 0 1 1 1 air', 'datapack disable "vanilla"', 'op user', 'execute run stop'):
             self.assertFalse(allowed_command(command), command)
@@ -127,6 +334,7 @@ class FeedbackTests(unittest.TestCase):
         desk = Desktop.__new__(Desktop)
         desk.gui = Mock()
         desk.guard = Mock(side_effect=[None, None, Blocked('focus lost')])
+        desk.copy_selected_text = Mock(return_value='/')
         with patch('harness.time.sleep'), self.assertRaises(Blocked):
             desk.send('reload')
         self.assertEqual(desk.gui.press.call_args_list, [(('/',), {})])
@@ -142,10 +350,11 @@ class FeedbackTests(unittest.TestCase):
         desk = Desktop.__new__(Desktop)
         desk.gui = Mock()
         desk.guard = Mock()
+        desk.copy_selected_text = Mock(side_effect=['/', '/time set 12000'])
         with patch('harness.time.sleep'):
             desk.send('time set 12000')
         self.assertEqual(desk.gui.press.call_args_list, [(('/',), {}), (('enter',), {})])
-        desk.gui.hotkey.assert_called_once_with('ctrl', 'a')
+        self.assertEqual(desk.gui.hotkey.call_args_list, [(('ctrl', 'a'), {}), (('ctrl', 'a'), {})])
         self.assertEqual(''.join(call.args[0] for call in desk.gui.write.call_args_list), '/time set 12000')
         self.assertLess(desk.gui.mock_calls.index(__import__('unittest').mock.call.hotkey('ctrl', 'a')),
                         desk.gui.mock_calls.index(__import__('unittest').mock.call.write('/')))
@@ -154,6 +363,7 @@ class FeedbackTests(unittest.TestCase):
         desk = Desktop.__new__(Desktop)
         desk.gui = Mock()
         desk.guard = Mock()
+        desk.copy_selected_text = Mock(side_effect=['/', '/', '/time set 12000'])
         writes = []
         def interrupt_after_prefix(char):
             writes.append(char)

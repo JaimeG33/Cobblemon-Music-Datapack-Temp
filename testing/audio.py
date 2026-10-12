@@ -44,13 +44,14 @@ def list_devices():
     return {'host_api': 'WASAPI', 'default_output': default_output['name'], 'devices': devices}
 
 
-def capture_loopback(path: Path, seconds: int, device_index: int | None = None):
+def capture_loopback(path: Path, seconds: int, device_index: int | None = None, guard=None):
     if not 1 <= seconds <= 180:
         raise ValueError('Audio capture duration must be between 1 and 180 seconds')
     try:
         import pyaudiowpatch as pyaudio
     except ImportError as exc:
         raise AudioUnavailable('PyAudioWPatch is not installed in the testing virtual environment') from exc
+    interrupted = None
     try:
         with pyaudio.PyAudio() as audio:
             api = audio.get_host_api_info_by_type(pyaudio.paWASAPI)
@@ -69,6 +70,12 @@ def capture_loopback(path: Path, seconds: int, device_index: int | None = None):
             chunks = []
             try:
                 for _ in range(math.ceil(rate * seconds / frame_size)):
+                    if guard:
+                        try:
+                            guard()
+                        except BaseException as exc:
+                            interrupted = exc
+                            break
                     chunks.append(stream.read(frame_size, exception_on_overflow=False))
             finally:
                 stream.stop_stream()
@@ -85,6 +92,8 @@ def capture_loopback(path: Path, seconds: int, device_index: int | None = None):
         output.setsampwidth(2)
         output.setframerate(rate)
         output.writeframes(raw)
+    if interrupted is not None:
+        raise interrupted  # Preserve partial WAV; stop gameplay input and do not notify during capture.
     peak = int(np.max(np.abs(samples.astype(np.int32)))) if samples.size else 0
     rms = float(np.sqrt(np.mean(samples.astype(np.float64) ** 2))) if samples.size else 0.0
     return {'file': str(path), 'device': device['name'], 'device_index': int(device['index']),
@@ -133,7 +142,8 @@ def _similarity(recording: np.ndarray, reference: np.ndarray, max_seconds=6):
     length = min(len(ref), max(16, int(max_seconds * 22050 / 512 / 6)))
     if len(rec) < length or len(ref) < length:
         return 0.0
-    starts = sorted(set((0, max(0, len(ref)//3-length//2), max(0, len(ref)*2//3-length//2), len(ref)-length)))
+    starts = sorted({max(0, min(len(ref)-length, start)) for start in
+                     (0, len(ref)//3-length//2, len(ref)*2//3-length//2, len(ref)-length)})
     best = 0.0
     # Each reference anchor is searched at every offset in the captured clip.
     for start in starts:
@@ -217,12 +227,17 @@ def resolve_reference(selection: str, rp_zip: Path):
 
 def identify(recording_path: Path, selection: str, rp_zip: Path, ffmpeg=None, compare_selection=None):
     ffmpeg = _ffmpeg(ffmpeg)
-    recording = _decode_bytes(recording_path.read_bytes(), ffmpeg, str(recording_path))
     with wave.open(str(recording_path), 'rb') as wav:
         rec_rate, rec_channels = wav.getframerate(), wav.getnchannels()
-    if rec_rate != 22050 or rec_channels != 1:
-        # FFmpeg normalizes the input above, independent of WAV device parameters.
-        pass
+        if wav.getsampwidth() != 2 or wav.getcomptype() != 'NONE':
+            raise AudioUnavailable('Matcher requires uncompressed 16-bit loopback WAV', 'BLOCKED_AUDIO_REFERENCE')
+        samples = np.frombuffer(wav.readframes(wav.getnframes()), dtype='<i2')
+    recording = samples.reshape((-1, rec_channels)).astype(np.float32).mean(axis=1) / 32768.0
+    if rec_rate != 22050 and len(recording):
+        # The profile's bundled FFmpeg supports OGG but has no WAV demuxer.
+        # Decode our PCM WAV natively; interpolation is recorded for calibration.
+        positions = np.arange(int(len(recording) * 22050 / rec_rate)) * rec_rate / 22050
+        recording = np.interp(positions, np.arange(len(recording)), recording).astype(np.float32)
     candidates = resolve_reference(selection, rp_zip)
     if compare_selection and compare_selection != selection:
         candidates += resolve_reference(compare_selection, rp_zip)
@@ -237,11 +252,13 @@ def identify(recording_path: Path, selection: str, rp_zip: Path, ffmpeg=None, co
     scores.sort(key=lambda item: item['score'], reverse=True)
     return {'expected_selection': selection, 'comparison_selection': compare_selection,
             'recording': str(recording_path),
+            'recording_decode': {'method': 'Python wave PCM16, channel mean, linear resampling to 22050 Hz',
+                                 'source_rate': rec_rate, 'source_channels': rec_channels},
             'candidates': scores, 'best': scores[0] if scores else None,
             'margin': (scores[0]['score'] - scores[1]['score']) if len(scores) > 1 else None,
             'confidence_threshold': None, 'calibrated': False,
             'classification': 'INCONCLUSIVE_AUDIO',
-            'note': 'Spectral candidate ranking only; no live calibration threshold established.'}
+            'note': 'Waveform and spectral candidate ranking; no live calibration threshold established.'}
 
 
 def synthetic_benchmark(positive_selection: str, negative_selection: str, rp_zip: Path, ffmpeg=None):

@@ -1,6 +1,6 @@
 # CSMusic Phase 2 implementation and validation
 
-Date: 2026-10-11. Branch: `codex/csmusic-test-harness`. Reviewed base: `34fc8be859a9fb4f729754c431bf4f8a5ffde568`. All edits in this phase are confined to `testing/`; they are local and uncommitted.
+Date: 2026-10-11. Branch: `codex/csmusic-test-harness`. Reviewed base: `34fc8be859a9fb4f729754c431bf4f8a5ffde568`. Phase 2 was committed and pushed at `4bafbefd3e8e92d11c0e39c531497c48a602172d`. All Phase 2 edits are confined to `testing/`; subsequent session changes remain local and uncommitted.
 
 ## Audit and preservation
 

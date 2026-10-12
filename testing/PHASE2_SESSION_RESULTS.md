@@ -1,6 +1,6 @@
 # Phase 2 session results — 2026-10-11
 
-**Implementation:** offline controller, reporting, audio-feasibility and scheduling work completed locally on `codex/csmusic-test-harness`, based on reviewed commit `34fc8be859a9fb4f729754c431bf4f8a5ffde568`. No commit, push, merge or production change was made.
+**Implementation:** offline controller, reporting, audio-feasibility and scheduling work completed locally on `codex/csmusic-test-harness`, based on reviewed commit `34fc8be859a9fb4f729754c431bf4f8a5ffde568`. During Phase 2 validation no commit, push, merge or production change was made. Phase 2 was subsequently committed and pushed at `4bafbefd3e8e92d11c0e39c531497c48a602172d`; this is the reviewed baseline for the final gameplay session.
 
 ## What passed
 

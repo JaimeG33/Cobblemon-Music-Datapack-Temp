@@ -8,7 +8,12 @@
       "weather": "clear",
       "source": "data\\dysfam_music\\csmusic\\definition\\villages_cobbletowns.json#0",
       "music": "dysfam_music:villages_lgpe_pokemon_tower",
-      "piece": "cobbletowns:lavender_town/buildings/pokemon_tower"
+      "piece": "cobbletowns:lavender_town/buildings/pokemon_tower",
+      "spectator_waypoint": [
+        -3687,
+        95,
+        697
+      ]
     },
     {
       "id": "cobbletowns_lavender_town_1",
@@ -17,7 +22,17 @@
       "time": 1000,
       "weather": "clear",
       "source": "data\\dysfam_music\\csmusic\\definition\\villages_cobbletowns.json#1",
-      "music": "dysfam_music:villages_lgpe_lavender_town"
+      "music": "dysfam_music:villages_lgpe_lavender_town",
+      "waypoint": [
+        -3712,
+        91,
+        720
+      ],
+      "spectator_waypoint": [
+        -3712,
+        91,
+        720
+      ]
     },
     {
       "id": "pallet_town",
@@ -89,7 +104,17 @@
       "time": 0,
       "weather": "clear",
       "source": "data\\dysfam_music\\csmusic\\definition\\villages_generic.json#0",
-      "pool": "village_basic_day"
+      "pool": "village_basic_day",
+      "candidate_xz": [
+        -878,
+        -383
+      ],
+      "candidate_evidence": "Saved bca:default/centers/center_small_battlepad_road bounds [-912,63,-384,-845,63,-382]; live safe-floor and containment checks required",
+      "spectator_waypoint": [
+        -878,
+        64,
+        -383
+      ]
     },
     {
       "id": "bca_village_default_small_1",
@@ -197,7 +222,12 @@
       "time": 0,
       "weather": "clear",
       "source": "data\\dysfam_music\\csmusic\\definition\\villages_generic.json#12",
-      "pool": "village_magic_day"
+      "pool": "village_magic_day",
+      "spectator_waypoint": [
+        -4736,
+        70,
+        -4192
+      ]
     },
     {
       "id": "bca_village_dark_small_13",
@@ -323,7 +353,17 @@
       "time": 0,
       "weather": "clear",
       "source": "data\\dysfam_music\\csmusic\\definition\\villages_generic.json#26",
-      "pool": "village_basic_day"
+      "pool": "village_basic_day",
+      "candidate_xz": [
+        -2182,
+        -576
+      ],
+      "candidate_evidence": "Saved terralith:village/fortified/roads/straight2 bounds [-2191,68,-577,-2173,69,-575]; live safe-floor and containment checks required",
+      "spectator_waypoint": [
+        -2182,
+        70,
+        -576
+      ]
     },
     {
       "id": "terralith_fortified_village_27",
@@ -527,7 +567,9 @@
           "weather": "clear",
           "context_weather": "none",
           "music": "dysfam_music:villages_bdsp_twinleaf_town_night",
-          "priority": 30
+          "priority": 30,
+          "record_audio": true,
+          "negative_selection": "dysfam_music:villages_bdsp_twinleaf_town_day"
         },
         {
           "id": "tick_23999_3",
@@ -546,6 +588,145 @@
           "priority": 30
         }
       ]
+    },
+    {
+      "id": "cherrygrove_weather",
+      "setup_id": "cobbletowns_cherrygrove_city_3",
+      "steps": [
+        {
+          "id": "clear",
+          "weather": "clear",
+          "context_weather": "none",
+          "music": "dysfam_music:villages_hgss_cherrygrove_city",
+          "priority": 30
+        },
+        {
+          "id": "ordinary_rain",
+          "weather": "rain",
+          "context_weather": "rain",
+          "music": "dysfam_music:villages_hgss_cherrygrove_city",
+          "priority": 30
+        },
+        {
+          "id": "thunder_override",
+          "weather": "thunder",
+          "context_weather": "thunder",
+          "music": "dysfam_music:weather_oras_heavy_rain",
+          "priority": 40
+        },
+        {
+          "id": "clear_restores_town",
+          "weather": "clear",
+          "context_weather": "none",
+          "music": "dysfam_music:villages_hgss_cherrygrove_city",
+          "priority": 30
+        }
+      ]
+    },
+    {
+      "id": "lavender_snow_weather",
+      "setup_id": "cobbletowns_lavender_town_1",
+      "steps": [
+        {
+          "id": "clear_day",
+          "time": 1000,
+          "weather": "clear",
+          "context_weather": "none",
+          "music": "dysfam_music:villages_lgpe_lavender_town",
+          "priority": 30
+        },
+        {
+          "id": "snow_day",
+          "time": 1000,
+          "weather": "rain",
+          "context_weather": "snow",
+          "music": "dysfam_music:weather_nps_shiver_snowfields_day",
+          "priority": 40,
+          "record_audio": true
+        },
+        {
+          "id": "snow_night",
+          "time": 13000,
+          "weather": "rain",
+          "context_weather": "snow",
+          "music": "dysfam_music:weather_nps_shiver_snowfields_night",
+          "priority": 40,
+          "record_audio": true
+        },
+        {
+          "id": "thunder",
+          "time": 1000,
+          "weather": "thunder",
+          "context_weather": "thunder",
+          "music": "dysfam_music:weather_oras_heavy_rain",
+          "priority": 40
+        },
+        {
+          "id": "clear_returns_lavender",
+          "time": 1000,
+          "weather": "clear",
+          "context_weather": "none",
+          "music": "dysfam_music:villages_lgpe_lavender_town",
+          "priority": 30
+        }
+      ]
+    },
+    {
+      "id": "bca_basic_weather",
+      "setup_id": "bca_village_default_small_0",
+      "steps": [
+        {
+          "id": "clear",
+          "time": 1000,
+          "weather": "clear",
+          "context_weather": "none",
+          "pool": "village_basic_day",
+          "priority": 30,
+          "source": "data\\dysfam_music\\csmusic\\definition\\villages_generic.json#0"
+        },
+        {
+          "id": "ordinary_rain",
+          "weather": "rain",
+          "context_weather": "rain",
+          "pool": "village_basic_day",
+          "priority": 30,
+          "source": "data\\dysfam_music\\csmusic\\definition\\villages_generic.json#0"
+        },
+        {
+          "id": "thunder_override",
+          "weather": "thunder",
+          "context_weather": "thunder",
+          "music": "dysfam_music:weather_oras_heavy_rain",
+          "priority": 40,
+          "record_audio": true
+        },
+        {
+          "id": "clear_restores_village",
+          "weather": "clear",
+          "context_weather": "none",
+          "pool": "village_basic_day",
+          "priority": 30,
+          "source": "data\\dysfam_music\\csmusic\\definition\\villages_generic.json#0"
+        },
+        {
+          "id": "basic_night",
+          "time": 13000,
+          "weather": "clear",
+          "context_weather": "none",
+          "pool": "village_basic_night",
+          "priority": 30,
+          "source": "data\\dysfam_music\\csmusic\\definition\\villages_generic.json#1"
+        },
+        {
+          "id": "basic_day_return",
+          "time": 1000,
+          "weather": "clear",
+          "context_weather": "none",
+          "pool": "village_basic_day",
+          "priority": 30,
+          "source": "data\\dysfam_music\\csmusic\\definition\\villages_generic.json#0"
+        }
+      ]
     }
   ],
   "modes": {
@@ -554,15 +735,8 @@
     ],
     "representative": [
       "bca_village_default_small_0",
-      "bca_village_dark_small_12",
-      "bca_village_ice_small_20",
-      "terralith_fortified_village_26",
       "terralith_fortified_desert_village_28",
-      "pallet_town",
-      "cobbletowns_twinleaf_town_5",
-      "cobbletowns_lavender_town_1",
-      "cobbletowns_lavender_town_0",
-      "legendarymonuments_traditional_village_ecruteak_0"
+      "cobbletowns_cherrygrove_city_3"
     ],
     "diagnostic": [
       "cobbletowns_cherrygrove_city_3",
@@ -592,8 +766,7 @@
   "mode_regressions": {
     "quick": [],
     "representative": [
-      "pallet_weather",
-      "twinleaf_exact_boundaries"
+      "bca_basic_weather"
     ],
     "diagnostic": [
       "pallet_weather",
