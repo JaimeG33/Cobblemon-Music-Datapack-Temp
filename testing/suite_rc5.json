@@ -1,0 +1,98 @@
+{
+  "structures": [
+    {
+      "id": "rc5_desert_pyramid",
+      "structure": "minecraft:desert_pyramid",
+      "priority": 41,
+      "time": 1000,
+      "weather": "clear",
+      "source": "data\\dysfam_music\\csmusic\\definition\\structures_vanilla.json#1",
+      "music": "dysfam_music:structures_bw_relic_castle"
+    },
+    {
+      "id": "rc5_lush_cove",
+      "structure": "cobblemon:shipwreck_coves/lush_shipwreck_cove",
+      "priority": 41,
+      "time": 1000,
+      "weather": "clear",
+      "source": "data\\dysfam_music\\csmusic\\definition\\structures_cobblemon.json#0",
+      "music": "dysfam_music:structures_lgpe_the_final_road"
+    },
+    {
+      "id": "rc5_amphitheater",
+      "structure": "legendarymonuments:amphitheater",
+      "priority": 41,
+      "time": 1000,
+      "weather": "clear",
+      "source": "data\\dysfam_music\\csmusic\\definition\\structures_legendary_monuments.json#1",
+      "music": "dysfam_music:structures_sv_meloettas_relic_song"
+    },
+    {
+      "id": "rc5_bell_tower",
+      "structure": "legendarymonuments:traditional_village/ecruteak",
+      "priority": 41,
+      "time": 1000,
+      "weather": "clear",
+      "source": "data\\dysfam_music\\csmusic\\definition\\structures_legendary_monuments.json#2",
+      "music": "dysfam_music:structures_hgss_bell_tower",
+      "piece": "legendarymonuments:traditional_village/ecruteak/bell_tower_base"
+    },
+    {
+      "id": "rc5_burned_tower",
+      "structure": "legendarymonuments:traditional_village/ecruteak",
+      "priority": 41,
+      "time": 1000,
+      "weather": "clear",
+      "source": "data\\dysfam_music\\csmusic\\definition\\structures_legendary_monuments.json#5",
+      "music": "dysfam_music:structures_hgss_burned_tower",
+      "piece": "legendarymonuments:traditional_village/ecruteak/burned_tower_1"
+    }
+  ],
+  "regressions": [
+    {
+      "id": "rc5_structure_weather",
+      "setup_id": "rc5_desert_pyramid",
+      "steps": [
+        {
+          "id": "clear_structure",
+          "time": 1000,
+          "weather": "clear",
+          "context_weather": "none",
+          "music": "dysfam_music:structures_bw_relic_castle",
+          "priority": 41,
+          "source": "data\\dysfam_music\\csmusic\\definition\\structures_vanilla.json#1"
+        },
+        {
+          "id": "thunder_structure",
+          "weather": "thunder",
+          "context_weather": "thunder",
+          "music": "dysfam_music:structures_bw_relic_castle",
+          "priority": 41,
+          "source": "data\\dysfam_music\\csmusic\\definition\\structures_vanilla.json#1",
+          "record_audio": true
+        },
+        {
+          "id": "clear_returns_structure",
+          "weather": "clear",
+          "context_weather": "none",
+          "music": "dysfam_music:structures_bw_relic_castle",
+          "priority": 41,
+          "source": "data\\dysfam_music\\csmusic\\definition\\structures_vanilla.json#1"
+        }
+      ]
+    }
+  ],
+  "modes": {
+    "representative": [
+      "rc5_desert_pyramid",
+      "rc5_lush_cove",
+      "rc5_amphitheater",
+      "rc5_bell_tower"
+    ]
+  },
+  "mode_regressions": {
+    "representative": [
+      "rc5_structure_weather"
+    ]
+  }
+}

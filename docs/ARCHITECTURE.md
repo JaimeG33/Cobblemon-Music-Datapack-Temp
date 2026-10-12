@@ -57,7 +57,9 @@ Generic generation music cannot match `generation` directly, so generation suppo
 
 Normal ambient rules use `battle: "never"` so ambient music yields cleanly when a battle begins.
 
-RC4 village rules also use `battle: "never"`, exact Overworld structure IDs and priority 30. Generic villages select one of eight day/night pools; named towns select exact tracks. `structure_piece` restricts Lavender Town's Pokémon Tower to its template bounds. Equal priorities use the source-key order in CobbleSafari 0.3.4; the tower and town rules occupy indices 0 and 1 in one file, respectively. RC4 leaves the Pallet lab on its town theme and reserves Pokémon Center/Mart overrides for RC5.
+RC4 village rules also use `battle: "never"`, exact Overworld structure IDs and priority 30. Generic villages select one of eight day/night pools; named towns select exact tracks. `structure_piece` restricts Lavender Town's Pokémon Tower to its template bounds. Equal priorities use the source-key order in CobbleSafari 0.3.4; the tower and town rules occupy indices 0 and 1 in one file, respectively. RC4 leaves the Pallet lab on its town theme and reserves Pokémon Center/Mart overrides for RC6.
+
+RC5 adds 45 exact structure rules representing 40 approved workbook conditions at priority 41. Every rule specifies its dimension and `battle: "never"`. Bell/Burned Tower rules AND the Ecruteak parent with seven exact template-piece IDs, overriding village 30 and weather 40. Native 3D bounds determine containment; there is no proximity padding. PLA - Lake covers the whole native lake structures, including interiors. Three lake-cavern overrides and four unavailable landmarks are deferred. Existing tracks, ambient tags and RC1–RC4 trigger definitions are preserved. Future interior overrides use priority 42; generic battles remain 50 and advanced battles are planned at 60.
 
 ## Resource pack
 

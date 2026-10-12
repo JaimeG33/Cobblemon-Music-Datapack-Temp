@@ -1,10 +1,10 @@
-tellraw @s [{"text":"=== ToaRex Music Pack Status ===","color":"gold","bold":true}]
-tellraw @s [{"text":"Datapack: ","color":"gray"},{"text":"ONLINE","color":"green"}]
-tellraw @s [{"text":"Release: ","color":"gray"},{"text":"RC4 - Ambient + Battles + Weather + Villages (Awaiting Gameplay QA)","color":"aqua"}]
-tellraw @s [{"text":"DysFam CSMusic tracks declared: ","color":"gray"},{"text":"407","color":"white"},{"text":" (280 cumulative RC3 + 127 new village tracks)","color":"dark_gray"}]
-tellraw @s [{"text":"Resource sound events expected: ","color":"gray"},{"text":"416","color":"white"},{"text":" (client resource pack cannot be queried by a vanilla datapack)","color":"dark_gray"}]
-tellraw @s [{"text":"Generic wild species rules: ","color":"gray"},{"text":"1016","color":"white"},{"text":" (base Cobblemon 1.7.3)","color":"dark_gray"}]
-tellraw @s [{"text":"Expected CobbleSafari runtime: ","color":"gray"},{"text":"413 music definitions / 1310 trigger rules / 19 trigger files","color":"white"}]
-tellraw @s [{"text":"Audio test: ","color":"gray"},{"text":"/function dysfam_music:check_audio","color":"aqua"}]
-tellraw @s [{"text":"Weather: 3 rules at priority 40. Audio test: /function dysfam_music:check_weather_audio","color":"aqua"}]
-tellraw @s [{"text":"Villages: 40 rules at priority 30. Detection: /cobblesafari csmusic structures","color":"aqua"}]
+tellraw @s {"text": "=== ToaRex Music Pack Status ===", "color": "gold"}
+tellraw @s {"text": "Datapack: ONLINE", "color": "green"}
+tellraw @s {"text": "Release: RC5 - Ambient + Battles + Weather + Villages + Structures (Gameplay QA pending)", "color": "aqua"}
+tellraw @s {"text": "DysFam CSMusic tracks declared: 434", "color": "white"}
+tellraw @s {"text": "Resource sound events expected: 443 (client pack cannot be queried by vanilla commands)", "color": "white"}
+tellraw @s {"text": "Generic wild species rules: 1016 (base Cobblemon 1.7.3)", "color": "white"}
+tellraw @s {"text": "Expected CobbleSafari runtime: 440 music definitions / 1355 trigger rules / 24 trigger files", "color": "white"}
+tellraw @s {"text": "Structures: 40 conditions / 45 rules at priority 41; seven conditions deferred", "color": "aqua"}
+tellraw @s {"text": "Lake music currently covers whole native bounds, including interiors", "color": "aqua"}
+tellraw @s {"text": "Detection: /cobblesafari csmusic structures; audio: /function dysfam_music:check_audio", "color": "aqua"}

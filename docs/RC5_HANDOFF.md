@@ -1,49 +1,40 @@
-# RC5 standalone handoff
+# RC5 continuation handoff
 
-Planning completed 2026-10-11 with explicit deferrals. **Implementation has NOT begun. Await user approval of `RC5_IMPLEMENTATION_PLAN.md` before production edits or tests.** No commit or push was made.
+Updated 2026-10-11 after the user's explicit implementation approval. **RC5 is built and statically validated; gameplay QA remains pending.** No commit, push or publication was performed. No game input, installation, world edits or cleanup occurred during implementation.
 
-## Start here
+## Current scope and results
+
+The user approved the recommended 40-condition scope and seven deferrals. Implemented 38 native whole-structure conditions and seven exact tower-piece rules for Bell/Burned Tower: 45 rules across five new definition files. Added 27 music registrations and reused Heatran's existing XY - Team Flare Secret HQ. All RC1–RC4 definitions, triggers and ambient tags remain preserved; the status function and metadata reflect RC5.
+
+Deferred: Lava Shipwreck Cove; Groudon's Desolate Volcano; Kyogre's Primordial Sea; Sky Pillar; Acuity/Valor/Verity lake-interior overrides. PLA - Lake plays throughout each whole native lake bound, including interiors. No optional lake investigation was included. No guessed IDs, padding, mod changes, compatibility mod or world-specific areas.
+
+Counts: 434 project tracks / 1351 rules / 21 definition files / 443 resource events and OGGs. Installed CobbleSafari defaults add 6/4/3, giving expected runtime 440/1355/24. New structures use priority 41, battle never and exact dimensions. Pokemon Tower remains priority 30. RC6 is specific interiors; RC7 is advanced battles.
+
+## Read next
+
+1. [RC5_BUILD_RESULTS.md](RC5_BUILD_RESULTS.md): output paths/hashes, completed checks, rebuild commands and pending gameplay gates.
+2. [RC5_BUILD_RESULTS.json](RC5_BUILD_RESULTS.json): portable static/audio/schema/test evidence.
+3. [RC5_IMPLEMENTATION_PLAN.md](RC5_IMPLEMENTATION_PLAN.md): approved scope and validation specification.
+4. [RC5_STRUCTURES_MAPPING.csv](RC5_STRUCTURES_MAPPING.csv): all 47 original condition rows; implemented rows are marked pending gameplay QA and seven rows are explicitly deferred.
+5. [RC5_STRUCTURES_RESEARCH.md](RC5_STRUCTURES_RESEARCH.md) and [RC5_STRUCTURES_PROGRESS.md](RC5_STRUCTURES_PROGRESS.md): completed research and checkpoints. Do not repeat workbook/archive discovery unless inputs change.
+
+## Inputs and tools
 
 Repository: `D:/Minecraft Stuff/Minecraft Datapacks/DysFam_CSMusic_Ambient_RC1_Datapack`.
-Remote: `https://github.com/JaimeG33/Cobblemon-Music-Datapack-Temp`.
-Baseline branch `codex/csmusic-test-harness`, commit `6a974fb509dcd58603cf17e7b7d54df48742dab5`. Starting worktree was clean; this session adds five `docs/RC5_*` planning files only. Preserve later user changes.
+Branch: `codex/csmusic-test-harness`. Implementation started clean at `a32e94903fcd644505be1542994ce2ad1c429f33`; runtime preservation is checked against planning baseline `6a974fb509dcd58603cf17e7b7d54df48742dab5`. Preserve subsequent user edits.
 
-Read in order:
-1. `RC5_IMPLEMENTATION_PLAN.md` for scope and approval choices.
-2. `RC5_STRUCTURES_MAPPING.csv` for all 47 original condition rows and exact evidence.
-3. `RC5_STRUCTURES_RESEARCH.md` for special-case details, sources, counts and hashes.
-4. `RC5_STRUCTURES_PROGRESS.md` for checkpoints and current completion state.
+Source audio: `D:/Minecraft Stuff/Minecraft Datapacks/CSMusic Sources/DysFam Music OGG Files.zip`. Workbook: `C:/Users/Jaime/Downloads/CSMusic_Reference_Excel_Files/Music Pack Conditions & Music(2)_2.xlsx`. Workbook and relevant installed mod hashes matched the documented research before implementation.
 
-## Inputs already located
+Use dedicated `tools/generate_csmusic_rc5.py`, `build_csmusic_rc5_datapack.ps1`, `build_csmusic_rc5_resourcepack.ps1`, and `validate_csmusic_rc5.py` under the historical package folder. Never invoke the historical RC4 generator on cumulative RC5 files. Both RC5 outputs are in that package's ignored `build_output/`; historical RC4 scripts/ZIPs are untouched.
 
-- Final assignments: `C:/Users/Jaime/Downloads/CSMusic_Reference_Excel_Files/Music Pack Conditions & Music(2)_2.xlsx`, Structures A/B/C/D/G. E/F are RC6 interiors. 47 conditions, 33 groups, 32 songs.
-- Historical companion: same folder, `DysFam_CSMusic_Master_Implementation_Mapping_v3(2)_2.xlsx`; old statuses/IDs do not supersede code or installed archive evidence.
-- **Source audio moved:** `D:/Minecraft Stuff/Minecraft Datapacks/CSMusic Sources/DysFam Music OGG Files.zip`. Do not stop at the absent Downloads copy or rebuild without passing this path.
-- Profile `D:/Minecraft Stuff/ModrinthApp/profiles/DysFam Cobblemon 2.0 6.0.0`: Minecraft 1.21.1, Cobblemon 1.7.3, Safari 0.3.4, LM 8.1, Mega Showdown 1.9.5, Terralith 2.6.2.
-- Source manifest `DysFam_CSMusic_Ambient_RC1_Package/manifest/csmusic_release_assets.csv`.
-- Track definitions `data/dysfam_music/csmusic/*.json`; trigger rules **`data/dysfam_music/csmusic/definition/*.json`** (not a csmusic_triggers folder).
-- Mirror under `DysFam_CSMusic_Ambient_RC1_Package/datapack/`.
+## Next action: gameplay when ready
 
-## Findings and recommended decision
+The user questioned why Minecraft needed to be open. Clarified that building and static validation work with it closed; live checks are a separate pending step. Do not treat that question as cancelling RC5. Build work is complete.
 
-38 direct structure conditions have exact archive-verified IDs. Two tower conditions use seven exact Ecruteak pieces. Three lake interior rows have verified parents but only candidate center-piece detection. Four unresolved locations: future lava cove plus Groudon volcano, Kyogre sea and Sky Pillar, whose providers/IDs are unlocated in installed resources.
+No live automation until the user has the copied world loaded, foreground and ready. First recover the prior owned force-load at block XZ (-3520,4352), using:
 
-Recommend first RC5 scope **40 conditions** (38 direct + two towers), defer the four unavailable locations and three lake interiors. Play PLA - Lake across whole lake bounds until a cave-only native footprint is proven. Ask approval for this explicit limitation; do not silently claim the original full sheet is implemented.
+`./testing/run.ps1 recover -RecoverReport testing/results/20261011-175431-061aa5/recovery-target.json`
 
-All 32 audio files exist with exact matching labels and Ogg/Vorbis headers. Complete scope would add 30 tracks/events and reuse two. Recommended initial scope adds **27**, reuses Heatran's existing XY - Team Flare Secret HQ, and leaves ORAS - Drought's ambient registration untouched. Counts: baseline 407 tracks/1306 rules/16 files/416 events; recommended tracks/events 434/443. Rules/file totals depend on final approved expansion; derive them.
+Copied world: `CSMusic Automation 20261010-192614`. No daylight restoration is pending. The ignored recovery target exists locally; if absent later, consult `testing/FINAL_GAMEPLAY_SESSION_RESULTS.md` for ownership. Never clear unrelated tickets or touch original saves.
 
-Do not guess IDs for absent landmarks. No proximity padding, compatibility mod, mod update, area creation or biome substitution authorized. Thalic Pyramid is LM in the Overworld; Heatran is Nether; Eternatus and Hoopa are End. Seasonal mage towers are separate structure variants. Bell/Burned Tower need parent plus piece matching; same song shared across segments. Lake `3x3` template boxes are 37x48x37 and are not proven cave-only.
-
-Preserve all existing ambient tags and RC1–RC4 definitions, including Pokemon Tower 30. New structure priority 41, battle never; hierarchy 10/30/40/41/42/50/60. Future roadmap: RC6 specific interiors, RC7 advanced battles.
-
-## Next exact action
-
-Before approval: review the two scope choices in the plan with the user; stop before coding.
-
-After explicit approval: recheck Git and input versions, record approved deferrals, inspect the force-load recovery prerequisite, then follow the plan. Use new RC5 builders; RC4 scripts hardcode their counts and output paths. Do not run the historical RC4 generator against cumulative RC5 files. No commit/push/publish unless separately authorized.
-
-## Live-testing prerequisite and limits
-
-No live testing or cleanup occurred during planning. Final RC4 report records owned force-load block XZ (-3520,4352), copied world `CSMusic Automation 20261010-192614`, no pending daylight restoration. Once approved and that world is ready, use existing recovery command with `testing/results/20261011-175431-061aa5/recovery-target.json`; inspect ownership if this ignored local file is unavailable. Never clear unrelated tickets or touch original saves.
-
-Then use a small suite: vanilla structure, cove, LM landmark, tower nesting, native entry/exit, weather and battle interaction, one actual audio check. Archive IDs and header checks are planning evidence, not gameplay or decoded-audio results. The implementation plan describes exact gates and safe sequencing.
+Then stage RC5 only in the copied world and enable the cumulative resource pack. Separate RC5 harness configuration/suite are ready: `testing/run_rc5.ps1 smoke`, then `representative -Audio`. Test native entry/exit and above-bounds containment, tower vertical transitions/Ecruteak fallback, weather and battle return, one actual playback sample and a representative seam audition. Archive evidence, simulated arbitration and complete audio decoding are not gameplay or audible-playback passes. Keep pending gates honest. No commit, push or publication without separate authorization.

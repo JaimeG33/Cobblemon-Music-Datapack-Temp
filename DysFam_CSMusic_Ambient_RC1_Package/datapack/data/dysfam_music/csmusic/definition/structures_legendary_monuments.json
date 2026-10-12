@@ -1,0 +1,263 @@
+{
+  "rules": [
+    {
+      "music": "dysfam_music:structures_bw_relic_castle",
+      "priority": 41,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "battle": "never",
+        "structure": "legendarymonuments:thalic_pyramid"
+      }
+    },
+    {
+      "music": "dysfam_music:structures_sv_meloettas_relic_song",
+      "priority": 41,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "battle": "never",
+        "structure": "legendarymonuments:amphitheater"
+      }
+    },
+    {
+      "music": "dysfam_music:structures_hgss_bell_tower",
+      "priority": 41,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "battle": "never",
+        "structure": "legendarymonuments:traditional_village/ecruteak",
+        "structure_piece": "legendarymonuments:traditional_village/ecruteak/bell_tower_base"
+      }
+    },
+    {
+      "music": "dysfam_music:structures_hgss_bell_tower",
+      "priority": 41,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "battle": "never",
+        "structure": "legendarymonuments:traditional_village/ecruteak",
+        "structure_piece": "legendarymonuments:traditional_village/ecruteak/bell_tower_middle"
+      }
+    },
+    {
+      "music": "dysfam_music:structures_hgss_bell_tower",
+      "priority": 41,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "battle": "never",
+        "structure": "legendarymonuments:traditional_village/ecruteak",
+        "structure_piece": "legendarymonuments:traditional_village/ecruteak/bell_tower_top"
+      }
+    },
+    {
+      "music": "dysfam_music:structures_hgss_burned_tower",
+      "priority": 41,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "battle": "never",
+        "structure": "legendarymonuments:traditional_village/ecruteak",
+        "structure_piece": "legendarymonuments:traditional_village/ecruteak/burned_tower_1"
+      }
+    },
+    {
+      "music": "dysfam_music:structures_hgss_burned_tower",
+      "priority": 41,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "battle": "never",
+        "structure": "legendarymonuments:traditional_village/ecruteak",
+        "structure_piece": "legendarymonuments:traditional_village/ecruteak/burned_tower_2"
+      }
+    },
+    {
+      "music": "dysfam_music:structures_hgss_burned_tower",
+      "priority": 41,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "battle": "never",
+        "structure": "legendarymonuments:traditional_village/ecruteak",
+        "structure_piece": "legendarymonuments:traditional_village/ecruteak/burned_tower_3"
+      }
+    },
+    {
+      "music": "dysfam_music:structures_hgss_burned_tower",
+      "priority": 41,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "battle": "never",
+        "structure": "legendarymonuments:traditional_village/ecruteak",
+        "structure_piece": "legendarymonuments:traditional_village/ecruteak/burned_tower_4"
+      }
+    },
+    {
+      "music": "dysfam_music:structures_swsh_crown_shrine",
+      "priority": 41,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "battle": "never",
+        "structure": "legendarymonuments:crown_shrine"
+      }
+    },
+    {
+      "music": "dysfam_music:structures_bw_dragonspiral_tower",
+      "priority": 41,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "battle": "never",
+        "structure": "legendarymonuments:dragonspiraltower"
+      }
+    },
+    {
+      "music": "dysfam_music:structures_bw_dragonspiral_tower",
+      "priority": 41,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "battle": "never",
+        "structure": "legendarymonuments:kyuremcave"
+      }
+    },
+    {
+      "music": "dysfam_music:structures_swsh_energy_plant",
+      "priority": 41,
+      "when": {
+        "dimension": "minecraft:the_end",
+        "battle": "never",
+        "structure": "legendarymonuments:eternatus_cocoon"
+      }
+    },
+    {
+      "music": "dysfam_music:structures_pmovie_the_tree_of_worlds_origin",
+      "priority": 41,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "battle": "never",
+        "structure": "legendarymonuments:final_island"
+      }
+    },
+    {
+      "music": "dysfam_music:structures_xy_team_flare_secret_hq",
+      "priority": 41,
+      "when": {
+        "dimension": "minecraft:the_nether",
+        "battle": "never",
+        "structure": "legendarymonuments:heatran_cave"
+      }
+    },
+    {
+      "music": "dysfam_music:structures_plza_hyperspace_lumiose",
+      "priority": 41,
+      "when": {
+        "dimension": "minecraft:the_end",
+        "battle": "never",
+        "structure": "legendarymonuments:hoopa_pyramid"
+      }
+    },
+    {
+      "music": "dysfam_music:structures_pla_lake",
+      "priority": 41,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "battle": "never",
+        "structure": "legendarymonuments:lake_acuity"
+      }
+    },
+    {
+      "music": "dysfam_music:structures_pla_lake",
+      "priority": 41,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "battle": "never",
+        "structure": "legendarymonuments:lake_valor"
+      }
+    },
+    {
+      "music": "dysfam_music:structures_pla_lake",
+      "priority": 41,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "battle": "never",
+        "structure": "legendarymonuments:lake_verity"
+      }
+    },
+    {
+      "music": "dysfam_music:structures_bw_liberty_garden",
+      "priority": 41,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "battle": "never",
+        "structure": "legendarymonuments:liberty_island"
+      }
+    },
+    {
+      "music": "dysfam_music:structures_pmovie_lugias_song",
+      "priority": 41,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "battle": "never",
+        "structure": "legendarymonuments:lugia_temple"
+      }
+    },
+    {
+      "music": "dysfam_music:structures_pc_outskirt_stand",
+      "priority": 41,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "battle": "never",
+        "structure": "legendarymonuments:outskirt_stand"
+      }
+    },
+    {
+      "music": "dysfam_music:structures_pla_snowpoint_temple",
+      "priority": 41,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "battle": "never",
+        "structure": "legendarymonuments:snowpoint_temple"
+      }
+    },
+    {
+      "music": "dysfam_music:structures_oras_southern_island",
+      "priority": 41,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "battle": "never",
+        "structure": "legendarymonuments:southern_island"
+      }
+    },
+    {
+      "music": "dysfam_music:structures_pla_suspense",
+      "priority": 41,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "battle": "never",
+        "structure": "legendarymonuments:spear_pillar"
+      }
+    },
+    {
+      "music": "dysfam_music:structures_swsh_slumbering_weald_shrine",
+      "priority": 41,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "battle": "never",
+        "structure": "legendarymonuments:throneroom_of_knightly_heroes"
+      }
+    },
+    {
+      "music": "dysfam_music:structures_psmd_tree_of_life",
+      "priority": 41,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "battle": "never",
+        "structure": "legendarymonuments:tree_of_life"
+      }
+    },
+    {
+      "music": "dysfam_music:structures_bdsp_old_chateau",
+      "priority": 41,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "battle": "never",
+        "structure": "legendarymonuments:turnback_cave"
+      }
+    }
+  ]
+}

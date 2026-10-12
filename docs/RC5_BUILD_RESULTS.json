@@ -1,0 +1,224 @@
+{
+  "status": "PASS_STATIC",
+  "baseline": "6a974fb509dcd58603cf17e7b7d54df48742dab5",
+  "preserved_data_files": 430,
+  "scope": {
+    "included": 40,
+    "deferred": [
+      "Lava Shipwreck Cove (coming in 1.8)",
+      "Lake Acuity (inside)",
+      "Lake Valor (inside)",
+      "Lake Verity (inside)",
+      "Groudon's Desolate Volcano",
+      "Kyogre's Primordial Sea",
+      "Sky Pillar"
+    ]
+  },
+  "counts": {
+    "tracks": 434,
+    "rules": 1351,
+    "definition_files": 21,
+    "events": 443
+  },
+  "installed_defaults": [
+    6,
+    4,
+    3
+  ],
+  "expected_runtime_counts": [
+    440,
+    1355,
+    24
+  ],
+  "simulated_selection_checks": 232,
+  "source_headers_checked": 443,
+  "decoded_audio": [
+    {
+      "song": "PC - Pyrite Building",
+      "stream": "Stream #0:0: Audio: vorbis, 44100 Hz, stereo, fltp, 128 kb/s",
+      "decoded_duration": "00:02:11.10",
+      "status": "PASS_DECODE"
+    },
+    {
+      "song": "BW - Relic Castle",
+      "stream": "Stream #0:0: Audio: vorbis, 44100 Hz, stereo, fltp, 128 kb/s",
+      "decoded_duration": "00:03:36.79",
+      "status": "PASS_DECODE"
+    },
+    {
+      "song": "BW - Abyssal Ruins",
+      "stream": "Stream #0:0: Audio: vorbis, 44100 Hz, stereo, fltp, 128 kb/s",
+      "decoded_duration": "00:04:58.73",
+      "status": "PASS_DECODE"
+    },
+    {
+      "song": "XY - Scary House",
+      "stream": "Stream #0:0: Audio: vorbis, 44100 Hz, stereo, fltp, 128 kb/s",
+      "decoded_duration": "00:00:59.57",
+      "status": "PASS_DECODE"
+    },
+    {
+      "song": "PC - Snagem Hideout",
+      "stream": "Stream #0:0: Audio: vorbis, 44100 Hz, stereo, fltp, 128 kb/s",
+      "decoded_duration": "00:01:19.53",
+      "status": "PASS_DECODE"
+    },
+    {
+      "song": "NPS - The Mural",
+      "stream": "Stream #0:0: Audio: vorbis, 44100 Hz, stereo, fltp, 128 kb/s",
+      "decoded_duration": "00:02:50.91",
+      "status": "PASS_DECODE"
+    },
+    {
+      "song": "ORAS - Hideout",
+      "stream": "Stream #0:0: Audio: vorbis, 44100 Hz, stereo, fltp, 128 kb/s",
+      "decoded_duration": "00:01:36.87",
+      "status": "PASS_DECODE"
+    },
+    {
+      "song": "LGPE - The Final Road",
+      "stream": "Stream #0:0: Audio: vorbis, 44100 Hz, stereo, fltp, 128 kb/s",
+      "decoded_duration": "00:01:35.44",
+      "status": "PASS_DECODE"
+    },
+    {
+      "song": "SV - Meloettas Relic Song",
+      "stream": "Stream #0:0: Audio: vorbis, 44100 Hz, stereo, fltp, 128 kb/s",
+      "decoded_duration": "00:01:02.54",
+      "status": "PASS_DECODE"
+    },
+    {
+      "song": "HGSS - Bell Tower",
+      "stream": "Stream #0:0: Audio: vorbis, 44100 Hz, stereo, fltp, 128 kb/s",
+      "decoded_duration": "00:15:30.06",
+      "status": "PASS_DECODE"
+    },
+    {
+      "song": "HGSS - Burned Tower",
+      "stream": "Stream #0:0: Audio: vorbis, 44100 Hz, stereo, fltp, 128 kb/s",
+      "decoded_duration": "00:07:30.25",
+      "status": "PASS_DECODE"
+    },
+    {
+      "song": "SWSH - Crown Shrine",
+      "stream": "Stream #0:0: Audio: vorbis, 44100 Hz, stereo, fltp, 128 kb/s",
+      "decoded_duration": "00:02:05.13",
+      "status": "PASS_DECODE"
+    },
+    {
+      "song": "BW - Dragonspiral Tower",
+      "stream": "Stream #0:0: Audio: vorbis, 44100 Hz, stereo, fltp, 128 kb/s",
+      "decoded_duration": "00:03:41.06",
+      "status": "PASS_DECODE"
+    },
+    {
+      "song": "SWSH - Energy Plant",
+      "stream": "Stream #0:0: Audio: vorbis, 44100 Hz, stereo, fltp, 128 kb/s",
+      "decoded_duration": "00:01:33.85",
+      "status": "PASS_DECODE"
+    },
+    {
+      "song": "PMovie - The Tree of Worlds Origin",
+      "stream": "Stream #0:0: Audio: vorbis, 44100 Hz, stereo, fltp, 128 kb/s",
+      "decoded_duration": "00:01:18.27",
+      "status": "PASS_DECODE"
+    },
+    {
+      "song": "PLZA - Hyperspace Lumiose",
+      "stream": "Stream #0:0: Audio: vorbis, 44100 Hz, stereo, fltp, 128 kb/s",
+      "decoded_duration": "00:03:05.91",
+      "status": "PASS_DECODE"
+    },
+    {
+      "song": "PLA - Lake",
+      "stream": "Stream #0:0: Audio: vorbis, 44100 Hz, stereo, fltp, 128 kb/s",
+      "decoded_duration": "00:06:56.85",
+      "status": "PASS_DECODE"
+    },
+    {
+      "song": "BW - Liberty Garden",
+      "stream": "Stream #0:0: Audio: vorbis, 44100 Hz, stereo, fltp, 128 kb/s",
+      "decoded_duration": "00:02:39.95",
+      "status": "PASS_DECODE"
+    },
+    {
+      "song": "PMovie - Lugias Song",
+      "stream": "Stream #0:0: Audio: vorbis, 44100 Hz, stereo, fltp, 128 kb/s",
+      "decoded_duration": "00:04:14.43",
+      "status": "PASS_DECODE"
+    },
+    {
+      "song": "PC - Outskirt Stand",
+      "stream": "Stream #0:0: Audio: vorbis, 44100 Hz, stereo, fltp, 128 kb/s",
+      "decoded_duration": "00:00:51.21",
+      "status": "PASS_DECODE"
+    },
+    {
+      "song": "PLA - Snowpoint Temple",
+      "stream": "Stream #0:0: Audio: vorbis, 44100 Hz, stereo, fltp, 128 kb/s",
+      "decoded_duration": "00:08:04.01",
+      "status": "PASS_DECODE"
+    },
+    {
+      "song": "ORAS - Southern Island",
+      "stream": "Stream #0:0: Audio: vorbis, 44100 Hz, stereo, fltp, 128 kb/s",
+      "decoded_duration": "00:01:45.97",
+      "status": "PASS_DECODE"
+    },
+    {
+      "song": "PLA - Suspense",
+      "stream": "Stream #0:0: Audio: vorbis, 44100 Hz, stereo, fltp, 128 kb/s",
+      "decoded_duration": "00:01:27.48",
+      "status": "PASS_DECODE"
+    },
+    {
+      "song": "SWSH - Slumbering Weald Shrine",
+      "stream": "Stream #0:0: Audio: vorbis, 44100 Hz, stereo, fltp, 128 kb/s",
+      "decoded_duration": "00:01:48.62",
+      "status": "PASS_DECODE"
+    },
+    {
+      "song": "PSMD - Tree of Life",
+      "stream": "Stream #0:0: Audio: vorbis, 44100 Hz, stereo, fltp, 128 kb/s",
+      "decoded_duration": "00:03:59.45",
+      "status": "PASS_DECODE"
+    },
+    {
+      "song": "BDSP - Old Chateau",
+      "stream": "Stream #0:0: Audio: vorbis, 44100 Hz, stereo, fltp, 128 kb/s",
+      "decoded_duration": "00:01:41.57",
+      "status": "PASS_DECODE"
+    },
+    {
+      "song": "SWSH - Slumbering Weald",
+      "stream": "Stream #0:0: Audio: vorbis, 44100 Hz, stereo, fltp, 128 kb/s",
+      "decoded_duration": "00:01:52.44",
+      "status": "PASS_DECODE"
+    }
+  ],
+  "archive_sha256": {
+    "DysFam_CSMusic_RC5_Datapack.zip": "c779374e461f9cd093ecb0e5ab1299757c6490b9231d95448eeddefa2d635980",
+    "DysFam_CSMusic_RC5_ResourcePack.zip": "4ab14dc5be52f24e3c274d6d412db741a8684ffcf00612c7ec38803a7ea4c405"
+  },
+  "gameplay": "PENDING: native containment, transitions and actual playback",
+  "loop_seams": "PENDING: representative audition; decoding does not establish seamless loops",
+  "installed_schema": {
+    "status": "PASS",
+    "files": 21,
+    "rules": 1351,
+    "structure_rules": 45,
+    "exact_piece_patterns": 7,
+    "tool": "ValidateRc5Schema.java",
+    "cobblesafari_version": "0.3.4"
+  },
+  "harness_unit_tests": {
+    "passed": 36,
+    "failed": 0,
+    "scope": "offline safety, feedback, RC5 fixture references and historical-pack recovery"
+  },
+  "implementation_start_commit": "a32e94903fcd644505be1542994ce2ad1c429f33",
+  "approval_date": "2026-10-11",
+  "release_status": "BUILT_GAMEPLAY_QA_PENDING",
+  "game_input_sent": false,
+  "world_or_profile_edits": false
+}

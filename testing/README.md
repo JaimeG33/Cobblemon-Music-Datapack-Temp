@@ -1,5 +1,7 @@
 # CSMusic testing harness
 
+RC5 builds and static results are in [RC5_BUILD_RESULTS.md](../docs/RC5_BUILD_RESULTS.md). The existing RC4 configuration and suite are retained. RC5 uses `config_rc5.json`, `suite_rc5.json` and `run_rc5.ps1`; its expected runtime counts are 440 tracks / 1355 rules / 24 files. It requires RC5 installed in the receipt-verified copied world before preflight can pass. Gameplay remains pending; do not infer a pass from the build or fixture definitions. Recover the existing owned ticket through the original RC4 recovery command before staging RC5, as documented in the build results.
+
 The Windows controller tests RC4 using a verified, disposable copy of `RC4 Village Test`. It edits only files under `testing/` in this repository and test-only files in that copied world. It never changes production trigger rules, release ZIPs, or the source save.
 
 Phase 2 was pushed at `4bafbefd3e8e92d11c0e39c531497c48a602172d`. Final gameplay session changes stay local under `testing/`.

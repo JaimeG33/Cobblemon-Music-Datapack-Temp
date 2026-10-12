@@ -1,0 +1,13 @@
+{
+  "rules": [
+    {
+      "music": "dysfam_music:structures_swsh_slumbering_weald",
+      "priority": 41,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "battle": "never",
+        "structure": "mega_showdown:wishing_weald"
+      }
+    }
+  ]
+}

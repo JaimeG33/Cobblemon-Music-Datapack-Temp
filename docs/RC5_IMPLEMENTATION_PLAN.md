@@ -1,6 +1,6 @@
 # RC5 implementation plan for approval
 
-Status: proposal only. User approval is required before production edits. Baseline is `6a974fb509dcd58603cf17e7b7d54df48742dab5`; RC4 testing is accepted. See [research](RC5_STRUCTURES_RESEARCH.md) and [47-row mapping](RC5_STRUCTURES_MAPPING.csv).
+Status: approved 2026-10-11. The user explicitly authorized implementation of the recommended 40-condition scope and seven deferrals. Whole-lake fallback is approved; optional lake investigation remains deferred. Implementation and static build validation are complete; gameplay QA is pending. See [build results](RC5_BUILD_RESULTS.md). The proposal below is retained as the approved scope and validation specification. Baseline is `6a974fb509dcd58603cf17e7b7d54df48742dab5`; RC4 testing is accepted. See [research](RC5_STRUCTURES_RESEARCH.md) and [47-row mapping](RC5_STRUCTURES_MAPPING.csv).
 
 ## Recommended release scope
 
@@ -97,4 +97,4 @@ The recovery target is ignored local evidence and may not exist in a fresh check
 
 ## Approval boundary
 
-This plan and the other four RC5 documents are the only authorized changes in this phase. Development, source generation, manifest edits, builders, packages and runtime testing begin only after explicit approval of this plan. No commit/push/publication is included.
+The original planning phase authorized only five RC5 documents. The user explicitly approved implementation on 2026-10-11, covering the recommended 40-condition scope and seven deferrals, dedicated builders, cumulative packages and documented validation. Implementation/build validation is complete; gameplay is pending copied-world readiness. No commit/push/publication is included.

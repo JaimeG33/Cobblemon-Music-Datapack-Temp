@@ -4,11 +4,11 @@ Unified music system for the DysFam Cobblemon modpack using CobbleSafari CSMusic
 
 ## Current status
 
-**RC4 Villages: Built / Awaiting Gameplay QA. RC3 remains Complete / Working.**
+**RC5 Structures: Built / Gameplay QA pending. RC4 is accepted as the baseline.**
 
-RC4 adds basic, magic, cold and hot village day/night pools, seven named CobbleTowns settlements, Ecruteak Village and Lavender Town's Pokémon Tower. Twinleaf uses Day/Night tracks; nonlegendary traditional villages retain ambient music. Install both cumulative RC4 packs; see [RC4 installation and gameplay QA](docs/RC4_VILLAGE_TESTING.md).
+RC5 adds 40 approved structure conditions through 45 exact rules, including Bell/Burned Tower pieces. It adds 27 music registrations and reuses Heatran's existing track. Four unavailable locations and three lake-interior overrides are explicitly deferred; PLA - Lake currently plays across whole native lake bounds, including interiors. See [RC5 builds, deferrals and validation](docs/RC5_BUILD_RESULTS.md).
 
-RC4 contains 407 DysFam tracks, 1,306 rules, 16 trigger files and 416 resource events/OGGs. With the installed CobbleSafari defaults, expect 413 tracks / 1,310 rules / 19 trigger files. Static verification is documented in the testing guide; in-game RC4 behavior still requires user QA.
+The cumulative RC5 packs contain 434 DysFam tracks, 1,351 rules, 21 definition files and 443 events/OGGs. With installed CobbleSafari defaults, expect 440 tracks / 1,355 rules / 24 files. RC1–RC4 tracks, triggers and ambient tags are preserved. Static/schema/archive checks and decoding of all 27 new songs passed; native gameplay containment, transitions and actual playback remain pending.
 
 Completed and tested:
 
@@ -52,4 +52,4 @@ The rapid dimension-hopping issue is intentionally deferred until all planned mu
 
 The finalized source OGG archive is intentionally not stored in Git:
 
-`C:\Users\Jaime\Downloads\DysFam Music OGG Files.zip`
+`D:/Minecraft Stuff/Minecraft Datapacks/CSMusic Sources/DysFam Music OGG Files.zip`

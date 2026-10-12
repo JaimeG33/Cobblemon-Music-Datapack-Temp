@@ -2,6 +2,8 @@
 
 ## Start here
 
+- [RC5_BUILD_RESULTS.md](RC5_BUILD_RESULTS.md) - current cumulative RC5 builds, approved deferrals, validation and pending gameplay gates.
+
 - `ARCHITECTURE.md` - how the datapack, resource pack, manifests, and CSMusic rules work.
 - `RELEASE_PLAN.md` - current cumulative release plan and technical priorities.
 - `TESTING.md` - build/install/testing procedure and current RC2 prototype test matrix.

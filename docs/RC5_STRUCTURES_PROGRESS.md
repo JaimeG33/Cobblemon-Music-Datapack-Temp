@@ -68,3 +68,15 @@ Unresolved by design, not hidden:
 No user approval of development has been received. No RC5 definitions, manifests, builders or release ZIPs created; no world/mod/config changes; no game launch, automation, cleanup, commit, push or publishing.
 
 Next exact action for a fresh session: read RC5_HANDOFF.md and RC5_IMPLEMENTATION_PLAN.md, obtain explicit approval of the recommended 40-condition scope and seven deferrals. Only after approval recheck Git/input versions, record approved scope, handle the owned-ticket recovery prerequisite before live automation, and follow the phased implementation plan. Do not repeat completed workbook or archive research unless inputs changed.
+
+## Approved implementation checkpoint — 2026-10-11
+
+- User explicitly approved implementation of the recommended 40-condition scope and seven deferrals. Whole-lake fallback retained; no optional lake investigation added.
+- Worktree was clean at `a32e94903fcd644505be1542994ce2ad1c429f33` (planning documents had been committed since the recorded baseline). Workbook and relevant mod hashes matched the research.
+- Added 27 full-loop definitions and 45 exact rules in five files; Heatran reuses its existing track. Root/mirror runtime and metadata match. Existing RC1–RC4 tracks/rules/tags/manifest records are preserved.
+- Built cumulative RC5 datapack/resource-pack ZIPs through dedicated builders; historical RC4 scripts and artifacts remain untouched.
+- Passed approved-scope/preservation/schema/archive/source-audio checks and fully decoded all 27 new OGGs. All 36 harness unit tests pass. Counts: 434/1351/21 and 443 events; expected installed runtime 440/1355/24.
+- Added separate RC5 harness configuration and representative fixtures. No live test, world edit, installation, cleanup, commit, push or publication occurred.
+- User asked why Minecraft needed to be open; clarified that it is needed only for the pending gameplay checks. Building/static work proceeded with it closed.
+- Exact hashes, decode metadata and completed/pending gates are in `RC5_BUILD_RESULTS.md` and `RC5_BUILD_RESULTS.json`.
+- Next action: when the copied world is explicitly ready, recover the recorded owned force-load using the original RC4 recovery command, stage RC5 in the copied world, and run the small gameplay suite. Native containment/transitions, actual playback and seam audition remain pending. Do not repeat completed research.

@@ -1,0 +1,58 @@
+{
+  "rules": [
+    {
+      "music": "dysfam_music:structures_xy_scary_house",
+      "priority": 41,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "battle": "never",
+        "structure": "terralith:mage_complex"
+      }
+    },
+    {
+      "music": "dysfam_music:structures_xy_scary_house",
+      "priority": 41,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "battle": "never",
+        "structure": "terralith:mage_tower"
+      }
+    },
+    {
+      "music": "dysfam_music:structures_xy_scary_house",
+      "priority": 41,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "battle": "never",
+        "structure": "terralith:mage_tower_spring"
+      }
+    },
+    {
+      "music": "dysfam_music:structures_xy_scary_house",
+      "priority": 41,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "battle": "never",
+        "structure": "terralith:mage_tower_summer"
+      }
+    },
+    {
+      "music": "dysfam_music:structures_xy_scary_house",
+      "priority": 41,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "battle": "never",
+        "structure": "terralith:mage_tower_autumn"
+      }
+    },
+    {
+      "music": "dysfam_music:structures_xy_scary_house",
+      "priority": 41,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "battle": "never",
+        "structure": "terralith:mage_tower_winter"
+      }
+    }
+  ]
+}

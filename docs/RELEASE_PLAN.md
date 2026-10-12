@@ -7,9 +7,9 @@ Releases are cumulative. Only the newest DysFam datapack and resource pack shoul
 | RC1 | Ambient biomes / dimensions | 10 | Working |
 | RC2 | Generic wild battles by generation | 50 | Complete / Working |
 | RC3 | Weather | 40 | Complete / Working |
-| RC4 | Villages | 30 | Built / Awaiting Gameplay QA |
-| RC5 | PokÃ©center / PokÃ©mart / specific buildings | 42 | Planned |
-| RC6 | General / special structures | 41 | Planned |
+| RC4 | Villages | 30 | Accepted baseline |
+| RC5 | General / special structures | 41 | Built / Gameplay QA pending; seven deferrals |
+| RC6 | Pokecenter / Pokemart / specific interiors | 42 | Planned |
 | RC7 | Advanced/special PokÃ©mon battles | 60 | Planned |
 | Optional | Trainer battle layer | 55 | Research / possible |
 
@@ -57,8 +57,12 @@ Source: `C:/Users/Jaime/Downloads/CSMusic_Reference_Excel_Files/Music Pack Condi
 - Use village priority 30 and `battle: "never"`: ambient 10 < villages 30 < weather 40 < generic wild battles 50.
 - Reuse existing registered sound events where possible; add only missing village audio/events to the cumulative manifest and resource pack.
 - Build cumulative RC4 packs and test entry/exit, day/night, named locations, weather overrides and battle return behavior.
-- Keep Pokecenter/Pokemart overrides for RC5 and general structures for RC6.
+- Keep Pokecenter/Pokemart overrides for RC6; general structures are RC5.
 
 Source clarification: the user confirmed the standalone `O` in Magic Villages Night is a typo; ignore it and retain village priority 30. The Villages sheet separately maps Pokemon Tower inside Lavender Town; installed data identifies it as a building piece, so plan a specific piece rule with deterministic precedence. Preserve the workbook's song intent while matching exact archive filenames.
 
-See [RC4 village research](RC4_VILLAGE_RESEARCH.md) for the historical vanilla-ID mismatch, BCA village replacement, current portable optional-pack configuration, compatibility findings and structure-boundary behavior. The user approved both Twinleaf Day/Night tracks, ambient fallback for the nonlegendary variant, tower-first ordering at priority 30, and deferred RC5 building overrides. RC4 was implemented on `rc4-villages` from RC3 commit `dc15892`; see [build results and gameplay QA](RC4_VILLAGE_TESTING.md). Mark RC4 Complete / Working only after the user confirms gameplay tests.
+See [RC4 village research](RC4_VILLAGE_RESEARCH.md) for the historical vanilla-ID mismatch, BCA village replacement, current portable optional-pack configuration, compatibility findings and structure-boundary behavior. The user approved both Twinleaf Day/Night tracks, ambient fallback for the nonlegendary variant, tower-first ordering at priority 30, and deferred RC6 building overrides. RC4 was implemented on `rc4-villages` from RC3 commit `dc15892`; see [build results and gameplay QA](RC4_VILLAGE_TESTING.md). Mark RC4 Complete / Working only after the user confirms gameplay tests.
+
+## RC5 implemented scope
+
+The user approved the recommended 40-condition scope and seven deferrals on 2026-10-11. RC5 is built and statically validated; gameplay QA is pending. Lake music covers the whole native bounds, including interiors. See [RC5 build results](RC5_BUILD_RESULTS.md) for exact counts, hashes, deferrals and test status. RC6 covers specific interiors; RC7 covers advanced battles.

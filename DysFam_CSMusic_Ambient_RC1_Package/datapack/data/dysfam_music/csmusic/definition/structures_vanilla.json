@@ -1,0 +1,76 @@
+{
+  "rules": [
+    {
+      "music": "dysfam_music:structures_pc_pyrite_building",
+      "priority": 41,
+      "when": {
+        "dimension": "minecraft:the_nether",
+        "battle": "never",
+        "structure": "minecraft:bastion_remnant"
+      }
+    },
+    {
+      "music": "dysfam_music:structures_bw_relic_castle",
+      "priority": 41,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "battle": "never",
+        "structure": "minecraft:desert_pyramid"
+      }
+    },
+    {
+      "music": "dysfam_music:structures_bw_relic_castle",
+      "priority": 41,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "battle": "never",
+        "structure": "minecraft:jungle_pyramid"
+      }
+    },
+    {
+      "music": "dysfam_music:structures_bw_abyssal_ruins",
+      "priority": 41,
+      "when": {
+        "dimension": "minecraft:the_end",
+        "battle": "never",
+        "structure": "minecraft:end_city"
+      }
+    },
+    {
+      "music": "dysfam_music:structures_xy_scary_house",
+      "priority": 41,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "battle": "never",
+        "structure": "minecraft:mansion"
+      }
+    },
+    {
+      "music": "dysfam_music:structures_pc_snagem_hideout",
+      "priority": 41,
+      "when": {
+        "dimension": "minecraft:the_nether",
+        "battle": "never",
+        "structure": "minecraft:fortress"
+      }
+    },
+    {
+      "music": "dysfam_music:structures_nps_the_mural",
+      "priority": 41,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "battle": "never",
+        "structure": "minecraft:stronghold"
+      }
+    },
+    {
+      "music": "dysfam_music:structures_oras_hideout",
+      "priority": 41,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "battle": "never",
+        "structure": "minecraft:trial_chambers"
+      }
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "rules": [
+    {
+      "music": "dysfam_music:structures_lgpe_the_final_road",
+      "priority": 41,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "battle": "never",
+        "structure": "cobblemon:shipwreck_coves/lush_shipwreck_cove"
+      }
+    },
+    {
+      "music": "dysfam_music:structures_lgpe_the_final_road",
+      "priority": 41,
+      "when": {
+        "dimension": "minecraft:overworld",
+        "battle": "never",
+        "structure": "cobblemon:shipwreck_coves/submerged_shipwreck_cove"
+      }
+    }
+  ]
+}

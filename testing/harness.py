@@ -137,7 +137,26 @@ def java_running():
     return bool(re.search(r'"javaw?\.exe"', result.stdout, re.I))
 
 
-def audit(config):
+def verify_installed_datapack(installed, recovery_only=False):
+    require(installed.is_file(), 'Expected datapack is not installed in configured test world')
+    with zipfile.ZipFile(installed) as z:
+        require(json.loads(z.read('pack.mcmeta'))['pack']['pack_format'] == 48, 'Unexpected datapack format')
+        require(z.testzip() is None, 'Installed datapack ZIP failed CRC validation')
+        # Cleanup ownership and copy identity do not depend on the latest production
+        # definitions. Ordinary gameplay preflight still compares every source byte.
+        if recovery_only:
+            return 0
+        compared = 0
+        source_files = [REPO / 'pack.mcmeta'] + list((REPO / 'data').rglob('*'))
+        for source in source_files:
+            if source.is_file():
+                name = source.relative_to(REPO).as_posix()
+                require(z.read(name) == source.read_bytes(), 'Installed datapack differs from repository: ' + name)
+                compared += 1
+        return compared
+
+
+def audit(config, recovery_only=False):
     profile = Path(config['profile'])
     require(profile.is_dir(), 'Profile missing')
     mods = {}
@@ -166,16 +185,14 @@ def audit(config):
     source_counts = [len(list(root.glob('*.json'))), sum(len(json.loads(p.read_bytes())['rules']) for p in triggers), len(triggers)]
     log = profile / 'logs/latest.log'
     old = log.read_text(encoding='utf-8', errors='replace') if log.exists() else ''
-    installed = profile / 'saves' / config['source_world'] / 'datapacks' / config['expected_datapack'].removeprefix('file/')
-    require(installed.is_file(), 'Expected RC4 datapack is not installed in source save')
-    with zipfile.ZipFile(installed) as z:
-        source_files = [REPO / 'pack.mcmeta'] + list((REPO / 'data').rglob('*'))
-        compared = 0
-        for source in source_files:
-            if source.is_file():
-                name = source.relative_to(REPO).as_posix()
-                require(z.read(name) == source.read_bytes(), 'Installed datapack differs from repository: ' + name)
-                compared += 1
+    installed_world = config.get('installed_world', config['source_world'])
+    if 'installed_world' in config:
+        receipt = json.loads((HERE / 'prepared.json').read_bytes())
+        world = (profile / 'saves' / installed_world).resolve()
+        require(world == Path(receipt['world']).resolve(), 'Configured installation is not the verified copy')
+        require(json.loads((world / 'csmusic-harness-copy.json').read_bytes()) == receipt, 'Invalid copy receipt')
+    installed = profile / 'saves' / installed_world / 'datapacks' / config['expected_datapack'].removeprefix('file/')
+    compared = verify_installed_datapack(installed, recovery_only)
     resource_options = [line for line in (profile / 'options.txt').read_text(encoding='utf-8').splitlines() if line.startswith('resourcePacks:')]
     rp_path = Path(config.get('audio', {}).get('reference_resource_pack', ''))
     audio_inventory = {'reference_pack': str(rp_path), 'available': rp_path.is_file(),
@@ -203,7 +220,8 @@ def audit(config):
     return {'profile': str(profile), 'saves': [p.name for p in (profile / 'saves').iterdir() if p.is_dir()],
             'mods': mods, 'metadata_warnings': metadata_warnings, 'source_counts': source_counts, 'builtin_counts': defaults,
             'computed_total': [a+b for a,b in zip(source_counts, defaults)],
-            'installed_datapack': {'file': str(installed), 'sha256': digest(installed), 'source_files_matched': compared},
+            'installed_datapack': {'file': str(installed), 'sha256': digest(installed), 'source_files_matched': compared,
+                                   'validation': 'readable historical ZIP for ownership recovery only' if recovery_only else 'current source byte comparison'},
             'resource_pack_options_disk_snapshot': resource_options,
             'windows': windows(), 'java_running': java_running(),
             'previous_log_evidence_only': [line for line in old.splitlines() if '[CSMusic] Loaded' in line or 'Loading Minecraft ' in line],
@@ -583,7 +601,7 @@ class Controller:
                                                'windows_loopback_audio': 'NOT_TESTED'},
                        'audible_playback': 'not tested', 'commands': [], 'states': [],
                        'controller_sha256': digest(Path(__file__)),
-                       'expected': case if isinstance(case, (dict, list)) else {'counts': config['expected_counts'], 'release': 'RC4'}, 'observed': {}}
+                       'expected': case if isinstance(case, (dict, list)) else {'counts': config['expected_counts'], 'release': config.get('release', 'RC4')}, 'observed': {}}
         if mode == 'capture':
             self.report['expected'] = {'evidence': 'nonblack screenshot and fresh playing-source response; this mode does not rerun RC4 smoke'}
         self.desktop = self.tail = None
@@ -864,11 +882,12 @@ class Controller:
             return result
 
     def smoke(self):
-        self.state('QUERY', 300, 'Enabled RC4 pack, status function, current selection, and fresh loader totals')
+        release = self.config.get('release', 'RC4')
+        self.state('QUERY', 300, 'Enabled pack, status function, current selection, and fresh loader totals')
         packs = self.command('datapack list enabled')
-        require(self.config['expected_datapack'] in packs, 'RC4 datapack not confirmed enabled')
+        require(self.config['expected_datapack'] in packs, release + ' datapack not confirmed enabled')
         check = self.command('function dysfam_music:check')
-        require('Release: RC4' in check, 'Status function is not RC4')
+        require('Release: ' + release in check, 'Status function is not ' + release)
         # Declared check counts are NOT runtime evidence. Reload only after copy identity verified.
         self.command('reload', 120)
         until = time.monotonic() + 60
@@ -1007,7 +1026,7 @@ class Controller:
             self.report['observed'].update({'structures': bounds, 'structure_current': current})
             self.state('VERIFY', 1, 'Exact structure bounds, expected selection and priority')
             expected = case.get('music') or '#' + case['pool']
-            all_cases = json.loads((HERE / 'suite.json').read_bytes())['structures']
+            all_cases = json.loads((HERE / self.config.get('suite', 'suite.json')).read_bytes())['structures']
             diagnosis = selection_diagnosis(case, bounds, current, all_cases)
             self.report['observed']['selection_diagnosis'] = diagnosis
             self.report['observed']['expected_selection'] = {
@@ -1073,7 +1092,7 @@ class Controller:
 
     def regression(self, case):
         require(case.get('steps') and case.get('setup_id'), case.get('requires', 'Regression fixture is not configured'))
-        cases = json.loads((HERE / 'suite.json').read_bytes())['structures']
+        cases = json.loads((HERE / self.config.get('suite', 'suite.json')).read_bytes())['structures']
         setup = next(c for c in cases if c['id'] == case['setup_id'])
         self.structure(setup)
         self.state('QUERY', 60, 'Read and freeze daylight cycle for exact tick-boundary testing')
@@ -1245,7 +1264,7 @@ class Controller:
                     break
             results.append(scenario)
         if not any(item['status'] == 'BLOCKED' for item in results):
-            regression_cases = json.loads((HERE / 'suite.json').read_bytes())['regressions']
+            regression_cases = json.loads((HERE / self.config.get('suite', 'suite.json')).read_bytes())['regressions']
             for regression_id in plan.get('regressions', []):
                 case = next(c for c in regression_cases if c['id'] == regression_id)
                 scenario = {'id': case['id'], 'expected': case, 'status': 'BLOCKED',
@@ -1294,10 +1313,11 @@ class Controller:
     def run(self):
         try:
             self.state('PREFLIGHT', 60, 'Paths, installed versions, counts, and controls checked')
-            env = audit(self.config)
+            env = audit(self.config, recovery_only=bool(self.recover_report))
             require(time.monotonic() <= self.deadline, 'Preflight exceeded 60 seconds')
             self.report['environment'] = env
-            require(env['computed_total'] == self.config['expected_counts'], 'Installed built-ins/source counts differ from expected RC4')
+            if not self.recover_report:
+                require(env['computed_total'] == self.config['expected_counts'], 'Installed built-ins/source counts differ from expected release')
             require(env['mods']['cobblesafari']['version'] == '0.3.4', 'Unsupported CobbleSafari version')
             require(env['mods']['cobblemon']['version'].startswith('1.7.3'), 'Unsupported Cobblemon version')
             require(env['settings']['enabled'], 'CSMusic disabled in installed settings')
@@ -1476,7 +1496,7 @@ def main():
         print('Installed terrain probe in copied world only; reload needed')
         return 0
     case = None
-    suites = json.loads((HERE / 'suite.json').read_bytes())
+    suites = json.loads((HERE / config.get('suite', 'suite.json')).read_bytes())
     if args.mode in ('structure', 'regression'):
         cases = suites['structures' if args.mode == 'structure' else 'regressions']
         case = next(c for c in cases if c['id'] == args.case)

@@ -5,6 +5,7 @@ import json
 import tempfile
 import types
 import wave
+import zipfile
 from pathlib import Path
 import unittest
 from unittest.mock import Mock, patch
@@ -12,7 +13,8 @@ import numpy as np
 
 from harness import (Blocked, Controller, Desktop, LogTail, allowed_command, chat_lines,
                      contains_structure, framed_response, locate_coordinates, music_sources,
-                     expected_rule_sources, playing, runtime_source, selection_diagnosis, structure_signature)
+                     expected_rule_sources, playing, runtime_source, selection_diagnosis, structure_signature,
+                     verify_installed_datapack)
 from audio import _wave_similarity, capture_loopback, identify
 
 
@@ -470,6 +472,52 @@ class FeedbackTests(unittest.TestCase):
         self.assertGreater(_wave_similarity(crop, reference), .9)
         self.assertLess(_wave_similarity(wrong, reference), .1)
         self.assertEqual(_wave_similarity(np.zeros_like(crop), reference), 0.0)
+
+
+class Rc5FixtureTests(unittest.TestCase):
+    def test_recovery_can_use_historical_pack_but_gameplay_rejects_it(self):
+        with tempfile.TemporaryDirectory() as folder:
+            repo = Path(folder) / 'repo'
+            repo.mkdir()
+            (repo / 'pack.mcmeta').write_text(json.dumps({'pack': {'pack_format': 48, 'description': 'RC5'}}))
+            installed = Path(folder) / 'historical.zip'
+            with zipfile.ZipFile(installed, 'w') as z:
+                z.writestr('pack.mcmeta', json.dumps({'pack': {'pack_format': 48, 'description': 'RC4'}}))
+            with patch('harness.REPO', repo):
+                self.assertEqual(verify_installed_datapack(installed, recovery_only=True), 0)
+                with self.assertRaises(Blocked):
+                    verify_installed_datapack(installed)
+
+    def test_recovery_rejects_invalid_pack_metadata(self):
+        with tempfile.TemporaryDirectory() as folder:
+            installed = Path(folder) / 'invalid.zip'
+            with zipfile.ZipFile(installed, 'w') as z:
+                z.writestr('pack.mcmeta', json.dumps({'pack': {'pack_format': 99}}))
+            with self.assertRaises(Blocked):
+                verify_installed_datapack(installed, recovery_only=True)
+
+    def test_rc5_config_fixtures_and_regressions_reference_actual_rules(self):
+        here = Path(__file__).resolve().parent
+        config = json.loads((here / 'config_rc5.json').read_bytes())
+        suite = json.loads((here / config['suite']).read_bytes())
+        self.assertEqual(config['release'], 'RC5')
+        self.assertNotEqual(config['installed_world'], config['source_world'])
+        cases = {c['id']: c for c in suite['structures']}
+        for case in cases.values():
+            source, index = case['source'].split('#')
+            rules = json.loads((here.parent / source.replace('\\', '/')).read_bytes())['rules']
+            rule = rules[int(index)]
+            self.assertEqual(rule['music'], case['music'])
+            self.assertEqual(rule['priority'], case['priority'])
+            self.assertEqual(rule['when']['structure'], case['structure'])
+            self.assertEqual(rule['when'].get('structure_piece'), case.get('piece'))
+        for regression in suite['regressions']:
+            setup = cases[regression['setup_id']]
+            for step in regression['steps']:
+                self.assertEqual(step['music'], setup['music'])
+                self.assertEqual(step['source'], setup['source'])
+                self.assertEqual(step['priority'], 41)
+        self.assertTrue(set(suite['modes']['representative']) <= cases.keys())
 
 
 if __name__ == '__main__':
