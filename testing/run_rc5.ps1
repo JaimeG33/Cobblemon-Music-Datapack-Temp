@@ -4,7 +4,8 @@ param(
     [string]$Case = 'rc5_desert_pyramid',
     [string]$RecoverReport,
     [switch]$Audio,
-    [switch]$AtCurrentPosition
+    [switch]$AtCurrentPosition,
+    [switch]$InitialChatOpen
 )
 $ErrorActionPreference = 'Stop'
 $TestPython = Join-Path $PSScriptRoot '.venv/Scripts/python.exe'
@@ -14,6 +15,7 @@ $Rc5Arguments = @((Join-Path $PSScriptRoot 'harness.py'), $HarnessMode,
                   '--config', (Join-Path $PSScriptRoot 'config_rc5.json'), '--case', $Case)
 if ($Audio) { $Rc5Arguments += '--audio' }
 if ($AtCurrentPosition) { $Rc5Arguments += '--at-current-position' }
+if ($InitialChatOpen) { $Rc5Arguments += '--initial-chat-open' }
 if ($RecoverReport) { $Rc5Arguments += @('--recover-report', $RecoverReport) }
 & $TestPython @Rc5Arguments
 exit $LASTEXITCODE

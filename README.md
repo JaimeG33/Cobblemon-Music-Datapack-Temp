@@ -4,11 +4,11 @@ Unified music system for the DysFam Cobblemon modpack using CobbleSafari CSMusic
 
 ## Current status
 
-**RC5 Structures: Built / Gameplay QA pending. RC4 is accepted as the baseline.**
+**RC5 Structures: Built / Four-location selection QA passed. Full transition QA remains pending.**
 
 RC5 adds 40 approved structure conditions through 45 exact rules, including Bell/Burned Tower pieces. It adds 27 music registrations and reuses Heatran's existing track. Four unavailable locations and three lake-interior overrides are explicitly deferred; PLA - Lake currently plays across whole native lake bounds, including interiors. See [RC5 builds, deferrals and validation](docs/RC5_BUILD_RESULTS.md).
 
-The cumulative RC5 packs contain 434 DysFam tracks, 1,351 rules, 21 definition files and 443 events/OGGs. With installed CobbleSafari defaults, expect 440 tracks / 1,355 rules / 24 files. RC1–RC4 tracks, triggers and ambient tags are preserved. Static/schema/archive checks and decoding of all 27 new songs passed; native gameplay containment, transitions and actual playback remain pending.
+The cumulative RC5 packs contain 434 DysFam tracks, 1,351 rules, 21 definition files and 443 events/OGGs. With installed CobbleSafari defaults, expect 440 tracks / 1,355 rules / 24 files. RC1–RC4 tracks, triggers and ambient tags are preserved. Static/schema/archive checks and decoding of all 27 new songs passed; representative gameplay checks passed at Desert Pyramid, Lush Cove, Amphitheater and Bell Tower. Full transition/weather/battle QA and loop-seam audition remain pending; see [gameplay results](testing/RC5_SESSION_RESULTS.md).
 
 Completed and tested:
 

@@ -26,7 +26,7 @@
     "device_index": null,
     "minimum_capture_rms_int16": 100,
     "clipping_fraction_limit": 0.01,
-    "reference_resource_pack": "D:/Minecraft Stuff/Minecraft Datapacks/DysFam_CSMusic_Ambient_RC1_Datapack/DysFam_CSMusic_Ambient_RC1_Package/build_output/DysFam_CSMusic_RC5_ResourcePack.zip",
+    "reference_resource_pack": "D:/Minecraft Stuff/ModrinthApp/profiles/DysFam Cobblemon 2.0 6.0.0/resourcepacks/DysFam_CSMusic_RC5_ResourcePack.zip",
     "ffmpeg": "D:/Minecraft Stuff/ModrinthApp/profiles/Cobblemon Freedom Frontiers/config/trueadaptivemusic/ffmpeg_binaries/ffmpeg.exe",
     "maximum_recording_megabytes": 180,
     "case_ids": [
@@ -55,5 +55,8 @@
   "test_gamemode": "spectator",
   "release": "RC5",
   "suite": "suite_rc5.json",
-  "installed_world": "CSMusic Automation 20261010-192614"
+  "installed_world": "CSMusic RC5 Test 20261011-195339",
+  "receipt": "prepared_rc5.json",
+  "world_name_prefix": "CSMusic RC5 Test ",
+  "prepare_gamemode": "spectator"
 }

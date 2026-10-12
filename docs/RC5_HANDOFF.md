@@ -1,3 +1,5 @@
+> Latest update: user-authorized RC5 installation and the four-location representative selection sample passed in fresh world **CSMusic RC5 Test 20261011-195339**. Its separate receipt is `testing/prepared_rc5.json`; original worlds and the older receipt remain preserved. See [gameplay results](../testing/RC5_SESSION_RESULTS.md) and [structured status](../testing/RC5_SESSION_RESULTS.json). Remaining work is full transition/weather/battle/vertical-piece/seam QA as desired. Do not rerun the four successful location checks without a new reason. The old RC4 recovery report belongs only to its older copied world; it must never be applied to the new RC5 world. All tickets owned by the new RC5 runs were cleaned up. The historical build-stage handoff below is retained for context.
+
 # RC5 continuation handoff
 
 Updated 2026-10-11 after the user's explicit implementation approval. **RC5 is built and statically validated; gameplay QA remains pending.** No commit, push or publication was performed. No game input, installation, world edits or cleanup occurred during implementation.

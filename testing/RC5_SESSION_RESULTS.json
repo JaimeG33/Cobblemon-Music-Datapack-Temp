@@ -1,0 +1,93 @@
+{
+  "status": "PASS_FOUR_LOCATION_REPRESENTATIVE_SELECTION_SAMPLE",
+  "world": "D:\\Minecraft Stuff\\ModrinthApp\\profiles\\DysFam Cobblemon 2.0 6.0.0\\saves\\CSMusic RC5 Test 20261011-195339",
+  "installed_hashes": {
+    "datapack": "c779374e461f9cd093ecb0e5ab1299757c6490b9231d95448eeddefa2d635980",
+    "resourcepack": "4ab14dc5be52f24e3c274d6d412db741a8684ffcf00612c7ec38803a7ea4c405"
+  },
+  "dry_run": "PASS_DRY_RUN",
+  "expected_runtime_counts": [
+    440,
+    1355,
+    24
+  ],
+  "receipt_file": "testing/prepared_rc5.json",
+  "original_world_preserved": true,
+  "old_receipt_preserved": true,
+  "old_force_load": "Older RC4 copy only; old recovery report must not be applied to this new world.",
+  "structure_tests": {
+    "rc5_desert_pyramid": "PASS_AUTOMATED_SELECTION",
+    "rc5_lush_cove": "PASS_USER_ASSISTED_RUNTIME_SELECTION_WITH_AUDIBLE_CONFIRMATION",
+    "rc5_amphitheater": "PASS_USER_ASSISTED_NATIVE_CONTAINMENT_AND_SELECTION",
+    "rc5_bell_tower": "PASS_EXACT_NATIVE_TOWER_PIECE_AND_SELECTION_OVER_VILLAGE",
+    "rc5_structure_weather": "NOT_EXECUTED_AFTER_SUITE_STOP"
+  },
+  "saved_fixture_scout": "No matching saved starts; runtime locate and containment are required.",
+  "runtime_counts": [
+    440,
+    1355,
+    24
+  ],
+  "live_reports": [
+    "testing/results/20261011-200206-98985a/report.json",
+    "testing/results/20261011-201121-1ad5fa/report.json",
+    "testing/results/20261011-202423-aaf05a/report.json",
+    "testing/results/20261011-203045-f76277/report.json",
+    "testing/results/20261011-203215-f132ec/report.json",
+    "testing/results/20261011-204234-cb896e/report.json"
+  ],
+  "pyramid_correction": {
+    "original_point": [
+      -176,
+      86,
+      -1984
+    ],
+    "native_bounds": [
+      -176,
+      61,
+      -1984,
+      -156,
+      75,
+      -1964
+    ],
+    "new_candidate": [
+      -166,
+      68,
+      -1974
+    ],
+    "gameplay_result": "pending new invocation"
+  },
+  "temporary_forceload": "No outstanding RC5-owned tickets: pyramid and village tickets removed; cove and amphitheater tickets recovered; final Bell capture created none. Older RC4-world ticket remains separate.",
+  "user_confirmation": {
+    "location": "Lush shipwreck cove, standing on the actual ship",
+    "observation": "Music changed when descending into the cove",
+    "scope": "User audible confirmation; exact selected track not yet captured at the manually adjusted position"
+  },
+  "pyramid_audio": {
+    "ranking": "Expected BW Relic Castle ranked above Pallet negative reference",
+    "waveform_score": 0.569918232273812,
+    "negative_score": 0.06992789017173878,
+    "classification": "INCONCLUSIVE_AUDIO_UNCALIBRATED",
+    "rms_int16": 297.3760145008706,
+    "clipped_fraction": 0.0
+  },
+  "bell_tower": {
+    "position": [
+      26725.5,
+      86,
+      55346.5
+    ],
+    "exact_piece": "legendarymonuments:traditional_village/ecruteak/bell_tower_base",
+    "selected_track": "dysfam_music:structures_hgss_bell_tower",
+    "priority": 41,
+    "competing_village_priority": 30,
+    "outside_tower_baseline": "Ecruteak City selected at village arrival with bounds 1 / piece 0"
+  },
+  "remaining_limits": [
+    "No full entry/exit or above-bounds transition sequence",
+    "No new weather or battle runtime sequence",
+    "Bell middle/top and Burned Tower not directly visited",
+    "Loop-seam audition not performed",
+    "Audio ranking remains uncalibrated; user audible cove change recorded separately"
+  ]
+}

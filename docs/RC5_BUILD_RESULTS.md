@@ -1,6 +1,6 @@
 # RC5 structures build results
 
-Implemented 2026-10-11 after explicit user approval of the handoff's recommended scope. **Built and statically validated; gameplay QA pending.** RC4 was accepted as the continuation baseline. No commit, push or publication was performed.
+Implemented 2026-10-11 after explicit user approval of the handoff's recommended scope. **Built and statically validated; four-location representative selection QA passed. Full transition QA remains pending.** RC4 was accepted as the continuation baseline. No commit, push or publication was performed.
 
 ## Approved scope and behavior
 
@@ -65,7 +65,7 @@ To repeat full audio decoding, pass `--ffmpeg '<ffmpeg.exe path>'` to the valida
 
 ## Pending gameplay gates
 
-Minecraft is not required for building. No game input, world edits, pack installation or force-load cleanup was performed in this implementation session. Native containment, entry/exit/above-bounds behavior, tower vertical transitions, weather recovery, battle interruption/resumption, actual playback and representative loop-seam audition remain pending.
+Minecraft is not required for building. The initial build session performed no game input or world changes. A subsequent user-authorized session installed RC5, prepared a fresh disposable world and passed the four-location representative selection sample; see [RC5 gameplay session](../testing/RC5_SESSION_RESULTS.md). Native containment, entry/exit/above-bounds behavior, tower vertical transitions, weather recovery, battle interruption/resumption, actual playback and representative loop-seam audition remain pending.
 
 When gameplay testing is ready:
 
@@ -77,3 +77,7 @@ When gameplay testing is ready:
 6. Capture an actual structure playback sample and audition a representative full-loop seam. The existing audio matcher remains uncalibrated; report its evidence separately from any user audible confirmation.
 
 The representative automated subset selects Desert Pyramid, Lush Cove, Amphitheater and Bell Tower, plus one structure/weather sequence. Burned Tower is available individually. This fixture selection does not claim the manual transition/battle gates have run. See [implementation plan](RC5_IMPLEMENTATION_PLAN.md) for the full release gates.
+
+## Subsequent representative gameplay sample
+
+On 2026-10-11, the user authorized installation and a fresh copied test world. Desert Pyramid, Lush Cove, Amphitheater and Bell Tower selected their intended priority-41 tracks. Cove evidence combines the user's audible change confirmation with a subsequent runtime selected-source snapshot. Amphitheater used a user-assisted position; Bell Tower used a saved native-bounds candidate and exact live piece verification, overriding Ecruteak 30. Full results and remaining limits are in [RC5_SESSION_RESULTS.md](../testing/RC5_SESSION_RESULTS.md). No music-definition fix was required; initial failures were invalid locate-height/piece fixtures or focus stops. Build hashes remain unchanged.

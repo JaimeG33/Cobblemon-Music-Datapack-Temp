@@ -2,6 +2,7 @@
 __pycache__/
 results/
 prepared.json
+prepared_rc5.json
 STOP
 READY
 audio_cache/

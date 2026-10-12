@@ -187,7 +187,7 @@ def audit(config, recovery_only=False):
     old = log.read_text(encoding='utf-8', errors='replace') if log.exists() else ''
     installed_world = config.get('installed_world', config['source_world'])
     if 'installed_world' in config:
-        receipt = json.loads((HERE / 'prepared.json').read_bytes())
+        receipt = json.loads((HERE / config.get('receipt', 'prepared.json')).read_bytes())
         world = (profile / 'saves' / installed_world).resolve()
         require(world == Path(receipt['world']).resolve(), 'Configured installation is not the verified copy')
         require(json.loads((world / 'csmusic-harness-copy.json').read_bytes()) == receipt, 'Invalid copy receipt')
@@ -242,7 +242,9 @@ def prepare(config):
     for p in source.rglob('*'):
         require(not p.is_symlink() and not p.is_junction(), 'Linked save contents not supported')
     token = uuid.uuid4().hex
-    target = saves / ('CSMusic Automation ' + datetime.now().strftime('%Y%m%d-%H%M%S'))
+    prefix = config.get('world_name_prefix', 'CSMusic Automation ')
+    require(re.fullmatch(r'[A-Za-z0-9 _-]{1,48}', prefix), 'Invalid copied-world name prefix')
+    target = saves / (prefix + datetime.now().strftime('%Y%m%d-%H%M%S'))
     require(not target.exists(), 'Copy destination already exists')
     original_hash = digest(source / 'level.dat')
     shutil.copytree(source, target, ignore=shutil.ignore_patterns('session.lock'))
@@ -250,10 +252,13 @@ def prepare(config):
     data = level['Data']
     require(str(data['Version']['Name']) == '1.21.1', 'Save is not Minecraft 1.21.1')
     data['LevelName'] = nbtlib.String(target.name)
-    data['GameType'] = nbtlib.Int(1)
+    prepare_mode = config.get('prepare_gamemode', 'creative')
+    require(prepare_mode in ('creative', 'spectator'), 'Invalid preparation gamemode')
+    game_type = 3 if prepare_mode == 'spectator' else 1
+    data['GameType'] = nbtlib.Int(game_type)
     data['allowCommands'] = nbtlib.Byte(1)
     if 'Player' in data:
-        data['Player']['playerGameType'] = nbtlib.Int(1)
+        data['Player']['playerGameType'] = nbtlib.Int(game_type)
         abilities = data['Player']['abilities']
         for key in ('mayfly', 'instabuild', 'invulnerable'):
             abilities[key] = nbtlib.Byte(1)
@@ -271,7 +276,7 @@ def prepare(config):
     receipt = {'world': str(target.resolve()), 'token': token, 'source': str(source),
                'source_level_sha256': original_hash, 'created': stamp(), 'profile': config['profile']}
     write_json(target / 'csmusic-harness-copy.json', receipt)
-    write_json(HERE / 'prepared.json', receipt)
+    write_json(HERE / config.get('receipt', 'prepared.json'), receipt)
     return receipt
 
 
@@ -727,7 +732,7 @@ class Controller:
         raise Blocked('No complete fresh command response within timeout: ' + command)
 
     def runtime_ready(self):
-        receipt = json.loads((HERE / 'prepared.json').read_bytes())
+        receipt = json.loads((HERE / self.config.get('receipt', 'prepared.json')).read_bytes())
         self.receipt = receipt
         world = Path(receipt['world']).resolve()
         require(world.parent == (Path(self.config['profile']) / 'saves').resolve(), 'Copy belongs to another profile')
@@ -1336,13 +1341,42 @@ class Controller:
                     self.runtime_ready()
                 if self.recover_report:
                     self.recover()
-                elif self.mode == 'capture':
+                if self.mode == 'capture' and (not self.recover_report or self.config.get('capture_fixture')):
+                    if self.config.get('capture_waypoint'):
+                        point = self.config['capture_waypoint']
+                        require(self.config.get('test_gamemode') == 'spectator', 'Captured waypoint requires authorized spectator mode')
+                        require(len(point) == 3 and all(type(n) is int for n in point), 'Invalid captured waypoint')
+                        x, y, z = point
+                        require(-63 <= y <= 318 and abs(x) < 29999984 and abs(z) < 29999984, 'Captured waypoint outside world bounds')
+                        self.state('TRAVEL', 180, 'Saved native-bounds candidate in already-loaded terrain; no force-load or generation')
+                        mode = self.command('execute if entity @s[gamemode=spectator] run tellraw @s "CSMUSIC_SPECTATOR"', screenshot=False)
+                        require('CSMUSIC_SPECTATOR' in mode.splitlines(), 'Spectator mode changed; waypoint travel disabled')
+                        loaded = self.command(f'execute if loaded {x} {y} {z} run tellraw @s "CSMUSIC_LOADED"', screenshot=False)
+                        require('CSMUSIC_LOADED' in loaded, 'Captured waypoint chunk is not loaded; no teleport sent')
+                        response = self.command(f'tp @s {x + .5} {y} {z + .5}')
+                        require('Teleported ' in response, 'Captured waypoint teleport unconfirmed')
+                        actual = self.player_position()
+                        require(all(abs(a-b) < .1 for a,b in zip(actual, [x+.5, y, z+.5])), 'Captured waypoint XYZ not verified')
+                        self.report['observed']['candidate_waypoint'] = point
+                        settle = int(self.config['settle_seconds'])
+                        self.state('WAIT_LOAD', settle + 10, 'Settle structure cache after verified waypoint travel')
+                        self.wait(settle)
                     self.state('QUERY', 90, 'Native framebuffer evidence and fresh selection response')
                     self.capture('native-evidence')
                     current = self.command('cobblesafari csmusic current')
                     require('csmusic sources for ' in current and playing(current), 'No current selection captured')
                     self.report['observed']['current'] = current
-                elif self.mode not in ('quick', 'representative', 'diagnostic', 'exhaustive'):
+                    if self.config.get('capture_fixture'):
+                        fixture = self.config['capture_fixture']
+                        position = self.player_position()
+                        bounds = self.command('cobblesafari csmusic structures')
+                        diagnosis = selection_diagnosis(fixture, bounds, current, [fixture])
+                        self.report['observed'].update({'fixture': fixture, 'player_xyz': position,
+                                                       'structures': bounds, 'selection_diagnosis': diagnosis})
+                        require(diagnosis['category'] == 'PASS_SELECTION', 'Current fixture selection/containment not verified: ' + diagnosis['category'])
+                        self.report['verification_layers']['music_selection'] = ('PASS_SAVED_BOUNDS_FIXTURE'
+                            if self.config.get('capture_waypoint') else 'PASS_USER_ASSISTED_FIXTURE')
+                elif not self.recover_report and self.mode not in ('quick', 'representative', 'diagnostic', 'exhaustive'):
                     self.smoke()
                 if self.mode == 'regression':
                     self.regression(self.case)
@@ -1427,10 +1461,13 @@ def main():
     parser.add_argument('--negative-selection', default='dysfam_music:villages_lgpe_lavender_town')
     parser.add_argument('--audio', action='store_true', help='Capture loopback audio during supported gameplay modes')
     parser.add_argument('--at-current-position', action='store_true', help='Reprobe the user-confirmed current fixture rather than locate landing')
+    parser.add_argument('--initial-chat-open', action='store_true', help='Close the initial empty chat only after explicit operator confirmation')
     parser.add_argument('--duration', type=int)
     parser.add_argument('--device-index', type=int)
     args = parser.parse_args()
     config = json.loads(args.config.read_bytes())
+    if args.initial_chat_open:
+        config['initial_chat_open'] = True
     if args.audio:
         config.setdefault('audio', {})['enabled'] = True
     if args.mode.startswith('audio-'):
@@ -1488,7 +1525,7 @@ def main():
         print(json.dumps(prepare(config), indent=2))
         return 0
     if args.mode == 'install-probe':
-        receipt = json.loads((HERE / 'prepared.json').read_bytes())
+        receipt = json.loads((HERE / config.get('receipt', 'prepared.json')).read_bytes())
         world = Path(receipt['world']).resolve()
         require(world.parent == (Path(config['profile']) / 'saves').resolve(), 'Wrong profile')
         require(json.loads((world / 'csmusic-harness-copy.json').read_bytes()) == receipt, 'Invalid copy receipt')

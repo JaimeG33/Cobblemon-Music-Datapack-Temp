@@ -7,7 +7,25 @@
       "time": 1000,
       "weather": "clear",
       "source": "data\\dysfam_music\\csmusic\\definition\\structures_vanilla.json#1",
-      "music": "dysfam_music:structures_bw_relic_castle"
+      "music": "dysfam_music:structures_bw_relic_castle",
+      "spectator_waypoint": [
+        -166,
+        68,
+        -1974
+      ],
+      "candidate_evidence": {
+        "world": "CSMusic RC5 Test 20261011-195339",
+        "region": "r.-1.-4.mca",
+        "native_piece_bounds": [
+          -176,
+          61,
+          -1984,
+          -156,
+          75,
+          -1964
+        ],
+        "status": "saved candidate; live containment required"
+      }
     },
     {
       "id": "rc5_lush_cove",
@@ -25,7 +43,25 @@
       "time": 1000,
       "weather": "clear",
       "source": "data\\dysfam_music\\csmusic\\definition\\structures_legendary_monuments.json#1",
-      "music": "dysfam_music:structures_sv_meloettas_relic_song"
+      "music": "dysfam_music:structures_sv_meloettas_relic_song",
+      "spectator_waypoint": [
+        4955,
+        68,
+        4705
+      ],
+      "candidate_evidence": {
+        "world": "CSMusic RC5 Test 20261011-195339",
+        "region": "r.9.9.mca",
+        "native_piece_bounds": [
+          4934,
+          65,
+          4691,
+          4976,
+          72,
+          4720
+        ],
+        "status": "saved candidate; live containment required"
+      }
     },
     {
       "id": "rc5_bell_tower",
@@ -35,7 +71,25 @@
       "weather": "clear",
       "source": "data\\dysfam_music\\csmusic\\definition\\structures_legendary_monuments.json#2",
       "music": "dysfam_music:structures_hgss_bell_tower",
-      "piece": "legendarymonuments:traditional_village/ecruteak/bell_tower_base"
+      "piece": "legendarymonuments:traditional_village/ecruteak/bell_tower_base",
+      "spectator_waypoint": [
+        26725,
+        86,
+        55346
+      ],
+      "candidate_evidence": {
+        "world": "CSMusic RC5 Test 20261011-195339",
+        "region": "r.52.107.mca",
+        "native_piece_bounds": [
+          26703,
+          64,
+          55323,
+          26748,
+          109,
+          55369
+        ],
+        "status": "saved candidate; live parent and piece containment required"
+      }
     },
     {
       "id": "rc5_burned_tower",
